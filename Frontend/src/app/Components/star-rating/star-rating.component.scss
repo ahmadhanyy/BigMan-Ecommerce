@@ -1,0 +1,14 @@
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+
+  .star {
+    cursor: pointer;
+  }
+
+  small {
+    font-size: 10px;
+    color: #000000;
+  }
+}

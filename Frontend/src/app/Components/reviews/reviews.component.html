@@ -1,0 +1,65 @@
+<!-- <div class="reviews-section">
+  <h6 class="reviews-label">Customer Reviews ({{ratersNumber}})</h6>
+  <div class="reviews-container">
+    <div class="reviews-statistics">
+      <div class="total-ratings-box">
+        <p class="average-rating">{{rating}} / 5</p>
+        <app-star-rating
+          *ngIf="prodCard"
+          [prodCard]="prodCard"
+          [size]="'30px'"
+          [color]="'black'"
+          [showRatersNumber]="false">
+        </app-star-rating>
+        <app-star-rating
+        *ngIf="coachCard"
+        [coachCard]="coachCard"
+        [size]="'30px'"
+        [color]="'black'"
+        [showRatersNumber]="false">
+      </app-star-rating>
+        <p class="ratings-count">{{ratersNumber}} Verified Ratings</p>
+      </div>
+
+      <div class="rating-bars">
+        <ng-container *ngFor="let count of ReviewsStatistics?.slice()?.reverse(); let i = index" class="rating-bar">
+          <span class="order-label">{{ 5 - i }}</span>
+          <span class="star-label">★</span>
+          <span class="count-label">({{ count }})</span>
+          <div class="bar-wrapper">
+            <div class="bar" [ngStyle]="{'width': getPercentage(count) + '%'}"></div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="reviews-view" *ngIf="this.prodReviews.length != 0">
+      <div class="review-block" *ngFor="let review of prodReviews">
+        <app-star-rating
+          [prodReviewId]="review.id!"
+          [size]="'20px'"
+          [color]="'black'"
+          [showRatersNumber]="false">
+        </app-star-rating>
+        <p class="review-text">{{review.review}}</p>
+        <p class="review-date">{{review.date.day}}-{{review.date.month}}-{{review.date.year}}</p>
+        <hr>
+      </div>
+      <span class="show-more-btn" *ngIf="prodReviews?.length" (click)="showMoreReviews()">View more &#x25BC;</span>
+    </div>
+    <div class="reviews-view" *ngIf="this.coachReviews.length != 0">
+      <div class="review-block" *ngFor="let review of coachReviews">
+        <app-star-rating
+          [prodReviewId]="review.id!"
+          [size]="'20px'"
+          [color]="'black'"
+          [showRatersNumber]="false">
+        </app-star-rating>
+        <p class="review-text">{{review.review}}</p>
+        <p class="review-date">{{review.date.day}}-{{review.date.month}}-{{review.date.year}}</p>
+        <hr>
+      </div>
+      <span class="show-more-btn" *ngIf="prodReviews?.length" (click)="showMoreReviews()">View more &#x25BC;</span>
+    </div>
+  </div>
+</div> -->

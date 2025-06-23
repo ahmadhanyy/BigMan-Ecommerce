@@ -1,0 +1,154 @@
+.card {
+  top: 100%;
+  flex: 0 0 auto;
+  margin: 0px 10px;
+  border-radius: 5%;
+  width: 200px;
+  height: 290px;
+}
+
+.card:hover {
+  height: 340px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border-radius: 5%;
+  width: 100%;
+  height: 100%;
+  padding-top: 10px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.rate-stars,
+h5,
+h6 {
+  text-align: left;
+  color: #000000;
+  text-decoration: none;
+  text-overflow: ellipsis;
+}
+
+.coach-salary {
+  margin: 10px 0px;
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000000;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 170px;
+}
+
+h6 {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 10%;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+.coach-salary {
+  font-weight: bold;
+}
+
+.original-price {
+  font-size: 0.7rem;
+  color: #c0392b;
+  text-decoration: line-through;
+  margin-bottom: 0px;
+}
+
+.discounted-price {
+  font-size: 0.9rem;
+  color: #000000;
+  font-weight: bold;
+}
+
+.discounted-text {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #c0392b;
+  margin: 0;
+}
+
+.button-group {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  gap: 20px;
+  transform: translateX(-50%);
+}
+
+.fa-heart{
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.fa-cart-plus{
+  font-size: 25px;
+  color: #ffffff;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.fa-cart-plus:hover{
+  font-size: 25px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+button:hover .fa-cart-plus{
+  color: black;
+}
+
+.card-body:hover .button-group {
+  display: flex;
+}
+
+.card-body button {
+  background-color: rgb(43, 43, 43);
+  margin: 0 5px;
+  border: none;
+  border-radius: 100%;
+  padding: 8px;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.fav-icon{
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.card-body button:hover {
+  background-color: rgb(206, 206, 206);
+}
+
+.card-body button:hover .cart-icon {
+  filter: invert(100%);
+}

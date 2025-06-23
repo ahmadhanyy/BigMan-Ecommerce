@@ -1,0 +1,102 @@
+.card{
+  border: none;
+}
+
+.coach-card {
+  display: flex;
+  width: 900px;
+  padding: 10px;
+  background-color: #ffffff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  border-radius: 3%;
+}
+
+.coach-info {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.coach-payment {
+  margin-left: 50px;
+  display: inline-block;
+}
+
+.coach-name {
+  display: inline-block;
+  width: 400px;
+  font-size: 1rem;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.coach-experience{
+  margin-top: 10px;
+}
+
+.coach-salary{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.original-price {
+  font-size: 1rem;
+  color: #c0392b;
+  text-decoration: line-through;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+
+.discounted-price {
+  font-size: 1.5rem;
+  color: #000000;
+  font-weight: bold;
+  margin: 0px;
+}
+
+.discounted-text{
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #c0392b;
+  margin: 0px;
+}
+
+p small {
+  font-size: 0.8rem;
+  margin-right: 2px;
+}
+
+.rate-stars {
+  margin: 5px 0;
+}
+
+button {
+  background-color: rgb(29, 29, 29);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 12px 40px;
+  position: absolute;
+  bottom: 40px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(185, 185, 185);
+  color: black;
+}

@@ -1,0 +1,11 @@
+<table>
+  <tbody>
+    <tr *ngFor="let coach of coachesList">
+      <td>
+        <app-coach-list-card [card]="coach"></app-coach-list-card>
+        <hr>
+      </td>
+    </tr>
+  </tbody>
+  <app-load-button></app-load-button>
+</table>

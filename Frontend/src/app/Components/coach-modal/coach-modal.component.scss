@@ -1,0 +1,231 @@
+.modal {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  z-index: 11;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 45px;
+  z-index: 11;
+}
+
+.close-btn {
+  color: #ffffff;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  cursor: pointer;
+  background-color: rgb(0, 0, 0);
+}
+
+.close-btn:hover {
+  color: #ff3b3b;
+}
+
+.modal-content {
+  width: 1250px;
+  padding: 30px;
+  position: absolute;
+  top: 30px;
+  bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.img-section {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coach-img img {
+  height: 350px;
+  width: 350px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.details-section{
+  padding: 0px 20px;
+  width: 850px;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.details-section::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar for WebKit browsers */
+}
+
+.coach-name {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0px;
+  color: #000;
+}
+
+.coach-salary{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.coach-salary span{
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin: 10px;
+}
+
+.original-salary {
+  font-size: 1rem;
+  color: #c0392b;
+  text-decoration: line-through;
+  margin: 0px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.discounted-salary {
+  font-size: 1.5rem;
+  color: #000000;
+  font-weight: bold;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.discounted-text{
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #c0392b;
+  margin: 0;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.coach-intro{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0px;
+}
+
+.session-label {
+  margin: 0px;
+  font-weight: 700;
+  color: #000;
+}
+
+.session-duration{
+  margin: 0px;
+  margin-bottom: 10px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #000;
+}
+
+.session-btn {
+  padding: 7px;
+  border: 1px solid #ccc;
+  transition: padding 0s, border-width 0s, border-color 0s;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.session-btn:hover {
+  border-width: 3px;
+  padding: 5px;
+  border-color: #000;
+}
+
+.session-btn.active {
+  border-width: 3px;
+  padding: 6px;
+  border-color: #000;
+}
+
+.show-more-btns {
+  color: rgb(0, 0, 0);
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: grid;
+  width: 100px;
+}
+
+.payment-section{
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub-btn button{
+  border: none;
+  border-radius: 20px;
+  padding: 10px 80px;
+  background-color: rgb(255, 187, 0);
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.sub-btn button:hover{
+  background-color: rgb(240, 156, 0);
+}
+
+.details-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.view-details-btn{
+  border: none;
+  border-radius: 20px;
+  padding: 7px 30px;
+  margin: 0px;
+  margin-top: 15px;
+  margin-right: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 1px solid #727272;
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "coach_times",
+  "info": {
+    "singularName": "coach-time",
+    "pluralName": "coach-times",
+    "displayName": "CoachTime",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "day": {
+      "type": "string",
+      "required": true
+    },
+    "time": {
+      "type": "string",
+      "required": true
+    },
+    "coaches": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::coach.coach",
+      "inversedBy": "coach_times"
+    }
+  }
+}

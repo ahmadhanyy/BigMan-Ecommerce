@@ -1,0 +1,61 @@
+<div class="modal" *ngIf="isOpen" (click)="onBackdropClick($event)">
+  <div class="modal-content">
+    <div class="close-modal">
+      <span class="close-btn" (click)="closeModal()">&times;</span>
+    </div>
+    <div class="modal-body">
+      <h2>Update Your Address</h2>
+      <hr/>
+      <form class="address-form" #addressForm="ngForm" (ngSubmit)="changeAddress()">
+        <div class="form-group">
+          <div class="form-sub-group">
+            <label for="government">Government</label>
+            <select id="government" name="government" [(ngModel)]="userAddress.government" required>
+              <option value="" disabled>Select your government</option>
+              <option *ngFor="let gov of governments" [value]="gov">{{ gov }}</option>
+            </select>
+          </div>
+          <div class="form-sub-group">
+            <label for="city">City</label>
+            <input id="city" name="city" type="text" [(ngModel)]="userAddress.city" #city="ngModel" required/>
+            <div *ngIf="city.invalid && city.touched" class="error">
+              <div *ngIf="city.errors?.['required']">City is required.</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-sub-group">
+            <label for="street">Street</label>
+            <input id="street" name="street" type="text" [(ngModel)]="userAddress.street" #street="ngModel" required/>
+            <div *ngIf="street.invalid && street.touched" class="error">
+              <div *ngIf="street.errors?.['required']">Street is required.</div>
+            </div>
+          </div>
+          <div class="form-sub-group">
+            <label for="buildingNo">Building Number</label>
+            <input id="buildingNo" name="buildingNo" type="number" [(ngModel)]="userAddress.buildingNo" #buildingNo="ngModel" required/>
+            <div *ngIf="buildingNo.invalid && buildingNo.touched" class="error">
+              <div *ngIf="buildingNo.errors?.['required']">Building Number is required.</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-sub-group">
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="phone" type="text" [(ngModel)]="userAddress.phone" #phone="ngModel" required/>
+            <div *ngIf="phone.invalid && phone.touched" class="error">
+              <div *ngIf="phone.errors?.['required']">Phone Number is required.</div>
+            </div>
+          </div>
+          <div class="form-sub-group">
+            <label for="moreInfo">More Informations</label>
+            <input id="moreInfo" name="moreInfo" type="text" [(ngModel)]="userAddress.moreInfo" #moreInfo="ngModel"/>
+          </div>
+        </div>
+        <div class="submit-section">
+          <button class="submit-btn" type="submit" [disabled]="addressForm.invalid">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

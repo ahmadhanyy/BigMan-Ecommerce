@@ -1,0 +1,106 @@
+<div class="body">
+  <div class="empty-cart" *ngIf="cartItems.length === 0">
+    <i class="fa-solid fa-cart-shopping" style="color: #B197FC;"></i>
+    <p class="empty-cart-text">No items yet? Continue shopping to explore more.</p>
+    <a routerLink="/products"><button class="empty-cart-btn">Explore Items</button></a>
+  </div>
+  <div class="order-section" *ngIf="cartItems.length != 0">
+    <div class="order-header">
+      <p>Place your order</p>
+    </div>
+    <div class="address-details">
+      <div class="address-header">
+        <p class="address-title">Customer Address</p>
+        <a class="address-change-btn" (click)="openAddressModal()"><i class="fa-solid fa-pen-to-square"></i></a>
+      </div>
+      <hr/>
+      <div class="address-info">
+        <p class="address-government"><span>Government: </span>{{userAddress?.government}}</p>
+        <p class="address-city"><span>City: </span>{{userAddress?.city}}</p>
+        <p class="address-street"><span>Street: </span>{{userAddress?.street}}</p>
+        <p class="address-building"><span>Building Number: </span>{{userAddress?.buildingNo}}</p>
+        <p class="address-moreInfo" *ngIf="userAddress?.moreInfo"><span>More Informations: </span>{{userAddress?.moreInfo}}</p>
+        <p class="address-phone"><span>Phone Number: </span>{{userAddress?.phone}}</p>
+      </div>
+    </div>
+    <div class="payment-method">
+      <div class="payment-header">
+        <p class="payment-title">Payment Method</p>
+      </div>
+      <hr/>
+      <div class="payment-cash">
+        <label>
+          <input type="radio" name="paymentMethod" value="cash" (click)="choosePayMethod()" [(ngModel)]="paymentMethod" />
+          Cash on Delivery <i class="fa-solid fa-money-bill"></i>
+        </label>
+      </div>
+      <div class="payment-card">
+        <label>
+          <input type="radio" name="paymentMethod" value="card" (click)="choosePayMethod()" [(ngModel)]="paymentMethod" />
+          Credit Card <i class="fa-solid fa-credit-card"></i>
+        </label>
+      </div>
+      <div class="card-details" *ngIf="paymentMethod === 'card'">
+        <input type="text" placeholder="Card Number" [(ngModel)]="cardNumber" name="cardNumber" required />
+        <input type="text" placeholder="Card Holder Name" [(ngModel)]="cardHolder" name="cardHolder" required />
+        <input type="date"  [(ngModel)]="cardExpiryDate" name="cardExpiryDate" required />
+        <input type="text" placeholder="CVV" [(ngModel)]="cvv" name="cvv" required />
+      </div>
+    </div>
+    <div class="order-details">
+      <div class="order-details-header">
+        <p class="order-title">Order Details</p>
+        <a class="address-change-btn" routerLink = "/cart"><i class="fa-solid fa-pen-to-square"></i></a>
+      </div>
+      <hr/>
+      <div class="delivery-date"><span>Delivery in:  </span>{{ deliveryDate | date: 'MMM d' }}</div>
+      <div class="order-info">
+        <ng-container *ngFor="let item of cartItems">
+          <div class="prod-card">
+            <a routerLink="/product/{{item.product.id}}" target="_blank"><img alt="img" [src]="apiUrl + item.product.images[0].url" /></a>
+            <div class="prod-details">
+              <a routerLink="/product/{{item.product.id}}" target="_blank"><p class="prod-name">{{ item.product.name }}</p></a>
+              <a routerLink="/product/{{item.product.id}}" target="_blank">
+              </a>
+              <div class="prod-specs">
+                <div class="prod-color" *ngIf="item.color">
+                  <p class="color-text"><span>Color:  </span>{{item.color}}</p>
+                </div>
+                <div class="prod-size" *ngIf="item.size">
+                  <p class="size-text"><span>Size:  </span>{{item.size}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr/>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="payment-section" *ngIf="cartItems.length != 0">
+    <p class="summary">Summary</p>
+    <p class="fees">Subtotal <span>{{getSubTotalPrice() | currency: 'EGP '}}</span></p>
+    <p class="fees">Shipping <span>{{getShippigPrice() | currency: 'EGP '}}</span></p>
+    <div class="total-fees" *ngIf="validVoucher">
+      <p class="original-fees">Total <span>{{getShippigPrice() + getSubTotalPrice() | currency: 'EGP '}}</span></p>
+      <p class="discounted-fees">Total <span>{{getTotalPrice() | currency: 'EGP '}}</span></p>
+    </div>
+    <p class="total-fees" *ngIf="!validVoucher">Total <span>{{getTotalPrice() | currency: 'EGP '}}</span></p>
+    <div class="voucher">
+      <div class="voucher-wrapper">
+        <input type="text" class="voucher-input" placeholder="Enter code here" #voucherInput/>
+        <i class="fa-solid fa-xmark" style="color: #1d1d1d;" (click)="removeVoucher()"></i>
+      </div>
+      <button class="voucher-btn" (click)="applyVoucher()">Apply</button>
+    </div>
+    <p class="err-msg" *ngIf="!isVoucheFound">Voucher is not valid.</p>
+    <div class="checkout-btn">
+      <button (click)="confirmOrder()">Confirm</button>
+    </div>
+    <p class="err-msg" *ngIf="!isPayMethodSelected">Choose a payment method to place the order.</p>
+    <p class="err-msg" *ngIf="!this.userAddress">Your address is required.</p>
+    <p class="err-msg" *ngIf="paymentMethod==='card' && (!cardHolder || !cardNumber || !cardExpiryDate || !cvv)">Card details are required.</p>
+  </div>
+</div>
+
+<app-address-modal *ngIf="isAddressModalOpen" [isOpen]="isAddressModalOpen" (updatedAddress)="onAddressUpdated($event)" (close)="closeAddressModal()"></app-address-modal>

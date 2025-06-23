@@ -1,0 +1,181 @@
+.coach-page {
+  margin: 0px;
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.coach-details{
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.img-section {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coach-img img {
+  height: 350px;
+  width: 350px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.details-section{
+  padding: 0px 20px;
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.coach-name {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0px;
+  color: #000;
+}
+
+.coach-salary{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.coach-salary span{
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin: 10px;
+}
+
+.original-salary {
+  font-size: 1rem;
+  color: #c0392b;
+  text-decoration: line-through;
+  margin: 0px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.discounted-salary {
+  font-size: 1.5rem;
+  color: #000000;
+  font-weight: bold;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.discounted-text{
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #c0392b;
+  margin: 0;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.coach-intro{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0px;
+}
+
+.session-label {
+  margin: 0px;
+  font-weight: 700;
+  color: #000;
+}
+
+.session-duration{
+  margin: 0px;
+  margin-bottom: 10px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #000;
+}
+
+.session-btn {
+  padding: 7px;
+  border: 1px solid #ccc;
+  transition: padding 0s, border-width 0s, border-color 0s;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.session-btn:hover {
+  border-width: 3px;
+  padding: 5px;
+  border-color: #000;
+}
+
+.session-btn.active {
+  border-width: 3px;
+  padding: 6px;
+  border-color: #000;
+}
+
+.show-more-btns {
+  color: rgb(0, 0, 0);
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: grid;
+  width: 100px;
+}
+
+.payment-section{
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub-btn button{
+  border: none;
+  border-radius: 20px;
+  padding: 10px 80px;
+  background-color: rgb(255, 187, 0);
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.sub-btn button:hover{
+  background-color: rgb(240, 156, 0);
+}
+
+.coach-reviews{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+}

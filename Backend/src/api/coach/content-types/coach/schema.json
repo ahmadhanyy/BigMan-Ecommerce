@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "coaches",
+  "info": {
+    "singularName": "coach",
+    "pluralName": "coaches",
+    "displayName": "Coach",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "salary": {
+      "type": "decimal",
+      "required": true
+    },
+    "experiance": {
+      "type": "string",
+      "required": true
+    },
+    "details": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "discountPrecent": {
+      "type": "decimal"
+    },
+    "coach_times": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::coach-time.coach-time",
+      "mappedBy": "coaches"
+    }
+  }
+}

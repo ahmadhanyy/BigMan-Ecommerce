@@ -1,0 +1,10 @@
+<div class="grid-container">
+  <div class="row" *ngFor="let row of prodRows">
+    <div class="cards-container">
+      <ng-container  *ngFor="let card of row">
+        <app-product-grid-card [card]="card"></app-product-grid-card>
+      </ng-container>
+    </div>
+  </div>
+  <app-load-button></app-load-button>
+</div>

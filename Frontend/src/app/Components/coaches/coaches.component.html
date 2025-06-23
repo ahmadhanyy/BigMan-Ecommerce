@@ -1,0 +1,8 @@
+<div class="coaches-container">
+  <app-coaches-sidebar [viewMode]="viewMode" (viewModeChange)="setViewMode($event)"></app-coaches-sidebar>
+  <div class="coaches-content">
+    <app-coaches-list-view *ngIf="viewMode === 'list'"></app-coaches-list-view>
+    <app-coaches-grid-view *ngIf="viewMode === 'grid'"></app-coaches-grid-view>
+  </div>
+</div>
+

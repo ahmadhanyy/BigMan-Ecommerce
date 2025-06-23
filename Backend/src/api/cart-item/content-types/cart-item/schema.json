@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cart_items",
+  "info": {
+    "singularName": "cart-item",
+    "pluralName": "cart-items",
+    "displayName": "CartItem",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "color": {
+      "type": "string"
+    },
+    "size": {
+      "type": "string"
+    },
+    "cost": {
+      "type": "decimal",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "product": {
+      "type": "json"
+    },
+    "deliveryDate": {
+      "type": "date",
+      "required": true
+    },
+    "deliveryStatus": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "shipped",
+        "delivered"
+      ],
+      "default": "pending"
+    },
+    "prodCount": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}

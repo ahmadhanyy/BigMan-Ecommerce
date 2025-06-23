@@ -1,0 +1,33 @@
+<div class="cards-container">
+  <div class="page-title">
+    <p>Vouchers</p>
+  </div>
+  <div class="voucher-btns">
+    <button class="active-vouchers-btn" [class.selected]="showActiveSection" (click)="showActiveVouchers()">AVAILABLE VOUCHERS</button>
+    <button class="used-vouchers-btn" [class.selected]="!showActiveSection" (click)="showUsedVouchers()">USED VOUCHERS</button>
+  </div>
+  <div class="active-vouchers" [hidden]="!this.showActiveSection">
+    <div class="no-vouchers" [hidden]="availableVouchers.length != 0">
+      <i class="fa-solid fa-ticket" style="color: #B197FC;"></i>
+      <p>No active vouchers yet? Stay tuned for more offers.</p>
+      <a class="continue-shopping-btn" routerLink="/products" >Continue Shopping</a>
+    </div>
+    <div class="card" *ngFor="let voucher of availableVouchers" [hidden]="availableVouchers.length == 0">
+      <p class="voucher-code">Code: {{voucher.code}}</p>
+      <p class="voucher-value">Value: {{voucher.value | currency: 'EGP'}}</p>
+      <p class="voucher-expiry-date">Expiry Date: {{ voucher.expiryDate| date: 'MMM d yyyy' }}</p>
+    </div>
+  </div>
+  <div class="used-vouchers" [hidden]="this.showActiveSection">
+    <div class="no-vouchers" [hidden]="usedVouchers.length != 0">
+      <i class="fa-solid fa-ticket" style="color: #B197FC;"></i>
+      <p>You do not have any used vouchers.</p>
+      <a class="continue-shopping-btn" routerLink="/products" >Continue Shopping</a>
+    </div>
+    <div class="card" *ngFor="let voucher of usedVouchers" [hidden]="usedVouchers.length == 0">
+      <p class="voucher-code">Code: {{voucher.code}}</p>
+      <p class="voucher-value">Value: {{voucher.value | currency: 'EGP'}}</p>
+      <p class="voucher-use-date">Usage Date: {{ voucher.usageDate| date: 'MMM d yyyy' }}</p>
+    </div>
+  </div>
+</div>

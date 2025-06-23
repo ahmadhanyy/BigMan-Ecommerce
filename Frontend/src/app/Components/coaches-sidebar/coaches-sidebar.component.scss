@@ -1,0 +1,88 @@
+.sidebar {
+  height: 100%;
+  width: 300px;
+  padding: 20px 40px 20px 20px;
+  border: none;
+  background-color: #f9f9f9;
+}
+
+.filter-section {
+  margin-bottom: 30px;
+}
+
+.filter-section h6 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.view-buttons {
+  display: flex;
+}
+
+button {
+  display: block;
+  padding: 7px 10px;
+  margin-top: 10px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.grid-btn i{
+  font-size: 20px;
+}
+
+.list-btn i{
+  font-size: 20px;
+}
+
+.grid-btn{
+  border-radius: 20px 0 0 20px;
+  width: 50%;
+}
+
+.list-btn{
+  border-radius: 0 20px 20px 0;
+  width: 50%;
+}
+
+button.active,
+button.active:hover {
+  background-color: rgb(240, 156, 0);
+}
+
+.grid-btn:hover,
+.list-btn:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.filter-section select {
+  width: 100%;
+  padding: 5px 15px;
+  margin-top: 5px;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.filter-section option {
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: rgb(230, 230, 230);
+}
+
+.filter-section select:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.filter-section option:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+.filter-section div {
+  margin-top: 10px;
+}

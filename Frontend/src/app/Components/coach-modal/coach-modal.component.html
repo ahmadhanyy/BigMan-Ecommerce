@@ -1,0 +1,49 @@
+<div class="modal" *ngIf="isOpen" (click)="onBackdropClick($event)">
+  <div class="close-modal">
+    <span class="close-btn" (click)="closeModal()">&times;</span>
+  </div>
+  <div class="modal-content">
+    <div class="img-section">
+      <div class="coach-img">
+        <img alt="coach image" [src]="apiUrl + card.image.url">
+      </div>
+      <div class="payment-section">
+        <div class="sub-btn">
+          <button (click)="contact(card)">Subscribe</button>
+        </div>
+        <div class="details-btn">
+          <a routerLink="/coach/{{card.id}}" target="_blank"><button class="view-details-btn">View Details</button></a>
+        </div>
+      </div>
+    </div>
+    <div class="details-section">
+      <div class="coach-info">
+        <p class="coach-name">{{ card.name }}</p>
+        <app-star-rating class="rate-stars" [coachCard]="card"></app-star-rating>
+      </div>
+      <div class="coach-payment">
+          <div class="coach-salary" *ngIf="card.discountPrecent">
+            <p class="discounted-salary">{{(card.salary - (card.salary * card.discountPrecent) / 100) | currency: 'EGP '}}<span> / month</span></p>
+            <p class="original-salary">{{card.salary | currency: 'EGP '}}</p>
+            <p class="discounted-text">{{card.discountPrecent}}% OFF for limited time</p>
+          </div>
+          <div class="coach-salary" *ngIf="!card.discountPrecent">
+            <p class="discounted-salary">{{card.salary | currency: 'EGP '}}<span> / month</span></p>
+          </div>
+      </div>
+      <hr>
+      <div class="coach-about">
+        <p class="coach-intro">{{ card.details }}</p>
+      </div>
+      <hr>
+      <div class="coach-sessions" *ngIf="card.coach_times">
+        <p class="session-label">Session: {{chosenTime.day.toUpperCase()}} - {{chosenTime.time}}</p>
+        <p class="session-duration">Note: Sessions duration is 2 hours only.</p>
+        <ng-container *ngFor="let time of visibleSessions">
+          <button class="session-btn" (click)="chooseTime(time)" [class.active]="chosenTime === time">{{time.day.toUpperCase()}} - {{time.time}}</button>
+        </ng-container>
+        <span class="show-more-btns" *ngIf="card.coach_times.length > 10 && !showAllSessions" (click)="showMoreSessions()">View more &#x25BC;</span>
+      </div>
+    </div>
+  </div>
+</div>

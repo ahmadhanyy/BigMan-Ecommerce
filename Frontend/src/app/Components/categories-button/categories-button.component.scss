@@ -1,0 +1,91 @@
+.dropdown-button {
+  background-color: rgb(91, 91, 91);
+  color: rgb(255, 255, 255);
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-width: 250px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+.dropdown:hover .dropdown-button {
+  background-color: rgb(230, 230, 230);
+  border-radius: 20px 20px 0px 0px;
+  color: rgb(0, 0, 0);
+}
+
+.button-text {
+  flex: 1;
+  text-align: left;
+}
+
+.arrow {
+  margin-right: 10px;
+  font-size: 1.9rem;
+  transform: rotate(90deg);
+}
+
+.down-arrow{
+  display: block;
+}
+
+.up-arrow{
+  display: none;
+}
+
+.dropdown:hover .down-arrow{
+  display: none;
+}
+
+.dropdown:hover .up-arrow{
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgb(230, 230, 230);
+  border-radius: 0px 0px 20px 20px;
+  z-index: 1;
+  top: 100%;
+  min-width: 250px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.list{
+  margin-bottom: 20px;
+}
+
+.dropdown-content a {
+  color: rgb(0, 0, 0);
+  background-color: rgb(230, 230, 230);
+  border: none;
+  text-decoration: none;
+  display: block;
+  font-size: 0.9rem;
+  text-align: left;
+  padding: 7px 10px;
+}
+
+.dropdown-content a:hover {
+  background-color: rgb(250, 250, 250);
+  font-weight: 600;
+}
+
+i{
+  color: rgb(255, 255, 255);
+  margin: 0px 7px;
+}
+
+.dropdown:hover i {
+  color: rgb(0, 0, 0);
+}

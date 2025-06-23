@@ -1,0 +1,73 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 0px 5px 0px;
+  background: rgb(190, 190, 190);
+}
+
+.footer .footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 20px 30px;
+}
+
+.footer-row .footer-col h4 {
+  color: #000000;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.footer-col .links {
+  margin-top: 20px;
+}
+
+.footer-col .links li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.footer-col .links li a {
+  text-decoration: none;
+  color: #000000;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.footer-col .links li a:hover {
+  color: #b67c00;
+}
+
+.copy-right{
+  text-align: center;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  color: #000000;
+  font-weight: 600;
+}
+
+.footer-col .icons {
+  display: flex;
+  justify-content: center; /* Centers the icons horizontally */
+  gap: 1rem; /* Space between icons */
+  margin-top: 20px; /* Space above the icons */
+}
+
+.footer-col .icons img {
+  width: 29px; /* Adjust the size of the icons */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.footer-col .icons img:hover {
+  transform: scale(1.1); /* Slightly enlarge the icon */
+  filter: brightness(1.2); /* Slightly brighten the icon */
+  transition: transform 0.3s ease, filter 0.3s ease; /* Smooth hover effect */
+}
+

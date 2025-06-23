@@ -1,0 +1,89 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": false
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "returnable": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "freeShipping": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "shippingPrice": {
+      "type": "decimal",
+      "required": true
+    },
+    "discountPrecent": {
+      "type": "decimal"
+    },
+    "material": {
+      "type": "string"
+    },
+    "productionCountry": {
+      "type": "string",
+      "required": true
+    },
+    "Fit": {
+      "type": "string"
+    },
+    "brand": {
+      "type": "string",
+      "required": true
+    },
+    "prod_colors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::prod-color.prod-color",
+      "mappedBy": "products"
+    },
+    "prod_sizes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::prod-size.prod-size",
+      "mappedBy": "products"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "products"
+    }
+  }
+}

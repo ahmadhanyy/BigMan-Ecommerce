@@ -1,0 +1,62 @@
+<div class="body">
+  <div class="empty-cart" *ngIf="cartItems.length === 0">
+    <i class="fa-solid fa-cart-shopping" style="color: #B197FC;"></i>
+    <p class="empty-cart-text">No items yet? Continue shopping to explore more.</p>
+    <a routerLink="/products"><button class="empty-cart-btn">Explore Items</button></a>
+  </div>
+  <div class="filled-cart" *ngIf="cartItems.length != 0">
+    <div class="cart-details">
+      <div class="cart-header">
+        <p>Shopping Cart ({{cartItems.length}})</p>
+        <button class="clear-btn" (click)="clearCart()">Clear</button>
+      </div>
+      <div class="cart-items">
+        <div class="cart-item" *ngFor="let item of cartItems">
+          <div class="prod-card">
+            <a routerLink="/product/{{item.product.id}}" target="_blank"><img alt="img" [src]="apiUrl + item.product.images[0].url" /></a>
+            <div class="prod-details">
+              <a routerLink="/product/{{item.product.id}}" target="_blank"><p class="prod-name">{{ item.product.name }}</p></a>
+              <a routerLink="/product/{{item.product.id}}" target="_blank">
+                <div class="prod-price" *ngIf="item.product.discountPrecent">
+                  <p class="discounted-text">{{item.product.discountPrecent}}% OFF for limited time</p>
+                  <p class="original-price">{{item.product.price| currency: 'EGP '}}</p>
+                  <p class="discounted-price">{{(item.product.price - (item.product.price * item.product.discountPrecent) / 100) | currency: 'EGP '}}</p>
+                </div>
+                <div class="prod-price" *ngIf="!item.product.discountPrecent">
+                  <p class="discounted-price">{{item.product.price | currency: 'EGP '}}</p>
+                </div>
+              </a>
+              <div class="prod-color" *ngIf="item.color">
+                <p class="color-text">Color: {{item.color}}</p>
+              </div>
+              <div class="prod-size" *ngIf="item.size">
+                <p class="size-text">Size: {{item.size}}</p>
+              </div>
+            </div>
+            <div class="item-buttons">
+              <button (click)="removeItem(item)"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            <div class="quantity-buttons">
+              <button (click)="decrementItem(item)">&#x207B;</button>
+              <span>{{item.prodCount}}</span>
+              <button (click)="incrementItem(item)">&#8314;</button>
+            </div>
+          </div>
+          <hr/>
+        </div>
+      </div>
+    </div>
+    <div class="cart-payment">
+      <p class="summary">Summary</p>
+      <p class="fees">Subtotal <span>{{getSubTotalPrice() | currency: 'EGP '}}</span></p>
+      <p class="fees">Shipping <span>{{getShippigPrice() | currency: 'EGP '}}</span></p>
+      <p class="total-fees">Total <span>{{(getSubTotalPrice() + getShippigPrice()) | currency: 'EGP '}}</span></p>
+      <div class="checkout-btn">
+        <a routerLink = "/payment" (click)="checkout()">Checkout ({{cartItems.length}})</a>
+      </div>
+    </div>
+  </div>
+  <div class="products-list">
+    <app-product-carousel [textOnList]="textOnList" [products]="productsList"></app-product-carousel>
+  </div>
+</div>

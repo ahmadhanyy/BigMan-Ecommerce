@@ -1,0 +1,25 @@
+<div class="cards-container">
+  <div class="empty-inbox" *ngIf="messagesList.length === 0">
+    <i class="fa-solid fa-message" style="color: #B197FC;"></i>
+    <p class="empty-inbox-text">You have not received any messages yet.</p>
+  </div>
+  <ng-container *ngIf="messagesList.length != 0">
+    <div class="page-title">
+      <p>Inbox Messages</p>
+    </div>
+    <div class="card" *ngFor="let message of messagesList">
+      <p class="message-date">{{message.date}}</p>
+      <p class="message-title">{{message.title}}</p>
+      <p class="message-text">{{message.message}}</p>
+      <div class="attached-product" *ngIf="getProdOnMessage(message.prodDocId)">
+        <img [src]="getProdOnMessage(message.prodDocId)?.images" alt="product image"/>
+        <p class="prod-name">{{getProdOnMessage(message.prodDocId)?.name}}</p>
+      </div>
+      <div class="attached-coach" *ngIf="getCoachOnMessage(message.coachDocId)">
+        <img [src]="getCoachOnMessage(message.coachDocId)?.image" alt="coach image"/>
+        <p class="coach-name">{{getCoachOnMessage(message.coachDocId)?.name}}</p>
+      </div>
+    </div>
+    <span class="show-more-btn">View more &#x25BC;</span>
+  </ng-container>
+</div>

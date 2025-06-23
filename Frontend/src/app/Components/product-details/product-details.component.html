@@ -1,0 +1,110 @@
+<div class="product-page">
+  <div class="product-section">
+    <div class="product-details">
+      <div class="img-section">
+        <div class="prod-img">
+          <img alt="product image" [src]="apiUrl + chosenImg">
+        </div>
+        <div class="imgs-container">
+          <span class="arrow left-arrow" aria-label="Scroll left" (click)="scroll('left')">&#8249;</span>
+          <div class="imgs-wrapper" #imgsWrapper appHorizontalScroll>
+            <ng-container *ngFor="let img of card.images">
+              <img class="imgs-on-list" alt="product image" (mouseenter)="chooseImg(img.url)" [src]="apiUrl + img.url">
+            </ng-container>
+          </div>
+          <span class="arrow right-arrow" aria-label="Scroll right" (click)="scroll('right')">&#8250;</span>
+        </div>
+      </div>
+      <div class="details-section">
+        <div class="prod-info">
+          <p class="prod-name">{{ card.name }}</p>
+          <app-star-rating [prodCard]="card"></app-star-rating>
+        </div>
+        <div class="prod-payment">
+            <div class="prod-price" *ngIf="card.discountPrecent">
+              <p class="discounted-price">{{(card.price - (card.price * card.discountPrecent) / 100) | currency: 'EGP '}}</p>
+              <p class="original-price">{{card.price | currency: 'EGP '}}</p>
+              <p class="discounted-text">{{card.discountPrecent}}% OFF for limited time</p>
+            </div>
+            <div class="prod-price" *ngIf="!card.discountPrecent">
+              <p class="discounted-price">{{card.price | currency: 'EGP '}}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="prod-data">
+          <div class="prod-color" *ngIf="card.prod_colors">
+            <p class="color-label">Color: {{chosenColor.toUpperCase()}}</p>
+            <div class="color-btns-container">
+              <ng-container *ngFor="let color of visibleColors">
+                <button class="color-btn" (click)="chooseColor(color.color)" [class.active]="chosenColor === color.color">{{color.color}}</button>
+              </ng-container>
+              <span class="show-more-btns" *ngIf="card.prod_colors.length > 10 && !showAllColors" (click)="showMoreColors()">View more &#x25BC;</span>
+            </div>
+          </div>
+          <div class="prod-size" *ngIf="card.prod_sizes">
+            <p class="size-label">Size: {{chosenSize.toUpperCase()}}</p>
+            <div class="size-btns-container">
+              <ng-container *ngFor="let size of visibleSizes">
+                <button class="size-btn" (click)="chooseSize(size.size)" [class.active]="chosenSize === size.size">{{size.size}}</button>
+              </ng-container>
+              <span class="show-more-btns" *ngIf="card.prod_sizes.length > 10 && !showAllSizes" (click)="showMoreSizes()">View more &#x25BC;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="specifications-section">
+      <h6 class="specifications-label">Product Specifications</h6>
+      <p class="prod-description" *ngIf="card.description">{{card.description}}</p>
+      <p class="prod-brand" *ngIf="card.brand">Brand: {{card.brand}}</p>
+      <p class="prod-material" *ngIf="card.material">Material: {{card.material}}</p>
+      <p class="prod-fit" *ngIf="card.Fit">Fit: {{card.Fit}}</p>
+      <p class="prod-country" *ngIf="card.productionCountry">Production Country: {{card.productionCountry}}</p>
+    </div>
+    <div class="product-reviews">
+      <app-reviews [prodCard]="card"></app-reviews>
+    </div>
+  </div>
+  <div class="payment-section">
+    <div class="delivary">
+      <p class="payment-labels">Delivery</p>
+      <ng-container *ngIf="card.freeShipping">
+        <p class="shipping-fees">Free Shipping</p>
+      </ng-container>
+      <ng-container *ngIf="!card.freeShipping">
+        <p class="shipping-fees">Shipping Fees: <span>{{card.shippingPrice| currency: 'EGP '}}</span></p>
+      </ng-container>
+      <p class="delivery-date">
+        Delivery: <span>{{ deliveryStartDate | date: 'MMM d' }}</span> - <span>{{ deliveryEndDate | date: 'MMM d' }}</span>
+      </p>
+    </div>
+    <hr>
+    <div class="services">
+      <p class="payment-labels">Services</p>
+      <p class="return-text-header">Buyer Protection</p>
+      <ng-container *ngIf="card.returnable">
+        <img class="protection-icon" alt="icon" src="assets/icon-protection.png">
+        <span class="return-text-body">Get full refund if the item is not as described or if is not delivered.</span>
+      </ng-container>
+      <ng-container *ngIf="!card.returnable">
+        <p class="return-text-body">This item is not refundable.</p>
+      </ng-container>
+    </div>
+    <hr>
+    <div class="quantity">
+      <p class="payment-labels">Quantity</p>
+    </div>
+    <div class="quantity-buttons">
+      <button (click)="decrementQuantity()">&#x207B;</button>
+      <span>{{countNo}}</span>
+      <button (click)="incrementQuantity()">&#8314;</button>
+    </div>
+    <div class="cart-btn">
+      <button class="add-to-cart-btn" (click)="addToCart(card)">Add To Cart</button>
+    </div>
+    <div class="fav-btns">
+      <i class="fa-solid fa-heart" *ngIf="isInWishlist(card)" (click)="removeFromWishlist(card)" style="color: #000000;"></i>
+      <i class="fa-regular fa-heart" *ngIf="!isInWishlist(card)" (click)="addToWishlist(card)" style="color: #000000;"></i>
+  </div>
+  </div>
+</div>

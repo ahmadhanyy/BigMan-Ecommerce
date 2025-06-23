@@ -1,0 +1,7 @@
+<div class="products-container">
+  <app-products-sidebar [viewMode]="viewMode" (viewModeChange)="setViewMode($event)"></app-products-sidebar>
+  <div class="products-content">
+    <app-products-grid-view *ngIf="viewMode === 'grid'"></app-products-grid-view>
+    <app-products-list-view *ngIf="viewMode === 'list'"></app-products-list-view>
+  </div>
+</div>

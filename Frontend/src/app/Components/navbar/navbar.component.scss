@@ -1,0 +1,51 @@
+*{
+  padding: 0;
+  margin: 0;
+
+}
+
+.container-fluid{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 1px 10px 10px 10px;
+  background-color: rgb(30, 30, 30);
+  gap: 60px;
+  padding-left: 180px;
+}
+
+.nav-btns{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+ul{
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+}
+
+app-categories-button{
+  display: flex;
+}
+
+.nav-link {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 7px 10px;
+  border-radius: 20px;
+}
+
+.nav-link:hover {
+  background: rgb(75, 75, 75);
+  transition: .5s;
+}
+
+.nav-btn.active .nav-link {
+  color: rgb(255, 187, 0);
+}

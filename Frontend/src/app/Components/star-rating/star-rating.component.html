@@ -1,0 +1,10 @@
+<div class="star-rating">
+  <span
+    *ngFor="let star of stars; let i = index"
+    [ngStyle]="{ 'color': color, 'font-size': size }"
+    (click)="ratingUpdated.emit(i + 1)"
+    class="star">
+    {{ showIcon(i) }}
+  </span>
+  <small *ngIf="showRatersNumber && ratersNumber">({{ ratersNumber }})</small>
+</div>

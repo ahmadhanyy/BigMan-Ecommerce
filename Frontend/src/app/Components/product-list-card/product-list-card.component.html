@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="prod-card">
+    <a [routerLink]="['/product', card.id]">
+      <img alt="img" [src]="apiUrl + card.images[0].url">
+    <div class="prod-info">
+      <p class="prod-name">{{ card.name }}</p>
+      <app-star-rating class="rate-stars" [prodCard]="card"></app-star-rating>
+      <p class="prod-description">{{ card.description }}</p>
+    </div>
+    </a>
+    <div class="prod-payment">
+      <a [routerLink]="['/product', card.id]">
+        <div class="prod-price" *ngIf="card.discountPrecent">
+          <p class="original-price">{{card.price | currency: 'EGP '}}</p>
+          <p class="discounted-price">{{(card.price - (card.price * card.discountPrecent) / 100) | currency: 'EGP '}}</p>
+          <p class="discounted-text">{{card.discountPrecent}}% OFF for limited time</p>
+        </div>
+        <div class="prod-price" *ngIf="!card.discountPrecent">
+          <p class="discounted-price">{{card.price | currency: 'EGP '}}</p>
+        </div>
+      </a>
+      <button class="cart-btn" (click)="openModal()">Add To Cart</button>
+      <i class="fa-solid fa-heart" *ngIf="isInWishlist(card)" (click)="removeFromWishlist(card)" style="color: #000000;"></i>
+      <i class="fa-regular fa-heart" *ngIf="!isInWishlist(card)" (click)="addToWishlist(card)" style="color: #000000;"></i>
+    </div>
+  </div>
+</div>
+
+<app-product-modal *ngIf="isModalProdOpen" [isOpen]="isModalProdOpen" [card]="card" (close)="closeProdModal()"></app-product-modal>
+<app-login-modal *ngIf="isModalLoginOpen" [isOpen]="isModalLoginOpen" (close)="closeLoginModal()"></app-login-modal>

@@ -1,0 +1,266 @@
+.empty-cart {
+  background-color: rgb(233, 233, 233);
+  height: 450px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.empty-cart i{
+  font-size: 200px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.empty-cart-btn{
+  margin-top: 30px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 90px;
+  background-color: rgb(255, 187, 0);
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.empty-cart-btn:hover{
+  background-color: rgb(240, 156, 0);
+}
+
+.empty-cart-text{
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.filled-cart {
+  background-color: rgb(233, 233, 233);
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.cart-payment{
+  margin: 20px 0px 20px 0px;
+  padding: 20px;
+  width: 400px;
+  height: 300px;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+}
+
+.summary{
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.fees{
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.total-fees{
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.fees span{
+  margin-left: 100px;
+}
+
+.total-fees span{
+  margin-left: 120px;
+}
+
+.checkout-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-btn a{
+  margin-top: 30px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 90px;
+  background-color: rgb(255, 187, 0);
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.checkout-btn:hover a{
+  background-color: rgb(240, 156, 0);
+}
+
+.cart-details{
+  margin: 20px 20px 20px 70px;
+}
+
+.cart-header{
+  padding: 20px;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  width: 800px;
+  height: auto;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-header p{
+  margin: 0px;
+}
+
+.clear-btn{
+  border: none;
+  border-radius: 50px;
+  background-color: rgb(91, 91, 91);
+  color: rgb(255, 255, 255);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 5px 20px;
+}
+
+.clear-btn:hover{
+  background-color: rgb(70, 70, 70);
+}
+
+.cart-items{
+  width: 800px;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+}
+
+hr{
+  margin: 5px;
+  margin-bottom: 15px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+}
+
+.prod-card {
+  width: 800px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+img {
+  width: 120px;
+  height: 120px;
+  border-radius: 10%;
+  margin-right: 20px;
+}
+
+.prod-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.prod-name {
+  color: #000;
+  width: 500px;
+  font-size: 1rem;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0px 0px 5px 0px;
+}
+
+.discounted-text{
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #c0392b;
+  margin: 0px;
+}
+
+.original-price {
+  font-size: 0.9rem;
+  color: #c0392b;
+  text-decoration: line-through;
+  margin: 0px 0px 5px 0px;
+}
+
+.discounted-price {
+  font-size: 1.2rem;
+  color: #000000;
+  font-weight: bold;
+  margin: 0px 0px 5px 0px;
+}
+
+.prod-color p,
+.prod-size p{
+  font-size: 0.9vw;
+  font-weight: 700;
+  margin: 0px;
+  padding: 0px;
+  color: #000000;
+}
+
+.prod-size,
+.prod-color{
+  margin: 0px;
+  padding: 0px;
+}
+
+.icons{
+  width: 20px;
+  height: auto;
+}
+
+.item-buttons button {
+  border: none;
+  background-color: rgb(255, 255, 255);
+}
+
+.item-buttons {
+  width: 65px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 20px;
+  right: 40px;
+}
+
+.quantity-buttons {
+  width: 90px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 80px;
+  right: 20px;
+}
+
+.quantity-buttons button {
+  border: none;
+  border-radius: 50%;
+  background-color: rgb(236, 236, 236);
+  color: rgb(0, 0, 0);
+  font-size: 1.5rem;
+  width: 30px;
+  height: 30px;
+}
+
+.quantity-buttons button:hover {
+  background-color: rgb(218, 218, 218);
+}
+
+.quantity-buttons span {
+  font-size: 1rem;
+  margin: 0 10px;
+}

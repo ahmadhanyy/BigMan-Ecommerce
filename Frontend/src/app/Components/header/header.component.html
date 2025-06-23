@@ -1,0 +1,56 @@
+<nav>
+  <div class="container-fluid">
+    <a routerLink="/home"><img src="assets/Logo.png" alt="logo" class="logo" /></a>
+    <div class="header-items">
+      <form action="/search" method="GET">
+        <input type="text" placeholder="What are you looking for?">
+      </form>
+      <div class="icons">
+        <div class="dropdown">
+          <div class="login-section dropdown-button">
+            <i class="fa-solid fa-user"></i>
+            <span class="login-text">{{loginText}}</span>
+            <span class="arrow down-arrow">&#8250;</span>
+            <span class="arrow up-arrow">&#8249;</span>
+          </div>
+          <div class="dropdown-content">
+            <div class="login-part" [hidden]="isUserLoggedIn">
+              <button class="log-btn" (click)="onLogin()">Login</button>
+              <button class="signup-btn" (click)="onRegister()">Register</button>
+            </div>
+            <div class="logout-part" [hidden]="!isUserLoggedIn">
+              <div class="profile-data">
+                <i class="fa-solid fa-user"></i>
+                <p class="profile-name">{{loginText}}</p>
+              </div>
+              <button class="log-btn" (click)="onLogout()">Logout</button>
+            </div>
+            <hr>
+            <div class="list">
+              <a routerLink = "/account">My Account</a>
+              <a routerLink = "/orders">My Orders</a>
+              <a routerLink = "/vouchers">Vouchers</a>
+              <a routerLink = "/user/reviews">Reviews</a>
+              <a routerLink = "/inbox">Inbox</a>
+            </div>
+          </div>
+        </div>
+        <div class="wishlist-section">
+          <a routerLink="/wishlist">
+            <i class="fa-regular fa-heart" style="color: #ececec;"></i>
+          </a>
+        </div>
+        <div class="cart-section">
+          <a routerLink="/cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">{{cartCount}}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<app-login-modal *ngIf="isLoginModalOpen" [isOpen]="isLoginModalOpen" (close)="closeLoginModal()"></app-login-modal>
+<app-register-modal *ngIf="isRegisterModalOpen" [isOpen]="isRegisterModalOpen" (close)="closeRegisterModal()"></app-register-modal>
+<app-logout-dialog *ngIf="isLogoutModalOpen" [isOpen]="isLogoutModalOpen" (close)="closeLogoutModal()"></app-logout-dialog>

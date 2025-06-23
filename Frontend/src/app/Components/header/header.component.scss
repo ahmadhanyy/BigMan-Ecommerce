@@ -1,0 +1,261 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-fluid {
+  background-color: rgb(30, 30, 30);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  padding: 20px;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+}
+
+.header-items {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+form input:focus {
+  outline: none;
+  background-color: rgb(233, 233, 233);
+}
+
+form input{
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  width: 400px;
+  border: none;
+  padding: 7px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+form input:hover {
+  background: rgb(233, 233, 233);
+  transition: .5s;
+}
+
+.icons {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.login-section,
+.wishlist-section,
+.cart-section{
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.login-section i{
+  font-size: 25px;
+  color: #ececec;
+  margin: 10px;
+}
+
+.login-section:hover i{
+  color: rgb(255, 208, 0);
+}
+
+.wishlist-section i,
+.cart-section i{
+  font-size: 30px;
+}
+
+.wishlist-icon{
+  filter: invert(100%);
+}
+
+.cart-count {
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 17px;
+  height: 17px;;
+}
+
+.wishlist-section:hover,
+.cart-section:hover .cart-icon{
+  filter: brightness(0) invert(70%) sepia(100%) hue-rotate(1deg) saturate(1000%);
+}
+
+.cart-section:hover .cart-count {
+  background-color: rgb(255, 208, 0);
+}
+
+.cart-section:hover i {
+  color: rgb(255, 208, 0);
+}
+
+.cart-section i {
+  color: #ececec;
+  font-size: 30px;
+}
+
+.login-text{
+  color: rgb(255, 255, 255);
+  height: 30px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow {
+  font-size: 1rem;
+  transform: rotate(90deg);
+  color: rgb(255, 255, 255);
+  margin-left: 7px;
+}
+
+.down-arrow{
+  display: block;
+}
+
+.up-arrow{
+  display: none;
+}
+
+.dropdown:hover .down-arrow{
+  display: none;
+}
+
+.dropdown:hover .up-arrow{
+  display: block;
+}
+
+.dropdown{
+  height: 40px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgb(245, 245, 245);
+  border-radius: 20px;
+  z-index: 1;
+  min-width: 250px;
+  margin-top: 10px;
+  right: -100px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.list{
+  margin: 20px 10px;
+}
+
+.dropdown-content a {
+  color: rgb(0, 0, 0);
+  background-color: rgb(245, 245, 245);
+  border-radius: 10px;
+  border: none;
+  text-decoration: none;
+  display: block;
+  font-size: 1rem;
+  text-align: left;
+  padding: 5px 10px;
+}
+
+.dropdown-content a:hover {
+  background-color: rgb(230, 230, 230);
+  font-weight: 600;
+}
+
+.dropdown:hover .login-section{
+  filter: brightness(0) invert(70%) sepia(100%) hue-rotate(1deg) saturate(1000%);
+}
+
+.login-part,
+.logout-part{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+}
+
+.log-btn{
+  border: none;
+  border-radius: 20px;
+  background-color: rgb(30, 30, 30);
+  color: rgb(255, 255, 255);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 7px 70px;
+}
+
+.log-btn:hover{
+  color: rgb(230, 230, 230);
+}
+
+.signup-btn{
+  border: none;
+  color: rgb(0, 0, 0);
+  font-size: 0.9rem;
+  font-weight: 700;
+  background-color: rgb(245, 245, 245);
+}
+
+.signup-btn:hover{
+  color: rgb(40, 40, 40);
+}
+
+hr{
+  margin: 5px;
+}
+
+.profile-data{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 3px;
+}
+
+.profile-img{
+  width: 50px;
+  height: 50px;
+  background-color: rgb(40, 40, 40);
+  border-radius: 50%;
+}
+
+.profile-name{
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+}

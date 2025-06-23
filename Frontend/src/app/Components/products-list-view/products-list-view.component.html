@@ -1,0 +1,11 @@
+<table>
+  <tbody>
+    <tr *ngFor="let prod of prodsList">
+      <td>
+        <app-product-list-card [card]="prod"></app-product-list-card>
+        <hr>
+      </td>
+    </tr>
+  </tbody>
+  <app-load-button></app-load-button>
+</table>

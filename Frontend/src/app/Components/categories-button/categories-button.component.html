@@ -1,0 +1,15 @@
+<div class="dropdown">
+  <button class="dropdown-button">
+    <span><i class="fa-solid fa-bars"></i></span>
+    <span class="button-text">All Categories</span>
+    <span class="arrow down-arrow">&#8250;</span>
+    <span class="arrow up-arrow">&#8249;</span>
+  </button>
+  <div class="dropdown-content">
+    <div class="list">
+      <ng-container *ngFor="let cat of categories; let i = index">
+        <a [routerLink] = "['/products', cat.id]">{{cat.name}}</a>
+      </ng-container>
+    </div>
+  </div>
+</div>

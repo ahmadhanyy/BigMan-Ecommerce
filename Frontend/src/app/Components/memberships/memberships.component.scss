@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #dddddd;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  width: 80%;
+  padding: 30px;
+  background-color: #fafafa;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.card h4 {
+  font-size: 1.4rem;
+  color: #001044;
+  margin-bottom: 8px;
+}
+
+.price-section {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.original-price {
+  font-size: 1.5rem;
+  color: #c0392b;
+  text-decoration: line-through;
+  margin-right: 10px;
+}
+
+.discounted-price {
+  font-size: 1.6rem;
+  color: #008839;
+  font-weight: 600;
+}
+
+.card p {
+  font-size: 1.1rem;
+  color: #131313;
+  margin-bottom: 20px;
+}
+
+.card .discount {
+  display: block;
+  padding: 10px 0;
+  background-color: #c21d1d;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.card .join-btn {
+  padding: 12px 25px;
+  background-color: rgb(240, 156, 0);
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+  border: none;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
+}

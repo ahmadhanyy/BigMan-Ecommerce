@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "addresses",
+  "info": {
+    "singularName": "address",
+    "pluralName": "addresses",
+    "displayName": "Address",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "street": {
+      "type": "string",
+      "required": true
+    },
+    "buildingNo": {
+      "type": "integer",
+      "required": true
+    },
+    "moreInfo": {
+      "type": "text"
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "government": {
+      "type": "enumeration",
+      "enum": [
+        "Alexandria",
+        "Aswan",
+        "Assiut",
+        "Beheira",
+        "Beni Suef",
+        "Cairo",
+        "Dakahlia",
+        "Damietta",
+        "Fayoum",
+        "Gharbia",
+        "Giza",
+        "Ismailia",
+        "Kafr el-Sheikh",
+        "Matrouh",
+        "Minya",
+        "Menofia",
+        "New Valley",
+        "North Sinai",
+        "Port Said",
+        "Qualyubia",
+        "Qena",
+        "Red Sea",
+        "Sharqia",
+        "Sohag",
+        "South Sinai",
+        "Suez",
+        "Luxor"
+      ],
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
