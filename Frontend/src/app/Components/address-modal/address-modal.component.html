@@ -53,7 +53,7 @@
           </div>
         </div>
         <div class="submit-section">
-          <button class="submit-btn" type="submit" [disabled]="addressForm.invalid">Submit</button>
+          <button class="submit-btn" type="submit" [disabled]="!addressForm.form.valid">Submit</button>
         </div>
       </form>
     </div>

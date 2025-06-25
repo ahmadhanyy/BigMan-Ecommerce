@@ -5,7 +5,7 @@ export interface IOrder {
   id: number;
   documentId: string;
   email: string;
-  cartItems: ICartItem[];
+  cart_items: ICartItem[];
   address: IAddress;
   orderDate: Date;
   deliveryDate: Date;

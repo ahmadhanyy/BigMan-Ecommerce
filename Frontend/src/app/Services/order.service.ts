@@ -57,7 +57,9 @@ export class OrderService {
           cardExpiryDate,
           cvv,
           address: address,
-          cart_items: cartItems,
+          cart_items: {
+            connect: cartItems.map(item => ({ id: item.id }))
+          }
         }
       };
       return this.httpClient.post<IOrder>(`${this.apiUrl}/orders`, order, { headers });
@@ -71,10 +73,11 @@ export class OrderService {
           cost,
           paymentMethod,
           address: address,
-          cart_items: cartItems,
+          cart_items: {
+            connect: cartItems.map(item => ({ id: item.id }))
+          }
         }
       };
-      console.log('new order to add: ', order);
       return this.httpClient.post<IOrder>(`${this.apiUrl}/orders`, order, { headers });
     }
   }

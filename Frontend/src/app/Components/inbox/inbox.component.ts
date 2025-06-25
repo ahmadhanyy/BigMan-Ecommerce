@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IMessage } from '../../Interfaces/imessage';
 import { MessageService } from '../../Services/message.service';
-import { IUser } from '../../Interfaces/iuser';
 import { UserService } from '../../Services/user.service';
 import { ProductService } from '../../Services/product.service';
 import { CoachService } from '../../Services/coach.service';
@@ -16,6 +15,7 @@ import { ModalService } from '../../Services/modal.service';
 })
 export class InboxComponent implements OnInit {
   messagesList: IMessage[] = [];
+  showAllMsg: boolean = false;
 
   constructor(private messageService: MessageService,
               private userService: UserService,
@@ -25,10 +25,7 @@ export class InboxComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.loggedUserEmail$.subscribe(email => {
-      if (!email) {
-        this.modalService.openLoginModal();
-      }
-      else{
+      if (email) {
         this.messageService.getMessagesByEmail(email).subscribe(messages => {
           this.messagesList = messages;
         });
@@ -54,5 +51,13 @@ export class InboxComponent implements OnInit {
     });
     }
     return coach;
+  }
+
+  get visibleMsg() {
+    return this.showAllMsg ? this.messagesList  : this.messagesList.slice(0, 5); // Show 5 messages by default
+  }
+
+  showMoreMsg() {
+    this.showAllMsg = true;
   }
 }

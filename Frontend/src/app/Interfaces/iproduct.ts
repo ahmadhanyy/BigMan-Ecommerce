@@ -1,11 +1,10 @@
+import { ICategory } from "./icategory";
+
 export interface IProduct {
   id: number;
   documentId: string;
   name: string;
-  catDocId: string;
-  catId: number;
   price: number;
-  quantity: number;
   description: string;
   images: IImage[];
   returnable: boolean;
@@ -16,8 +15,16 @@ export interface IProduct {
   productionCountry: string;
   Fit?: string;
   brand: string;
-  prod_colors: IProdColor[];
-  prod_sizes: IProdSize[];
+  categories: ICategory[];
+  prod_variants: IProdVariant[];
+}
+
+export interface IProdVariant {
+  id: number;
+  documentId: string;
+  color?: string;
+  size?: string;
+  quantity: number;
 }
 
 export interface IImage {
@@ -37,14 +44,4 @@ export interface IImageFormat {
   width: number;
   height: number;
   url: string;
-}
-
-export interface IProdColor {
-  id: number;
-  color: string;
-}
-
-export interface IProdSize {
-  id: number;
-  size: string;
 }

@@ -11,6 +11,7 @@ export interface ICartItem {
   deliveryDate: Date;
   deliveryStatus: DeliveryStatus;
   cost: number;
+  isOrdered: boolean;
 }
 
 export enum DeliveryStatus {

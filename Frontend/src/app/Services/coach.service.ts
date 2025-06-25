@@ -12,8 +12,8 @@ export class CoachService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getCoaches(): Observable<ICoach[]> {
-    return this.httpClient.get<ICoach[]>(`${this.apiUrl}/coaches?populate=*`);
+  getCoaches(currentPage: number): Observable<ICoach[]> {
+    return this.httpClient.get<ICoach[]>(`${this.apiUrl}/coaches?populate=*&pagination[page]=${currentPage}&pagination[pageSize]=20`);
   }
 
   getCoachById(id: number): Observable<ICoach> {

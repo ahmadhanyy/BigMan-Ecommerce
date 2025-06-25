@@ -40,14 +40,14 @@ import { ProductDetailsComponent } from './Components/product-details/product-de
 import { CoachDetailsComponent } from './Components/coach-details/coach-details.component';
 import { RegisterModalComponent } from './Components/register-modal/register-modal.component';
 import { LogoutDialogComponent } from './Components/logout-dialog/logout-dialog.component';
-import { ReviewsComponent } from './Components/reviews/reviews.component';
 import { AccountComponent } from './Components/account/account.component';
 import { OrdersComponent } from './Components/orders/orders.component';
 import { InboxComponent } from './Components/inbox/inbox.component';
 import { VouchersComponent } from './Components/vouchers/vouchers.component';
-import { UserReviewsComponent } from './Components/user-reviews/user-reviews.component';
 import { PaymentComponent } from './Components/payment/payment.component';
 import { AddressModalComponent } from './Components/address-modal/address-modal.component';
+import { OrderPlacedModalComponent } from './Components/order-placed-modal/order-placed-modal.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -87,23 +87,23 @@ import { AddressModalComponent } from './Components/address-modal/address-modal.
     CoachDetailsComponent,
     RegisterModalComponent,
     LogoutDialogComponent,
-    ReviewsComponent,
     AccountComponent,
     OrdersComponent,
     InboxComponent,
     VouchersComponent,
-    UserReviewsComponent,
     PaymentComponent,
-    AddressModalComponent
+    AddressModalComponent,
+    OrderPlacedModalComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule
-  ],
+    ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

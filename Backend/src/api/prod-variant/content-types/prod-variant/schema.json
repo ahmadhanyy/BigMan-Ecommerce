@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prod_variants",
+  "info": {
+    "singularName": "prod-variant",
+    "pluralName": "prod-variants",
+    "displayName": "prodVariant"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "color": {
+      "type": "string"
+    },
+    "size": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "prod_variants"
+    }
+  }
+}

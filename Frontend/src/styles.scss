@@ -9,3 +9,6 @@ body.modal-open {
   overflow: hidden; /* Prevent background scrolling when modal is open */
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

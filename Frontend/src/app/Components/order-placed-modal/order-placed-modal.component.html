@@ -1,0 +1,13 @@
+<div class="order-modal" *ngIf="isOpen">
+  <div class="order-content">
+    <div class="success-header">
+      <i class="fa-solid fa-circle-check"></i>
+      <h2>Order Placed Successfully!</h2>
+      <p>Thank you for your purchase. A confirmation email has been sent.</p>
+    </div>
+    <div class="order-actions">
+      <a routerLink="/home" class="go-home-btn" (click)="closeModal()">Continue Shopping</a>
+      <a routerLink="/orders" class="go-order-btn" (click)="closeModal()">View My Orders</a>
+    </div>
+  </div>
+</div>

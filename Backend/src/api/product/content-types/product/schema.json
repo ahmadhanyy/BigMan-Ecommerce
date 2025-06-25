@@ -20,10 +20,6 @@
       "type": "decimal",
       "required": true
     },
-    "quantity": {
-      "type": "integer",
-      "required": true
-    },
     "description": {
       "type": "text",
       "required": false
@@ -67,23 +63,17 @@
       "type": "string",
       "required": true
     },
-    "prod_colors": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::prod-color.prod-color",
-      "mappedBy": "products"
-    },
-    "prod_sizes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::prod-size.prod-size",
-      "mappedBy": "products"
-    },
     "categories": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::category.category",
       "inversedBy": "products"
+    },
+    "prod_variants": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::prod-variant.prod-variant",
+      "mappedBy": "product"
     }
   }
 }

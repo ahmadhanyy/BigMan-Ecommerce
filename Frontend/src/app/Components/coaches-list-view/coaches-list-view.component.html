@@ -7,5 +7,5 @@
       </td>
     </tr>
   </tbody>
-  <app-load-button></app-load-button>
+  <app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>
 </table>

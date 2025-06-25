@@ -1,0 +1,84 @@
+.order-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.order-content {
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.success-header {
+  color: #2f9e44;
+  margin-bottom: 20px;
+}
+
+.success-header i {
+  font-size: 3rem;
+  color: #2f9e44;
+  margin-bottom: 10px;
+}
+
+.success-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.success-header p {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.order-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+a{
+  text-decoration: none;
+}
+
+.go-home-btn,
+.go-order-btn {
+  flex: 1;
+  padding: 10px 5px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.go-home-btn {
+  background-color: #1971c2;
+  color: #ffffff;
+}
+
+.go-home-btn:hover {
+  background-color: #1864ab;
+}
+
+.go-order-btn {
+  background-color: #2f9e44;
+  color: #ffffff;
+}
+
+.go-order-btn:hover {
+  background-color: #228d36;
+}

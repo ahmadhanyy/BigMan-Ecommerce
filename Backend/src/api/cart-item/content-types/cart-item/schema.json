@@ -45,6 +45,11 @@
     "prodCount": {
       "type": "integer",
       "required": true
+    },
+    "isOrdered": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

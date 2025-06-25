@@ -7,62 +7,41 @@ import { UserService } from '../../Services/user.service';
 import { UserInformationService } from '../../Services/user-information.service';
 import { ModalService } from '../../Services/modal.service';
 import { environment } from '../../../environments/environment';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
-export class CartComponent implements OnInit, OnChanges {
+export class CartComponent implements OnInit {
   apiUrl = environment.imageApi;
   loggedUserEmail: string | null;
   cartItems: ICartItem[] = [];
   productsList: IProduct[] = [];
-  textOnList: string = 'More To Love';
+  textOnList: string = 'Big Sale Now! Up To 50% off on all clothes.';
 
   constructor(private prodService: ProductService,
               private cartItemService: CartItemService,
               private userService: UserService,
               private userInfoService: UserInformationService,
-              private modalService: ModalService)
+              private modalService: ModalService,
+              private viewportScroller: ViewportScroller)
               {
                 this.loggedUserEmail = null;
               }
-
-  ngOnChanges(): void {
-        // Subscribe to the loggedUserId$ observable to get real-time updates
-        this.userService.loggedUserEmail$.subscribe((email) => {
-          this.loggedUserEmail = email;
-          if (!this.loggedUserEmail) {
-            this.modalService.openLoginModal();
-          }
-          else{
-            this.userInfoService.userCart$.subscribe((items) => {
-              this.cartItems =  items;
-            });
-          }
-        });
-
-        this.prodService.getProducts().subscribe((response: any) => {
-          this.productsList = response.data;
-        });
-  }
 
   ngOnInit(): void {
     // Subscribe to the loggedUserId$ observable to get real-time updates
     this.userService.loggedUserEmail$.subscribe((email) => {
       this.loggedUserEmail = email;
-      if (!this.loggedUserEmail) {
-        this.modalService.openLoginModal();
-      }
-      else{
+      if (this.loggedUserEmail) {
         this.userInfoService.userCart$.subscribe((items) => {
           this.cartItems =  items;
         });
       }
     });
-
-    this.prodService.getProducts().subscribe((response: any) => {
+    this.prodService.getDiscountByCategory('Clothes').subscribe((response: any) => {
       this.productsList = response.data;
     });
   }
@@ -124,7 +103,8 @@ export class CartComponent implements OnInit, OnChanges {
 
   incrementItem(item: ICartItem): void {
     if (this.loggedUserEmail) {
-      if (item.prodCount < item.product.quantity){
+      const matchedVariant = item.product.prod_variants.find(variant => variant.color === item.color && variant.size === item.size);
+      if (matchedVariant && item.prodCount < matchedVariant.quantity) {
         item.prodCount++;
         this.cartItemService.updateItem(item).subscribe({
           next: (res) => {
@@ -157,7 +137,7 @@ export class CartComponent implements OnInit, OnChanges {
   }
 
   checkout(){
-    console.log('order : ', this.cartItems);
+    this.viewportScroller.scrollToPosition([0, 0]); // scroll to top
   }
 
 }

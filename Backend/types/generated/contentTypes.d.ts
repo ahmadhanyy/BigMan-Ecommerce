@@ -599,6 +599,9 @@ export interface ApiCartItemCartItem extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.DefaultTo<'pending'>;
     prodCount: Schema.Attribute.Integer & Schema.Attribute.Required;
+    isOrdered: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -815,20 +818,21 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiProdColorProdColor extends Struct.CollectionTypeSchema {
-  collectionName: 'prod_colors';
+export interface ApiProdVariantProdVariant extends Struct.CollectionTypeSchema {
+  collectionName: 'prod_variants';
   info: {
-    singularName: 'prod-color';
-    pluralName: 'prod-colors';
-    displayName: 'prodColor';
-    description: '';
+    singularName: 'prod-variant';
+    pluralName: 'prod-variants';
+    displayName: 'prodVariant';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    color: Schema.Attribute.String & Schema.Attribute.Required;
-    products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
+    color: Schema.Attribute.String;
+    size: Schema.Attribute.String;
+    quantity: Schema.Attribute.Integer & Schema.Attribute.Required;
+    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -839,36 +843,7 @@ export interface ApiProdColorProdColor extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::prod-color.prod-color'
-    >;
-  };
-}
-
-export interface ApiProdSizeProdSize extends Struct.CollectionTypeSchema {
-  collectionName: 'prod_sizes';
-  info: {
-    singularName: 'prod-size';
-    pluralName: 'prod-sizes';
-    displayName: 'prodSize';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    size: Schema.Attribute.String & Schema.Attribute.Required;
-    products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::prod-size.prod-size'
+      'api::prod-variant.prod-variant'
     >;
   };
 }
@@ -887,7 +862,6 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   attributes: {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     price: Schema.Attribute.Decimal & Schema.Attribute.Required;
-    quantity: Schema.Attribute.Integer & Schema.Attribute.Required;
     description: Schema.Attribute.Text;
     images: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
     returnable: Schema.Attribute.Boolean &
@@ -902,17 +876,13 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     productionCountry: Schema.Attribute.String & Schema.Attribute.Required;
     Fit: Schema.Attribute.String;
     brand: Schema.Attribute.String & Schema.Attribute.Required;
-    prod_colors: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::prod-color.prod-color'
-    >;
-    prod_sizes: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::prod-size.prod-size'
-    >;
     categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::category.category'
+    >;
+    prod_variants: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::prod-variant.prod-variant'
     >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -971,7 +941,7 @@ export interface ApiVoucherVoucher extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    code: Schema.Attribute.String & Schema.Attribute.Required;
+    voucherCode: Schema.Attribute.String & Schema.Attribute.Required;
     value: Schema.Attribute.Decimal & Schema.Attribute.Required;
     expiryDate: Schema.Attribute.Date & Schema.Attribute.Required;
     isUsed: Schema.Attribute.Boolean &
@@ -1411,8 +1381,7 @@ declare module '@strapi/strapi' {
       'api::membership.membership': ApiMembershipMembership;
       'api::message.message': ApiMessageMessage;
       'api::order.order': ApiOrderOrder;
-      'api::prod-color.prod-color': ApiProdColorProdColor;
-      'api::prod-size.prod-size': ApiProdSizeProdSize;
+      'api::prod-variant.prod-variant': ApiProdVariantProdVariant;
       'api::product.product': ApiProductProduct;
       'api::review.review': ApiReviewReview;
       'api::voucher.voucher': ApiVoucherVoucher;

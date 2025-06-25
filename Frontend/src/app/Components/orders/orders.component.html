@@ -1,1 +1,44 @@
-<p>orders works!</p>
+<div class="cards-container">
+  <div class="empty-order" *ngIf="ordersList.length === 0">
+    <i class="fa-solid fa-box-open fa-3x" style="color: #B197FC;"></i>
+    <p class="empty-order-text">You have not placed any orders yet.</p>
+    <a routerLink="/products"><button class="empty-order-btn">Explore Items</button></a>
+  </div>
+  <ng-container *ngIf="ordersList.length != 0">
+    <div class="page-title">
+      <p>Your Orders</p>
+    </div>
+    <div class="card" *ngFor="let order of ordersList">
+      <div class="order-info">
+        <div class="order-info-item">
+          <i class="fa-solid fa-truck"></i>
+          <p><span>Status:</span> {{ order.orderStatus }}</p>
+        </div>
+        <div class="order-info-item">
+          <i class="fa-solid fa-calendar-check"></i>
+          <p><span>Ordered on:</span> {{ order.orderDate | date: 'MMM d, y' }}</p>
+        </div>
+        <div class="order-info-item">
+          <i class="fa-solid fa-box"></i>
+          <p><span>Delivery:</span> {{ order.deliveryDate | date: 'MMM d, y' }}</p>
+        </div>
+      </div>
+      <ng-container *ngIf="order.cart_items && order.cart_items.length > 0">
+        <div class="prod-card" *ngFor="let item of order.cart_items">
+          <div class="prod-details">
+            <a routerLink="/product/{{item.product.id}}" target="_blank"><img alt="img" [src]="apiUrl + item.product.images[0].url" /></a>
+            <p class="prod-name">{{ item.product.name }}</p>
+            <div class="prod-specs">
+              <div class="prod-color" *ngIf="item.color">
+                <p class="color-text"><span>Color:  </span>{{item.color}}</p>
+              </div>
+              <div class="prod-size" *ngIf="item.size">
+                <p class="size-text"><span>Size:  </span>{{item.size}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

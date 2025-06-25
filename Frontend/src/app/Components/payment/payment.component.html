@@ -80,22 +80,22 @@
   <div class="payment-section" *ngIf="cartItems.length != 0">
     <p class="summary">Summary</p>
     <p class="fees">Subtotal <span>{{getSubTotalPrice() | currency: 'EGP '}}</span></p>
-    <p class="fees">Shipping <span>{{getShippigPrice() | currency: 'EGP '}}</span></p>
+    <p class="fees">Shipping <span>{{getShippingPrice() | currency: 'EGP '}}</span></p>
     <div class="total-fees" *ngIf="validVoucher">
-      <p class="original-fees">Total <span>{{getShippigPrice() + getSubTotalPrice() | currency: 'EGP '}}</span></p>
+      <p class="original-fees">Total <span>{{getShippingPrice() + getSubTotalPrice() | currency: 'EGP '}}</span></p>
       <p class="discounted-fees">Total <span>{{getTotalPrice() | currency: 'EGP '}}</span></p>
     </div>
     <p class="total-fees" *ngIf="!validVoucher">Total <span>{{getTotalPrice() | currency: 'EGP '}}</span></p>
     <div class="voucher">
       <div class="voucher-wrapper">
-        <input type="text" class="voucher-input" placeholder="Enter code here" #voucherInput/>
+        <input type="text" class="voucher-input" placeholder="Enter code here" #voucherInput [(ngModel)]="voucherText"/>
         <i class="fa-solid fa-xmark" style="color: #1d1d1d;" (click)="removeVoucher()"></i>
       </div>
-      <button class="voucher-btn" (click)="applyVoucher()">Apply</button>
+      <button class="voucher-btn" [disabled]="!voucherText.trim()" (click)="applyVoucher()">Apply</button>
     </div>
     <p class="err-msg" *ngIf="!isVoucheFound">Voucher is not valid.</p>
     <div class="checkout-btn">
-      <button (click)="confirmOrder()">Confirm</button>
+      <button (click)="confirmOrder()" [disabled]="!paymentMethod || !userAddress || !this.isVoucheFound">Confirm</button>
     </div>
     <p class="err-msg" *ngIf="!isPayMethodSelected">Choose a payment method to place the order.</p>
     <p class="err-msg" *ngIf="!this.userAddress">Your address is required.</p>
@@ -104,3 +104,4 @@
 </div>
 
 <app-address-modal *ngIf="isAddressModalOpen" [isOpen]="isAddressModalOpen" (updatedAddress)="onAddressUpdated($event)" (close)="closeAddressModal()"></app-address-modal>
+<app-order-placed-modal *ngIf="isOrderModalOpen" [isOpen]="isOrderModalOpen" (close)="closeOrderModal()"></app-order-placed-modal>

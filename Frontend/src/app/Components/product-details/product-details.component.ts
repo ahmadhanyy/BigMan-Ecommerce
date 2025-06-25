@@ -1,8 +1,8 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { IProduct } from '../../Interfaces/iproduct';
+import { IProdVariant, IProduct } from '../../Interfaces/iproduct';
 import { ProductService } from '../../Services/product.service';
 import { WishlistService } from '../../Services/wishlist.service';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CartItemService } from '../../Services/cart-item.service';
 import { UserService } from '../../Services/user.service';
 import { ModalService } from '../../Services/modal.service';
@@ -59,14 +59,13 @@ export class ProductDetailsComponent implements OnInit {
       const prodId = Number(params.get('id'));
       this.prodService.getProductById(prodId!).subscribe((response: any) => {
         this.card = response.data[0];
-      // Initialize the chosen img, color and size
-      this.chosenImg = this.card.images[0].url;
-      if (this.card.prod_colors && this.card.prod_colors.length > 0) {
-        this.chosenColor = this.card.prod_colors[0].color;
-      }
-      if (this.card.prod_sizes && this.card.prod_sizes.length > 0) {
-        this.chosenSize = this.card.prod_sizes[0].size;
-      }
+        // Initialize the chosen img, color and size
+        this.chosenImg = this.card.images[0].url;
+        if (this.card.prod_variants?.length > 0) {
+          const firstVariant = this.card.prod_variants[0];
+          this.chosenColor = firstVariant.color || '';
+          this.chosenSize = firstVariant.size || '';
+        }
       });
     });
 
@@ -111,12 +110,69 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
+  get availableColors(): string[] {
+    // Filter colors based on the available variants
+    const colors = this.card?.prod_variants?.filter(v => v.quantity > 0)?.map(v => v.color)?.filter((color): color is string => !!color); // remove undefined/null
+    return Array.from(new Set(colors)); // add Set to remove duplicates
+  }
+
+  get availableSizes(): string[] {
+    // Filter sizes based on the chosen color
+    if (!this.card.prod_variants[0]?.color) {
+      // If the product has no colors, return all sizes
+      const sizes = this.card?.prod_variants?.filter(v => v.quantity > 0)?.map(v => v.size)?.filter((size): size is string => !!size);
+      return Array.from(new Set(sizes)); // add Set to remove duplicates
+    }
+    const sizes = this.card?.prod_variants?.filter(v => (v.color === this.chosenColor) && (v.quantity > 0))?.map(v => v.size)?.filter((size): size is string => !!size);
+    return Array.from(new Set(sizes)); // add Set to remove duplicates
+  }
+
+  get currentVariantQuantity(): number {
+    // Find the matching variant based on chosen color and size
+    if (!this.card.prod_variants[0]?.color && !this.card.prod_variants[0]?.size) {
+      // If the product has no colors or sizes, return the quantity of the first variant
+      return this.card.prod_variants[0]?.quantity;
+    }
+    else if (!this.card.prod_variants[0]?.size) {
+      // If the product has no sizes, return the quantity of the first variant based on color
+      const match = this.card.prod_variants?.find(variant =>
+        variant.color === this.chosenColor);
+      if (match) {
+        return match.quantity;
+      }
+      return 0;
+    }
+    else if (!this.card.prod_variants[0]?.color) {
+      // IIf the product has no colors, return the quantity of the first variant based on size
+      const match = this.card.prod_variants?.find(variant =>
+        variant.size === this.chosenSize);
+      if (match) {
+        return match.quantity;
+      }
+      return 0;
+    }
+    // If color and size variants exist, find the matching variant
+    const match = this.card.prod_variants?.find(variant =>
+      variant.color === this.chosenColor && variant.size === this.chosenSize);
+    if (match) {
+      return match.quantity;
+    }
+    return 0;
+  }
+
+
   chooseColor(color: string) {
     this.chosenColor = color;
+    // Reset chosen size when color changes to first available size or empty string
+    this.chosenSize = this.availableSizes[0] || '';
+    // Reset countNo when color changes
+    this.countNo = 1;
   }
 
   chooseSize(size: string) {
     this.chosenSize = size;
+    // Reset countNo when size changes
+    this.countNo = 1;
   }
 
   chooseImg(img: string) {
@@ -130,7 +186,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   incrementQuantity() {
-    if (this.card.quantity > this.countNo) {
+    if (this.countNo < this.currentVariantQuantity) {
       this.countNo++;
     }
   }
@@ -144,58 +200,92 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  addToCart(prod: IProduct) {
-    if (!this.userEmail) {
-      this.modalService.openLoginModal();
-    }
-    else {
-      // Check if the product is already in the cart
-      const existingCartItem = this.cartItems.find(item => item.product.documentId === prod.documentId && item.color === this.chosenColor && item.size === this.chosenSize);
-      if (existingCartItem) {
-        // If it exists, update the count and cost
-        existingCartItem.prodCount += this.countNo;
-        existingCartItem.cost += prod.price * this.countNo;
-        console.log('Existing cart item document Id found:', existingCartItem.documentId);
-        this.cartService.updateItem(existingCartItem).subscribe({
-          next: (res) => {
-            // Update the cart items in the component
-            this.userInfoService.cartSubject.next(this.cartItems);
-            this.countNo = 1; // Reset count after adding to cart
-          },
-          error: (err) => {
-            console.error('Failed to update cart item:', err);
-          }
-        });
-      } else {
-        // If it doesn't exist, create a new cart item
-        const cost = prod.price * this.countNo;
-        this.cartService.addToCart(this.userEmail, prod, this.countNo, this.chosenColor, this.chosenSize, this.deliveryDate, cost).subscribe({
-          next: (res) => {
-            // Update the cart items in the component
-            let newItem: ICartItem = {
-              id: res.data.id,
-              documentId: res.data.documentId,
-              email: res.data.email,
-              product: res.data.product,
-              prodCount: res.data.prodCount,
-              color: res.data.color,
-              size: res.data.size,
-              deliveryDate: res.data.deliveryDate,
-              deliveryStatus: res.data.deliveryStatus,
-              cost: res.data.cost
-            }
-            this.cartItems.push(newItem);
-            this.userInfoService.cartSubject.next(this.cartItems);
-            this.countNo = 1;
-          },
-          error: (err) => {
-            this.countNo = 1;
-            console.error('Failed to add to wishlist:', err);
-          }
-        });
-      }
-    }
+addToCart(prod: IProduct) {
+  if (!this.userEmail) {
+    this.modalService.openLoginModal();
+    return;
   }
+
+  // Find the chosen variant
+  let chosenVariant: IProdVariant | undefined;
+  if (!this.chosenColor && !this.chosenSize){
+    chosenVariant = prod.prod_variants[0];
+  }
+  else if (!this.chosenColor) {
+    chosenVariant = prod.prod_variants.find(variant => variant.size === this.chosenSize);
+  }
+  else if (!this.chosenSize) {
+    chosenVariant = prod.prod_variants.find(variant => variant.color === this.chosenColor);
+  }
+  else{
+    chosenVariant = prod.prod_variants.find(variant => variant.color === this.chosenColor && variant.size === this.chosenSize);
+  }
+
+    // Check if already in cart
+    const existingCartItem = this.cartItems.find(item =>
+      item.product.documentId === prod.documentId &&
+      item.color === this.chosenColor &&
+      item.size === this.chosenSize
+    );
+
+  if (!chosenVariant) {
+    return;
+  }
+
+  // Check if there's enough quantity
+  if (this.countNo > (chosenVariant.quantity - (existingCartItem ? existingCartItem.prodCount : 0))) {
+    return;
+  }
+
+  if (existingCartItem) {
+    // Total requested = existing count + new count
+    const totalRequested = existingCartItem.prodCount + this.countNo;
+    if (totalRequested > chosenVariant.quantity) {
+      console.warn('Total quantity in cart exceeds stock.');
+      return;
+    }
+
+    // Update the cart item
+    existingCartItem.prodCount = totalRequested;
+    existingCartItem.cost += prod.price * this.countNo;
+
+    this.cartService.updateItem(existingCartItem).subscribe({
+      next: () => {
+        this.userInfoService.cartSubject.next(this.cartItems);
+        this.countNo = 1;
+      },
+      error: err => console.error('Failed to update cart item:', err)
+    });
+
+  } else {
+    // Add new item to cart
+    const cost = prod.price * this.countNo;
+    this.cartService.addToCart(this.userEmail, prod, this.countNo, this.chosenColor, this.chosenSize, this.deliveryDate, cost).subscribe({
+      next: res => {
+        const newItem: ICartItem = {
+          id: res.data.id,
+          documentId: res.data.documentId,
+          email: res.data.email,
+          product: res.data.product,
+          prodCount: res.data.prodCount,
+          color: res.data.color,
+          size: res.data.size,
+          deliveryDate: res.data.deliveryDate,
+          deliveryStatus: res.data.deliveryStatus,
+          cost: res.data.cost,
+          isOrdered: res.data.isOrdered
+        };
+        this.cartItems.push(newItem);
+        this.userInfoService.cartSubject.next(this.cartItems);
+        this.countNo = 1;
+      },
+      error: err => {
+        this.countNo = 1;
+        console.error('Failed to add to cart:', err);
+      }
+    });
+  }
+}
 
   addToWishlist(card: IProduct) {
     if (!this.userEmail) {
@@ -260,21 +350,11 @@ export class ProductDetailsComponent implements OnInit {
 
   // Computed properties to determine visible items
   get visibleColors() {
-    if (this.card.prod_colors) {
-      return this.showAllColors ? this.card.prod_colors : this.card.prod_colors.slice(0, 10); // Show 10 colors
-    }
-    else {
-      return [];
-    }
+    return this.showAllColors ? this.availableColors  : this.availableColors.slice(0, 10); // Show 10 colors
   }
 
   get visibleSizes() {
-    if (this.card.prod_sizes) {
-      return this.showAllSizes ? this.card.prod_sizes : this.card.prod_sizes.slice(0, 10); // Show 10 colors
-    }
-    else {
-      return [];
-    }
+    return this.showAllSizes ? this.availableSizes : this.availableSizes.slice(0, 10);
   }
 
   // Methods to show more colors and sizes

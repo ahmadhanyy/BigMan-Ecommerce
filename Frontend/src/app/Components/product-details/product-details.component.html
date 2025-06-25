@@ -32,22 +32,22 @@
         </div>
         <hr>
         <div class="prod-data">
-          <div class="prod-color" *ngIf="card.prod_colors">
+          <div class="prod-color" *ngIf="availableColors?.length">
             <p class="color-label">Color: {{chosenColor.toUpperCase()}}</p>
             <div class="color-btns-container">
               <ng-container *ngFor="let color of visibleColors">
-                <button class="color-btn" (click)="chooseColor(color.color)" [class.active]="chosenColor === color.color">{{color.color}}</button>
+                <button class="color-btn" (click)="chooseColor(color)" [class.active]="chosenColor === color">{{color}}</button>
               </ng-container>
-              <span class="show-more-btns" *ngIf="card.prod_colors.length > 10 && !showAllColors" (click)="showMoreColors()">View more &#x25BC;</span>
+              <span class="show-more-btns" *ngIf="availableColors.length > 10 && !showAllColors" (click)="showMoreColors()">View more &#x25BC;</span>
             </div>
           </div>
-          <div class="prod-size" *ngIf="card.prod_sizes">
+          <div class="prod-size" *ngIf="availableSizes?.length">
             <p class="size-label">Size: {{chosenSize.toUpperCase()}}</p>
             <div class="size-btns-container">
               <ng-container *ngFor="let size of visibleSizes">
-                <button class="size-btn" (click)="chooseSize(size.size)" [class.active]="chosenSize === size.size">{{size.size}}</button>
+                <button class="size-btn" (click)="chooseSize(size)" [class.active]="chosenSize === size">{{size}}</button>
               </ng-container>
-              <span class="show-more-btns" *ngIf="card.prod_sizes.length > 10 && !showAllSizes" (click)="showMoreSizes()">View more &#x25BC;</span>
+              <span class="show-more-btns" *ngIf="availableSizes.length > 10 && !showAllSizes" (click)="showMoreSizes()">View more &#x25BC;</span>
             </div>
           </div>
         </div>
@@ -60,9 +60,6 @@
       <p class="prod-material" *ngIf="card.material">Material: {{card.material}}</p>
       <p class="prod-fit" *ngIf="card.Fit">Fit: {{card.Fit}}</p>
       <p class="prod-country" *ngIf="card.productionCountry">Production Country: {{card.productionCountry}}</p>
-    </div>
-    <div class="product-reviews">
-      <app-reviews [prodCard]="card"></app-reviews>
     </div>
   </div>
   <div class="payment-section">

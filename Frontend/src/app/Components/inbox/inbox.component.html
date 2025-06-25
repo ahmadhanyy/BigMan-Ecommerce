@@ -7,19 +7,19 @@
     <div class="page-title">
       <p>Inbox Messages</p>
     </div>
-    <div class="card" *ngFor="let message of messagesList">
+    <div class="card" *ngFor="let message of visibleMsg">
       <p class="message-date">{{message.date}}</p>
       <p class="message-title">{{message.title}}</p>
       <p class="message-text">{{message.message}}</p>
-      <div class="attached-product" *ngIf="getProdOnMessage(message.prodDocId)">
+      <div class="attached-product" *ngIf="message.prodDocId">
         <img [src]="getProdOnMessage(message.prodDocId)?.images" alt="product image"/>
         <p class="prod-name">{{getProdOnMessage(message.prodDocId)?.name}}</p>
       </div>
-      <div class="attached-coach" *ngIf="getCoachOnMessage(message.coachDocId)">
+      <div class="attached-coach" *ngIf="message.coachDocId">
         <img [src]="getCoachOnMessage(message.coachDocId)?.image" alt="coach image"/>
         <p class="coach-name">{{getCoachOnMessage(message.coachDocId)?.name}}</p>
       </div>
     </div>
-    <span class="show-more-btn">View more &#x25BC;</span>
+    <span class="show-more-btns" *ngIf="messagesList.length > 5 && !showAllMsg" (click)="showMoreMsg()">View more &#x25BC;</span>
   </ng-container>
 </div>

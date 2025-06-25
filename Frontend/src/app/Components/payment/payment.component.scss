@@ -11,40 +11,44 @@
 }
 
 .empty-cart {
-  background-color: rgb(233, 233, 233);
-  height: 450px;
+  background-color: #f8f8f8;
+  height: 400px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-
-.empty-cart i{
-  font-size: 200px;
   text-align: center;
   padding: 2rem;
 }
 
-.empty-cart-btn{
-  margin-top: 30px;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 90px;
-  background-color: rgb(255, 187, 0);
-  color: rgb(0, 0, 0);
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.empty-cart-btn:hover{
-  background-color: rgb(240, 156, 0);
+.empty-cart i{
+  font-size: 100px;
+  color: #a29bfe;
+  margin-bottom: 1rem;
 }
 
 .empty-cart-text{
   font-size: 1.2rem;
-  font-weight: 700;
-  margin-top: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.empty-cart-btn{
+  background-color: #ffbe0b;
+  color: #000;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.empty-cart-btn:hover{
+  background-color: #faa307;
 }
 
 .order-section {
@@ -302,15 +306,21 @@ span{
   border-radius: 20px;
   border: none;
   background-color: rgb(255, 187, 0);
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 700;
   transition: background-color 0.2s ease;
   cursor: pointer;
 }
 
-.voucher-btn:hover {
-  background-color: rgb(240, 156, 0);
+.voucher-btn:disabled {
+  background-color: #aaa;
+  color: #000;
+  cursor: not-allowed;
 }
 
+.voucher-btn:hover:not(:disabled) {
+  background-color: rgb(240, 156, 0);
+}
 
 .original-fees,
 .original-fees span {
@@ -343,7 +353,12 @@ span{
   transition: background-color 0.2s ease;
 }
 
-.checkout-btn button:hover {
+.checkout-btn button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.checkout-btn button:hover:not(:disabled) {
   background-color: rgb(240, 156, 0);
 }
 

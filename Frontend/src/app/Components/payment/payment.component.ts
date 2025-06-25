@@ -11,6 +11,8 @@ import { CartItemService } from '../../Services/cart-item.service';
 import { IVoucher } from '../../Interfaces/ivoucher';
 import { VoucherService } from '../../Services/voucher.service';
 import { Router  } from '@angular/router';
+import { ProductService } from '../../Services/product.service';
+import { IProdVariant } from '../../Interfaces/iproduct';
 
 @Component({
   selector: 'app-payment',
@@ -27,13 +29,14 @@ export class PaymentComponent implements OnInit {
   userVouchers: IVoucher[] = [];
   validVoucher: IVoucher | undefined = undefined;
   isVoucheFound: boolean = true;
-  @ViewChild('voucherInput') voucherCode!: ElementRef<HTMLInputElement>;
+  voucherText: string = '';
   paymentMethod: string = '';
   cardNumber: string = '';
   cardHolder: string = '';
   cardExpiryDate: Date = new Date();
   cvv: number = 0;
   isPayMethodSelected: boolean = true;
+  isOrderModalOpen: boolean = false;
 
   constructor(private userService: UserService,
               private userInfoService: UserInformationService,
@@ -41,6 +44,7 @@ export class PaymentComponent implements OnInit {
               private addressService: AddressService,
               private orderService: OrderService,
               private cartService: CartItemService,
+              private prodService: ProductService,
               private voucherService: VoucherService,
               private renderer: Renderer2,
               private router: Router)
@@ -50,10 +54,7 @@ export class PaymentComponent implements OnInit {
     // Subscribe to the loggedUserId$ observable to get real-time updates
     this.userService.loggedUserEmail$.subscribe((email) => {
       this.loggedEmail = email;
-      if (!this.loggedEmail) {
-        this.modalService.openLoginModal();
-      }
-      else{
+      if (this.loggedEmail) {
         this.userInfoService.userCart$.subscribe((items) => {
           this.cartItems =  items;
         });
@@ -85,6 +86,16 @@ export class PaymentComponent implements OnInit {
         });
       }
     });
+  }
+
+  openOrderModal() {
+    this.isOrderModalOpen = true;
+    this.renderer.addClass(document.body, 'modal-open');
+  }
+
+  closeOrderModal(){
+    this.isOrderModalOpen = false;
+    this.renderer.removeClass(document.body, 'modal-open');
   }
 
   openAddressModal() {
@@ -128,7 +139,7 @@ export class PaymentComponent implements OnInit {
     return subTotalPrice;
   }
 
-  getShippigPrice(): number {
+  getShippingPrice(): number {
     let shippingPrice: number = 0;
     for (let i = 0; i < this.cartItems.length; i++) {
       if (!this.cartItems[i].product.freeShipping) {
@@ -139,7 +150,7 @@ export class PaymentComponent implements OnInit {
   }
 
   getTotalPrice(): number {
-    let totalPrice: number = this.getSubTotalPrice() + this.getShippigPrice();
+    let totalPrice: number = this.getSubTotalPrice() + this.getShippingPrice();
     if (this.validVoucher) {
       totalPrice -= this.validVoucher.value;
     }
@@ -147,25 +158,23 @@ export class PaymentComponent implements OnInit {
   }
 
   applyVoucher(): void {
-    const code = this.voucherCode.nativeElement.value.trim();
+    const code = this.voucherText.trim();
     if (!code){
       return;
     }
-    console.log('Applying voucher code:', code);
-    console.log('Available vouchers:', this.userVouchers);
-    this.validVoucher = this.userVouchers.find((voucher) => voucher.code === code);
-    console.log('Valid voucher:', this.validVoucher);
-    if (!this.validVoucher){
-      this.isVoucheFound = false;
-    }
-    else {
+    this.validVoucher = this.userVouchers.find((voucher) => voucher.voucherCode === code && !voucher.isUsed && !voucher.isExpired);
+    if (this.validVoucher){
       this.isVoucheFound = true;
     }
+    else {
+      this.isVoucheFound = false;
+    }
+    console.log('Voucher :', this.validVoucher);
   }
 
   removeVoucher() {
     this.validVoucher = undefined;
-    this.voucherCode.nativeElement.value = '';
+    this.voucherText = '';
     this.isVoucheFound = true;
   }
 
@@ -183,15 +192,66 @@ export class PaymentComponent implements OnInit {
       // Create the order with the selected payment method
       this.orderService.addOrder(this.loggedEmail, this.cartItems, this.userAddress, orderData, deliveryDate, orderStatus, cost, this.paymentMethod, this.cardNumber, this.cardHolder, this.cardExpiryDate, this.cvv).subscribe({
         next: (res) => {
-          console.log('Order placed successfully: ', res)
-          this.cartService.clearCart(this.loggedEmail!).subscribe({
-            next: (res) => {
-            },
-            error: (err) => {
-              console.log('Failed to delete cart items: ', err)
+          // Check if a voucher was used and update it
+          if (this.validVoucher) {
+            this.validVoucher.isUsed = true;
+            this.validVoucher.usageDate = new Date();
+            this.voucherService.updateVoucher(this.validVoucher).subscribe({
+              next: (res) => {
+              },
+              error: (error) => {
+                console.error('Error using voucher:', error);
+              }
+            });
+          }
+          // Update the cart items as ordered in the cart service
+          let updatedCount = 0;
+          for (let item of this.cartItems) {
+            // Set the item as ordered
+            item.isOrdered = true;
+            // Update the cart item in the service
+            this.cartService.updateItem(item).subscribe({
+              next: (res) => {
+                updatedCount++;
+                if (updatedCount === this.cartItems.length) {
+                  // All items updated, clear the cart and navigate to home
+                  this.userInfoService.cartSubject.next([]);
+                  this.openOrderModal();
+                }
+              },
+              error: (error) => {
+                console.error('Error updating cart item to ordered:', error);
+              }
+            });
+            // Decrement the product count after placing the order
+            // Find the matching variant
+            let matchingVariant: IProdVariant | undefined = undefined;
+            if (!item.product.prod_variants[0]?.color && !item.product.prod_variants[0]?.size){
+              matchingVariant = item.product.prod_variants[0]; // If no color or size, use the first variant
             }
-          }); // Clear the cart in the cart service
-          this.userInfoService.cartSubject.next([]); // Clear the cart in the user information service
+            else if (!item.product.prod_variants[0]?.color){
+              matchingVariant = item.product.prod_variants?.find(variant => variant.size === item.size);
+            }
+            else if (!item.product.prod_variants[0]?.size){
+              matchingVariant = item.product.prod_variants?.find(variant => variant.color === item.color);
+            }
+            else{
+              matchingVariant = item.product.prod_variants?.find(
+                variant => variant.color === item.color && variant.size === item.size
+              );
+            }
+            if (matchingVariant) {
+              matchingVariant.quantity -= item.prodCount;
+              this.prodService.updateVariantQuantity(matchingVariant.documentId, matchingVariant).subscribe({
+                next: () => {
+                  console.log(`Variant quantity updated for product ${item.product.name}, color ${item.color}, size ${item.size}`);
+                },
+                error: (err) => {
+                  console.error('Error updating variant quantity:', err);
+                }
+              });
+            }
+          }
         },
         error: (err) => {
           console.error('Order failed', err);

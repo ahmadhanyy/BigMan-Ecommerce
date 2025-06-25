@@ -12,10 +12,10 @@ import { UserInformationService } from '../../Services/user-information.service'
   templateUrl: './wish-list.component.html',
   styleUrl: './wish-list.component.scss'
 })
-export class WishListComponent implements OnInit, OnChanges {
+export class WishListComponent implements OnInit {
   wishlistItems: IWishlistItem[] = [];
   prodsList: IProduct[] = [];
-  textOnList: string = 'More To Love';
+  textOnList: string = 'Big Sale New Collection';
   userEmail: string | null = null;
 
   constructor(private wishlistService: WishlistService,
@@ -24,36 +24,18 @@ export class WishListComponent implements OnInit, OnChanges {
               private modalService: ModalService,
               private userInfoService: UserInformationService) {}
 
-  ngOnChanges(): void {
-    // Subscribe to the loggedUserId$ observable to get real-time updates
-    this.userService.loggedUserEmail$.subscribe((email) => {
-      this.userEmail = email;
-      if (!this.userEmail) {
-        this.modalService.openLoginModal();
-      }
-      else{
-        this.userInfoService.userWishlist$.subscribe((items) => {
-          this.wishlistItems = items;
-        });
-      }
-    });
-  }
-
   ngOnInit(): void {
     // Subscribe to the loggedUserId$ observable to get real-time updates
     this.userService.loggedUserEmail$.subscribe((email) => {
       this.userEmail = email;
-      if (!this.userEmail) {
-        this.modalService.openLoginModal();
-      }
-      else{
+      if (this.userEmail) {
         this.userInfoService.userWishlist$.subscribe((items) => {
           this.wishlistItems = items;
         });
       }
     });
 
-    this.prodService.getProducts().subscribe((response: any) => {
+    this.prodService.getDiscountByCategory('Clothes').subscribe((response: any) => {
       this.prodsList = response.data;
     });
   }

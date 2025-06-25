@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { IProduct } from '../../Interfaces/iproduct';
+import { IProdVariant, IProduct } from '../../Interfaces/iproduct';
 import { ProductService } from '../../Services/product.service';
 import { WishlistService } from '../../Services/wishlist.service';
 import { ReviewService } from '../../Services/review.service';
@@ -80,11 +80,10 @@ export class ProductModalComponent implements OnInit {
 
     // Initialize the chosen img, color and size
     this.chosenImg = this.card.images[0].url;
-    if (this.card.prod_colors && this.card.prod_colors.length > 0) {
-      this.chosenColor = this.card.prod_colors[0].color;
-    }
-    if (this.card.prod_sizes && this.card.prod_sizes.length > 0) {
-      this.chosenSize = this.card.prod_sizes[0].size;
+    if (this.card.prod_variants.length > 0) {
+      const firstVariant = this.card.prod_variants[0];
+      this.chosenColor = firstVariant.color || '';
+      this.chosenSize = firstVariant.size || '';
     }
   }
 
@@ -94,11 +93,10 @@ export class ProductModalComponent implements OnInit {
     this.showAllColors = false;
     this.showAllSizes = false;
     this.chosenImg = this.card.images[0].url;
-    if (this.card.prod_colors && this.card.prod_colors.length > 0) {
-      this.chosenColor = this.card.prod_colors[0].color;
-    }
-    if (this.card.prod_sizes && this.card.prod_sizes.length > 0) {
-      this.chosenSize = this.card.prod_sizes[0].size;
+    if (this.card.prod_variants.length > 0) {
+      const firstVariant = this.card.prod_variants[0];
+      this.chosenColor = firstVariant.color || '';
+      this.chosenSize = firstVariant.size || '';
     }
   }
 
@@ -117,6 +115,49 @@ export class ProductModalComponent implements OnInit {
         });
       }
     }
+  }
+
+  get availableColors(): string[] {
+    const colors = this.card?.prod_variants?.map(v => v.color)?.filter((color): color is string => !!color); // remove undefined/null
+    return Array.from(new Set(colors));
+  }
+
+  get availableSizes(): string[] {
+    const sizes = this.card?.prod_variants?.map(v => v.size)?.filter((size): size is string => !!size); // remove undefined/null
+    return sizes;
+  }
+
+  get currentVariantQuantity(): number {
+    // Find the matching variant based on chosen color and size
+    if (!this.card.prod_variants[0]?.color && !this.card.prod_variants[0]?.size) {
+      // If the product has no colors or sizes, return the quantity of the first variant
+      return this.card.prod_variants[0]?.quantity;
+    }
+    else if (!this.card.prod_variants[0]?.size) {
+      // If the product has no sizes, return the quantity of the first variant based on color
+      const match = this.card.prod_variants?.find(variant =>
+        variant.color === this.chosenColor);
+      if (match) {
+        return match.quantity;
+      }
+      return 0;
+    }
+    else if (!this.card.prod_variants[0]?.color) {
+      // IIf the product has no colors, return the quantity of the first variant based on size
+      const match = this.card.prod_variants?.find(variant =>
+        variant.size === this.chosenSize);
+      if (match) {
+        return match.quantity;
+      }
+      return 0;
+    }
+    // If color and size variants exist, find the matching variant
+    const match = this.card.prod_variants?.find(variant =>
+      variant.color === this.chosenColor && variant.size === this.chosenSize);
+    if (match) {
+      return match.quantity;
+    }
+    return 0;
   }
 
   chooseColor(color: string) {
@@ -138,7 +179,7 @@ export class ProductModalComponent implements OnInit {
   }
 
   incrementQuantity() {
-    if (this.card.quantity > this.countNo) {
+    if (this.countNo < this.currentVariantQuantity) {
       this.countNo++;
     }
   }
@@ -151,7 +192,7 @@ export class ProductModalComponent implements OnInit {
       this.deliveryDate.setDate(this.today.getDate() + 5); // 5 days after today
     }
   }
-
+/*
   addToCart(prod: IProduct) {
     if (!this.userEmail) {
       this.modalService.openLoginModal();
@@ -160,6 +201,27 @@ export class ProductModalComponent implements OnInit {
       // Check if the product is already in the cart
       const existingCartItem = this.cartItems.find(item => item.product.documentId === prod.documentId && item.color === this.chosenColor && item.size === this.chosenSize);
       if (existingCartItem) {
+        // If it exists, check if the chosen variant has enough quantity
+        let chosenVariant: IProdVariant | undefined;
+        if (this.chosenColor === '' && this.chosenSize === ''){
+          chosenVariant = prod.prod_variants[0];
+          console.log('Chosen variant:', chosenVariant);
+        }
+        else if (this.chosenColor === '') {
+          chosenVariant = prod.prod_variants.find(variant => variant.size === this.chosenSize);
+          console.log('Chosen variant:', chosenVariant);
+        }
+        else if (this.chosenSize === '') {
+          chosenVariant = prod.prod_variants.find(variant => variant.color === this.chosenColor);
+          console.log('Chosen variant:', chosenVariant);
+        }
+        else{
+          chosenVariant = prod.prod_variants.find(variant => variant.color === this.chosenColor && variant.size === this.chosenSize);
+          console.log('Chosen variant:', chosenVariant);
+        }
+        if (chosenVariant && chosenVariant.quantity < this.countNo) {
+          return;
+        }
         // If it exists, update the count and cost
         existingCartItem.prodCount += this.countNo;
         existingCartItem.cost += prod.price * this.countNo;
@@ -191,7 +253,8 @@ export class ProductModalComponent implements OnInit {
               size: res.data.size,
               deliveryDate: res.data.deliveryDate,
               deliveryStatus: res.data.deliveryStatus,
-              cost: res.data.cost
+              cost: res.data.cost,
+              isOrdered: res.data.isOrdered
             }
             this.cartItems.push(newItem);
             this.userInfoService.cartSubject.next(this.cartItems);
@@ -206,6 +269,98 @@ export class ProductModalComponent implements OnInit {
       }
     }
   }
+*/
+
+addToCart(prod: IProduct) {
+  if (!this.userEmail) {
+    this.modalService.openLoginModal();
+    return;
+  }
+
+  // Find the chosen variant
+  let chosenVariant: IProdVariant | undefined;
+  if (!this.chosenColor && !this.chosenSize){
+    chosenVariant = prod.prod_variants[0];
+  }
+  else if (!this.chosenColor) {
+    chosenVariant = prod.prod_variants.find(variant => variant.size === this.chosenSize);
+  }
+  else if (!this.chosenSize) {
+    chosenVariant = prod.prod_variants.find(variant => variant.color === this.chosenColor);
+  }
+  else{
+    chosenVariant = prod.prod_variants.find(variant => variant.color === this.chosenColor && variant.size === this.chosenSize);
+  }
+
+  // Check if already in cart
+  const existingCartItem = this.cartItems.find(item =>
+    item.product.documentId === prod.documentId &&
+    item.color === this.chosenColor &&
+    item.size === this.chosenSize
+  );
+
+  // If no variant found, log an error and exit
+  if (!chosenVariant) {
+    return;
+  }
+
+  // Check if there's enough quantity
+  if (this.countNo > (chosenVariant.quantity - (existingCartItem ? existingCartItem.prodCount : 0))) {
+    return;
+  }
+
+  if (existingCartItem) {
+    // Total requested = existing count + new count
+    const totalRequested = existingCartItem.prodCount + this.countNo;
+    if (totalRequested > chosenVariant.quantity) {
+      return;
+    }
+
+    // Update the cart item
+    existingCartItem.prodCount = totalRequested;
+    existingCartItem.cost += prod.price * this.countNo;
+
+    this.cartService.updateItem(existingCartItem).subscribe({
+      next: () => {
+        this.userInfoService.cartSubject.next(this.cartItems);
+        this.countNo = 1;
+      },
+      error: err => console.error('Failed to update cart item:', err)
+    });
+
+    this.closeModal();
+  } else {
+    // Add new item to cart
+    const cost = prod.price * this.countNo;
+    this.cartService.addToCart(this.userEmail, prod, this.countNo, this.chosenColor, this.chosenSize, this.deliveryDate, cost).subscribe({
+      next: res => {
+        const newItem: ICartItem = {
+          id: res.data.id,
+          documentId: res.data.documentId,
+          email: res.data.email,
+          product: res.data.product,
+          prodCount: res.data.prodCount,
+          color: res.data.color,
+          size: res.data.size,
+          deliveryDate: res.data.deliveryDate,
+          deliveryStatus: res.data.deliveryStatus,
+          cost: res.data.cost,
+          isOrdered: res.data.isOrdered
+        };
+        this.cartItems.push(newItem);
+        this.userInfoService.cartSubject.next(this.cartItems);
+        this.countNo = 1;
+      },
+      error: err => {
+        this.countNo = 1;
+        console.error('Failed to add to cart:', err);
+      }
+    });
+
+    this.closeModal();
+  }
+}
+
 
   addToWishlist(card: IProduct) {
     if (!this.userEmail) {
@@ -257,21 +412,11 @@ export class ProductModalComponent implements OnInit {
 
   // Computed properties to determine visible items
   get visibleColors() {
-    if (this.card.prod_colors) {
-      return this.showAllColors ? this.card.prod_colors : this.card.prod_colors.slice(0, 10); // Show 10 colors
-    }
-    else {
-      return [];
-    }
+    return this.showAllColors ? this.availableColors  : this.availableColors.slice(0, 10); // Show 10 colors
   }
 
   get visibleSizes() {
-    if (this.card.prod_sizes) {
-      return this.showAllSizes ? this.card.prod_sizes : this.card.prod_sizes.slice(0, 10); // Show 10 colors
-    }
-    else {
-      return [];
-    }
+    return this.showAllSizes ? this.availableSizes : this.availableSizes.slice(0, 10);
   }
 
   // Methods to show more colors and sizes

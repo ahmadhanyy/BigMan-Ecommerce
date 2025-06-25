@@ -1,19 +1,22 @@
-<div class="load-button">
-  <button class="btn left-arrow" type="button" [disabled]="currentPage === 1" (click)="previousPage()">&#8249;</button>
+<div class="pagination-container">
+  <button class="pagination-btn" [disabled]="currentPage === 1" (click)="previousPage()">&#8249;</button>
 
   <ng-container *ngFor="let page of pages">
-    <button class="btn" type="button"
+    <button
       *ngIf="page > 0"
+      class="pagination-btn"
       [class.active]="page === currentPage"
       (click)="onPageClick(page)">
-      {{page}}
+      {{ page }}
     </button>
-    <p *ngIf="page === 0">...</p>
+    <span class="ellipsis" *ngIf="page === 0">…</span>
   </ng-container>
 
-  <button class="btn right-arrow" type="button" [disabled]="currentPage === totalPages" (click)="nextPage()">&#8250;</button>
+  <button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="nextPage()">&#8250;</button>
 
-  <p class="go-text">Go to page</p>
-  <input type="text" class="page-input" [(ngModel)]="goToPageNumber" min="1" [max]="totalPages">
-  <button class="go-button" type="button" (click)="goToPage()">Confirm</button>
+  <div class="go-to-container">
+    <label class="go-label">Go to</label>
+    <input type="text" [(ngModel)]="goToPageNumber" class="go-input" pattern="[0-9]*" inputmode="numeric">
+    <button class="go-btn" (click)="goToPage()">Go</button>
+  </div>
 </div>

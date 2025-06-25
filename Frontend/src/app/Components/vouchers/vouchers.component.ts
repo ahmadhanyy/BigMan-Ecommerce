@@ -20,10 +20,7 @@ export class VouchersComponent implements OnInit {
   ngOnInit(): void {
     // Subscribe to the loggedUserId$ observable to get real-time updates
     this.userService.loggedUserEmail$.subscribe((email) => {
-      if (!email) {
-        this.modalService.openLoginModal();
-      }
-      else {
+      if (email) {
         this.voucherService.getVouchersByEmail(email).subscribe((res) => {
           this.usedVouchers = res.filter(voucher => voucher.isUsed);
           this.availableVouchers = res.filter(voucher => !voucher.isUsed && !voucher.isExpired);

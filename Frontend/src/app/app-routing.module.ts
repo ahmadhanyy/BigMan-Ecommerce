@@ -15,7 +15,6 @@ import { AccountComponent } from './Components/account/account.component';
 import { OrdersComponent } from './Components/orders/orders.component';
 import { InboxComponent } from './Components/inbox/inbox.component';
 import { VouchersComponent } from './Components/vouchers/vouchers.component';
-import { UserReviewsComponent } from './Components/user-reviews/user-reviews.component';
 import { PaymentComponent } from './Components/payment/payment.component';
 
 const routes: Routes = [
@@ -24,18 +23,17 @@ const routes: Routes = [
   {path: 'products', component: ProductsComponent},
   {path: 'products/:category', component: ProductsComponent },
   {path: 'product/:id', component: ProductDetailsComponent},
-  {path: 'cart', component: CartComponent, canActivate: [AuthGuard]},
+  {path: 'cart', component: CartComponent},
   {path: 'branches', component: BranchesComponent},
   {path: 'memberships', component: MembershipsComponent},
   {path: 'coaches', component: CoachesComponent},
   {path: 'coach/:id', component: CoachDetailsComponent},
-  {path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]},
-  {path: 'wishlist', component: WishListComponent, canActivate: [AuthGuard]},
+  {path: 'payment', component: PaymentComponent},
+  {path: 'wishlist', component: WishListComponent},
+  {path: 'inbox', component: InboxComponent},
+  {path: 'orders', component: OrdersComponent},
+  {path: 'vouchers', component: VouchersComponent},
   {path: 'account', component: AccountComponent, canActivate: [AuthGuard]},
-  {path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
-  {path: 'vouchers', component: VouchersComponent, canActivate: [AuthGuard]},
-  {path: 'user/reviews', component: UserReviewsComponent, canActivate: [AuthGuard]},
-  {path: 'inbox', component: InboxComponent, canActivate: [AuthGuard]},
   {path: '**', component: PageNotFoundComponent} //Wildcard route
 ];
 

@@ -27,7 +27,7 @@ export class CartItemService {
 
   getCartItems(email: string): Observable<ICartItem[]> {
     const headers = this.getHeaders();
-    return this.httpClient.get<{ data: ICartItem[] }>(`${this.apiUrl}/cart-items?filters[email][$eq]=${email}`, { headers }).pipe(
+    return this.httpClient.get<{ data: ICartItem[] }>(`${this.apiUrl}/cart-items?filters[email][$eq]=${email}&filters[isOrdered][$eq]=false`, { headers }).pipe(
       map(res => res.data)
     );
   }
@@ -41,7 +41,8 @@ export class CartItemService {
         color: color,
         size: size,
         deliveryDate: deliveryDate,
-        cost: cost
+        cost: cost,
+        isOrdered: false
       }
     };
     const headers = this.getHeaders();
@@ -64,7 +65,8 @@ export class CartItemService {
         size: cartItem.size,
         deliveryDate: cartItem.deliveryDate,
         deliveryStatus: cartItem.deliveryStatus,
-        cost: cartItem.cost
+        cost: cartItem.cost,
+        isOrdered: cartItem.isOrdered
       }
     }
     return this.httpClient.put<ICartItem>(`${this.apiUrl}/cart-items/${cartItem.documentId}`, updatedItem, { headers });

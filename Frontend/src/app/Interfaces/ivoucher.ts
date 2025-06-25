@@ -2,7 +2,7 @@ export interface IVoucher {
   id: number;
   documentId: string;
   email: string;
-  code: string;
+  voucherCode: string;
   value: number;
   isExpired: boolean;
   expiryDate: Date;

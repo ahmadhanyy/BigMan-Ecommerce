@@ -39,6 +39,22 @@ export class VoucherService {
     );
   }
 
+  updateVoucher(voucher: IVoucher): Observable<IVoucher> {
+    const headers = this.getHeaders();
+    const updatedVoucher = {
+      data: {
+        email: voucher.email,
+        voucherCode: voucher.voucherCode,
+        value: voucher.value,
+        isExpired: voucher.isExpired,
+        expiryDate: voucher.expiryDate,
+        isUsed: voucher.isUsed,
+        usageDate: voucher.usageDate
+      }
+    }
+    return this.httpClient.put<IVoucher>(`${this.apiUrl}/vouchers/${voucher.documentId}`, updatedVoucher, { headers });
+  }
+
   deleteVoucher(voucherDocId: string): Observable<any> {
     const headers = this.getHeaders();
     return this.httpClient.delete(`${this.apiUrl}/vouchers/${voucherDocId}`, { headers });
