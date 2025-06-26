@@ -37,7 +37,7 @@ export class AddressModalComponent implements OnInit{
         this.userAddress.email = email;
         this.addressService.getAddressByEmail(email).subscribe({
           next: (res) => {
-            if(res[0]){
+            if(res){
               this.userAddress = res[0];
             }
           },

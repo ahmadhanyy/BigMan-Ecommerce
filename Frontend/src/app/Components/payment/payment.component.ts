@@ -62,6 +62,7 @@ export class PaymentComponent implements OnInit {
         this.addressService.getAddressByEmail(this.loggedEmail).subscribe({
           next: (response) => {
             this.userAddress = response[0];
+            console.log('User Address:', this.userAddress);
             if(this.userAddress.government == government.Cairo){
               this.deliveryDate = new Date(); // Reset delivery date to today
               this.deliveryDate.setDate(this.deliveryDate.getDate() + 3); // Delivey after 3 days for Cairo

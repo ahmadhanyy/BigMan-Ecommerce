@@ -27,9 +27,9 @@
         </div>
       </div>
       <div *ngIf="password.invalid && password.touched" class="error">
-        <div *ngIf="password.errors?.['required']">Password is required.</div>
-        <div *ngIf="password.errors?.['minlength']">Password must be at least 8 characters.</div>
-        <div *ngIf="password.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, and one number.</div>
+        <p *ngIf="password.errors?.['required']">Password is required.</p>
+        <p *ngIf="password.errors?.['minlength']">Password must be at least 8 characters.</p>
+        <p *ngIf="password.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, and one number.</p>
       </div>
       <button type="submit" [disabled]="!loginForm.form.valid">Log in</button>
     </form>

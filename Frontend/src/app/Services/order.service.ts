@@ -34,11 +34,9 @@ export class OrderService {
     );
   }
 
-  getOrdersByEmail(email: string): Observable<IOrder[]> {
+  getOrdersByEmail(email: string, currentPage: number): Observable<any> {
     const headers = this.getHeaders();
-    return this.httpClient.get<{ data: IOrder[] }>(`${this.apiUrl}/orders?populate=*&filters[email][$eq]=${email}`, { headers }).pipe(
-      map(response => response.data)
-    );
+    return this.httpClient.get<any>(`${this.apiUrl}/orders?populate=*&filters[email][$eq]=${email}&pagination[page]=${currentPage}&pagination[pageSize]=10`, { headers });
   }
 
   addOrder(email: string, cartItems: ICartItem[], address: IAddress, orderDate: Date, deliveryDate: Date, orderStatus: DeliveryStatus, cost: number, paymentMethod: string, cardNumber: string, cardHolder: string, cardExpiryDate: Date, cvv: number): Observable<IOrder> {

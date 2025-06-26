@@ -3,15 +3,15 @@
   position: fixed;
   justify-content: center;
   align-items: center;
-  z-index: 110;
+  z-index: 100;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
-  width: 700px;
-  height: 500px;
+  width: 600px;
+  height: auto;
   position: absolute;
   top: 70px;
   display: flex;
@@ -41,10 +41,14 @@
   color: #ff3b3b;
 }
 
+.header-section{
+  width: 100%;
+}
+
 .login-text{
   display: flex;
   justify-content: center;
-  width: 700px;
+  width: 100%;
   margin: 15px 0px 7px 0px;
   font-size: 1.3rem;
   font-weight: 800;
@@ -52,7 +56,7 @@
 }
 
 .protected-section{
-  width: 700px;
+  width: 100%;
   background-color: rgb(220, 242, 255);
   gap: 10px;
   padding: 3px;
@@ -151,6 +155,10 @@ form.register-form button:hover:not(:disabled) {
   font-weight: 600;
 }
 
+.error div{
+  margin: 0px;
+  padding: 0px;
+}
 
 .password-wrapper {
   position: relative;

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IOrder } from '../../Interfaces/iorder';
 import { OrderService } from '../../Services/order.service';
 import { UserService } from '../../Services/user.service';
-import { ModalService } from '../../Services/modal.service';
-import { CartItemService } from '../../Services/cart-item.service';
+import { ViewportScroller } from '@angular/common';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -14,26 +13,42 @@ import { environment } from '../../../environments/environment';
 export class OrdersComponent implements OnInit {
   apiUrl = environment.imageApi;
   ordersList: IOrder[] = [];
+  currentPage: number = 1;
+  totalPages: number = 1;
+  email: string | null = null;
 
   constructor(private orderService: OrderService,
               private userService: UserService,
-              private cartService: CartItemService,
-              private modalService: ModalService) {}
+              private viewportScroller: ViewportScroller) {}
 
   ngOnInit(): void {
     this.userService.loggedUserEmail$.subscribe(email => {
+      this.email = email;
       if (email) {
-        this.orderService.getOrdersByEmail(email).subscribe({
-          next: (orders) => {
-            this.ordersList = orders;
-            console.log('Orders fetched successfully:', this.ordersList);
-          },
-          error: (error) => {
-            console.error('Error fetching orders:', error);
-          }
-        });
+        this.fetchOrders(this.currentPage, email);
       }
     });
+  }
+
+  fetchOrders(page: number, email: string) {
+    this.orderService.getOrdersByEmail(email, page).subscribe({
+      next: (res) => {
+        this.ordersList = res.data;
+        this.currentPage = res.meta.pagination.page;
+        this.totalPages = res.meta.pagination.pageCount;
+      },
+      error: (error) => {
+        console.error('Error fetching orders:', error);
+      }
+    });
+  }
+
+  onPageChanged(newPage: number) {
+    if(this.email){
+      this.viewportScroller.scrollToPosition([0, 0]); // scroll to top
+      // Update the current page and fetch products for the new page
+      this.fetchOrders(newPage, this.email);
+    }
   }
 
 }

@@ -48,6 +48,7 @@ import { PaymentComponent } from './Components/payment/payment.component';
 import { AddressModalComponent } from './Components/address-modal/address-modal.component';
 import { OrderPlacedModalComponent } from './Components/order-placed-modal/order-placed-modal.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { VerifyModalComponent } from './Components/verify-modal/verify-modal.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     PaymentComponent,
     AddressModalComponent,
     OrderPlacedModalComponent,
+    VerifyModalComponent,
   ],
   imports: [
     BrowserModule,

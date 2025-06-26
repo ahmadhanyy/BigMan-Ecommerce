@@ -1,0 +1,104 @@
+<div class="not-logged" *ngIf="user?.documentId == ''">
+  <i class="fa-solid fa-user-plus" style="color: #B197FC;"></i>
+  <p class="not-logged-text">Login or signup if you don't have an account.</p>
+</div>
+<div class="account-page" *ngIf="user?.documentId != ''">
+  <div class="body">
+    <div class="user-form">
+      <h2>Account</h2>
+      <form (ngSubmit)="openVerifyModal('account')" #accountForm="ngForm">
+        <div class="form-group">
+          <label>User Name</label>
+          <input id="name" name="name" type="text" [(ngModel)]="user!.username" #name="ngModel" required />
+          <div *ngIf="name.invalid && name.touched" class="error">
+            <div *ngIf="name.errors?.['required']">User name is required.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input id="email" name="email" type="text" [(ngModel)]="user!.email" #email="ngModel" required />
+          <div *ngIf="email.invalid && email.touched" class="error">
+            <div *ngIf="email.errors?.['required']">Email is required.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Change Password</label>
+          <div class="password-wrapper">
+            <input id="password" name="password" [type]="passwordVisible ? 'text' : 'password'" #password="ngModel" [(ngModel)]="newPassword" placeholder="Leave empty if you don't want to change" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$"/>
+            <i (click)="togglePasswordVisibility()" [class]="passwordVisible ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+          </div>
+          <div *ngIf="password.invalid && password.touched" class="error">
+            <div *ngIf="password.errors?.['required']">Password is required.</div>
+            <div *ngIf="password.errors?.['minlength']">Password must be at least 8 characters.</div>
+            <div *ngIf="password.errors?.['pattern']">Password must contain at least one uppercase letter, one lowercase letter, and one number.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Rewrite Password</label>
+          <div class="password-wrapper">
+            <input id="repassword" name="repassword" [type]="rePasswordVisible ? 'text' : 'password'" #repassword="ngModel" [(ngModel)]="rePassword" placeholder="Leave empty if you don't want to change" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$"/>
+            <i (click)="toggleRePasswordVisibility()" [class]="rePasswordVisible ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+          </div>
+          <div *ngIf="repassword.invalid && repassword.touched" class="error">
+            <div *ngIf="repassword != password">Password you reentered is not the same.</div>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="accountForm.invalid || (rePassword != newPassword)">Update</button>
+      </form>
+    </div>
+
+    <div class="address-form">
+      <h2>Address</h2>
+      <form #addressForm="ngForm" (ngSubmit)="openVerifyModal('address')">
+        <div class="form-group">
+          <label for="government">Government</label>
+          <select id="government" name="government" [(ngModel)]="userAddress!.government" required>
+            <option value="" disabled>Select your government</option>
+            <option *ngFor="let gov of governments" [value]="gov">{{ gov }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input id="city" name="city" type="text" [(ngModel)]="userAddress!.city" #city="ngModel" required/>
+          <div *ngIf="city.invalid && city.touched" class="error">
+            <div *ngIf="city.errors?.['required']">City is required.</div>
+          </div>
+        </div>
+        <div class="row-form-group">
+          <div class="form-group">
+            <label for="street">Street</label>
+            <input id="street" name="street" type="text" [(ngModel)]="userAddress!.street" #street="ngModel" required/>
+            <div *ngIf="street.invalid && street.touched" class="error">
+              <div *ngIf="street.errors?.['required']">Street is required.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="buildingNo">Building Number</label>
+            <input id="buildingNo" name="buildingNo" type="number" [(ngModel)]="userAddress!.buildingNo" #buildingNo="ngModel" required/>
+            <div *ngIf="buildingNo.invalid && buildingNo.touched" class="error">
+              <div *ngIf="buildingNo.errors?.['required']">Building Number is required.</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input id="phone" name="phone" type="text" [(ngModel)]="userAddress!.phone" #phone="ngModel" required/>
+          <div *ngIf="phone.invalid && phone.touched" class="error">
+            <div *ngIf="phone.errors?.['required']">Phone Number is required.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="moreInfo">More Informations</label>
+          <input id="moreInfo" name="moreInfo" type="text" [(ngModel)]="userAddress!.moreInfo" #moreInfo="ngModel"/>
+        </div>
+        <button type="submit" [disabled]="!addressForm.form.valid">Update</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-verify-modal *ngIf="isVerifyModalOpen" [isOpen]="isVerifyModalOpen" (isVerified)="onVerification($event)" (close)="closeVerifyModal()"></app-verify-modal>

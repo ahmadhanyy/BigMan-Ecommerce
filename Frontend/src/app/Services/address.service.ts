@@ -61,7 +61,9 @@ export class AddressService {
     }
   };
     const headers = this.getHeaders();
-    return this.httpClient.put<IAddress>(`${this.apiUrl}/addresses/${addressDocId}`, newAddress, { headers });
+    return this.httpClient.put<{data: IAddress}>(`${this.apiUrl}/addresses/${addressDocId}`, newAddress, { headers }).pipe(
+      map(res => res.data)
+    );
   }
 
   deleteAddress(addressDocId: string): Observable<any> {

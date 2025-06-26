@@ -11,12 +11,7 @@ export class LogoutDialogComponent {
   @Input() isOpen: boolean = false;
   @Output() close = new EventEmitter<void>();
 
-  constructor(private userService: UserService,
-    private modalService: ModalService
-  ) {
-    console.log('LogoutDialogComponent initialized');
-  }
-
+  constructor(private userService: UserService, private modalService: ModalService){}
 
   closeModal() {
     this.close.emit();

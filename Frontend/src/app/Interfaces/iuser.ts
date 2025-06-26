@@ -3,4 +3,5 @@ export interface IUser {
   documentId: string;
   username: string;
   email: string;
+  password: string;
 }

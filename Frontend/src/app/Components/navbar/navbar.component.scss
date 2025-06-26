@@ -10,9 +10,9 @@
   align-items: center;
   width: 100%;
   padding: 1px 10px 10px 10px;
-  background-color: rgb(30, 30, 30);
+  background-color: rgb(20, 20, 20);
   gap: 60px;
-  padding-left: 180px;
+  padding-left: 200px;
 }
 
 .nav-btns{
@@ -47,5 +47,5 @@ app-categories-button{
 }
 
 .nav-btn.active .nav-link {
-  color: rgb(255, 187, 0);
+  color: rgb(255, 238, 0);
 }

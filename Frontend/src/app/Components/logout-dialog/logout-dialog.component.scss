@@ -2,45 +2,80 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  transition: opacity 0.3s ease;
 }
 
 .logout-content {
-  background: white;
-  padding: 20px 30px;
-  border-radius: 10px;
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.logout-content p {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #333;
 }
 
 .logout-actions {
-  margin-top: 15px;
   display: flex;
-  justify-content: space-around;
-  gap: 10px;
+  justify-content: center;
+  gap: 20px;
 }
 
 .confirm-btn,
 .cancel-btn {
-  padding: 8px 16px;
-  font-weight: bold;
+  padding: 10px 40px;
+  width: 150px;
+  font-size: 1rem;
+  font-weight: 600;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .confirm-btn {
-  background-color: #dc3545;
-  color: white;
+  background: #cf0b1f;
+  color: #f1f1f1;
+}
+
+.confirm-btn:hover {
+  background-color: #b3091a;
+  transform: translateY(-2px);
 }
 
 .cancel-btn {
-  background-color: #6c757d;
-  color: white;
+  background: #e0e0e0;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background: #d4d4d4;
+  transform: translateY(-2px);
 }

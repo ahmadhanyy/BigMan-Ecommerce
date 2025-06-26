@@ -41,4 +41,5 @@
       </ng-container>
     </div>
   </ng-container>
+  <app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>
 </div>

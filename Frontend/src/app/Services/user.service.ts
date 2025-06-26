@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { IUser } from '../Interfaces/iuser';
 
 @Injectable({
   providedIn: 'root'
@@ -82,7 +83,7 @@ export class UserService {
   }
 
   // Get user by email
-  getUserByEmail(email: string): Observable<any> {
+  getUserByEmail(email: string): Observable<IUser[]> {
     const token = this.getToken() // Ensure the JWT token is available
     if (!token) {
       throw new Error('No token found');
@@ -91,7 +92,24 @@ export class UserService {
       Authorization: `Bearer ${token}`
     });
     // Filter by email using query params
-    return this.httpClient.get(`${this.apiUrl}/users?filters[email][$eq]=${email}`, { headers });
+    return this.httpClient.get<IUser[]>(`${this.apiUrl}/users?filters[email][$eq]=${email}`, { headers });
+  }
+
+  // Update user by ID
+  updateUser(userId: number, userData: IUser): Observable<IUser> {
+    const token = this.getToken(); // Ensure the JWT token is available
+    if (!token) {
+      throw new Error('No token found');
+    }
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    const newUser = {
+      username: userData.username,
+      email: userData.email,
+      password: userData.password
+    }
+    return this.httpClient.put<IUser>(`${this.apiUrl}/users/${userId}`, newUser, { headers });
   }
 
 }
