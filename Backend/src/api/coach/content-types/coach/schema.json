@@ -20,10 +20,6 @@
       "type": "decimal",
       "required": true
     },
-    "experiance": {
-      "type": "string",
-      "required": true
-    },
     "details": {
       "type": "text",
       "required": true
@@ -44,6 +40,10 @@
       "relation": "manyToMany",
       "target": "api::coach-time.coach-time",
       "mappedBy": "coaches"
+    },
+    "experiance": {
+      "type": "integer",
+      "required": true
     }
   }
 }

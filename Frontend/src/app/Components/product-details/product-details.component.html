@@ -1,5 +1,10 @@
-<div class="product-page">
+<div class="product-page" *ngIf="card">
   <div class="product-section">
+    <div class="toast-container" *ngIf="showAddToCartAlert">
+      <div class="toast-success">
+        ✅ Product added to cart successfully!
+      </div>
+    </div>
     <div class="product-details">
       <div class="img-section">
         <div class="prod-img">
@@ -102,6 +107,6 @@
     <div class="fav-btns">
       <i class="fa-solid fa-heart" *ngIf="isInWishlist(card)" (click)="removeFromWishlist(card)" style="color: #000000;"></i>
       <i class="fa-regular fa-heart" *ngIf="!isInWishlist(card)" (click)="addToWishlist(card)" style="color: #000000;"></i>
-  </div>
+    </div>
   </div>
 </div>

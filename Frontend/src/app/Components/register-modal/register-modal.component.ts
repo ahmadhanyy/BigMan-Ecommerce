@@ -15,9 +15,7 @@ export class RegisterModalComponent {
 
   constructor(private userService: UserService,
               private modalService: ModalService
-  ) {
-    console.log('RegisterModalComponent initialized');
-  }
+  ) {}
 
 
   closeModal() {

@@ -17,7 +17,6 @@ export class CoachModalComponent implements OnInit {
   showAllSessions = false;
 
   constructor(public coachService: CoachService) {
-    console.log('CoachModalComponent initialized');
   }
 
   ngOnInit(): void {

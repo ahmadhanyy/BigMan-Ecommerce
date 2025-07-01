@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../Interfaces/iproduct';
 import { ProductService } from '../../Services/product.service';
 import { ICartItem } from '../../Interfaces/icart-item';

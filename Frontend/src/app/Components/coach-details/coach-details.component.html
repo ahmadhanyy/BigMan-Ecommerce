@@ -1,6 +1,6 @@
 <div class="coach-page">
   <div class="coach-section">
-    <div class="coach-details">
+    <div class="coach-details" *ngIf="card">
       <div class="img-section">
         <div class="coach-img">
           <img alt="coach image"  [src]="apiUrl + card.image.url">
@@ -43,4 +43,5 @@
         </div>
       </div>
     </div>
+  </div>
 </div>

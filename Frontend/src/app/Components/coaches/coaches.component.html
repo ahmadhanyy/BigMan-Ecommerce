@@ -1,8 +1,18 @@
 <div class="coaches-container">
-  <app-coaches-sidebar [viewMode]="viewMode" (viewModeChange)="setViewMode($event)"></app-coaches-sidebar>
+  <app-coaches-sidebar [viewMode]="viewMode" (viewModeChange)="setViewMode($event)" (sortChange)="setSorting($event)"></app-coaches-sidebar>
   <div class="coaches-content">
-    <app-coaches-list-view *ngIf="viewMode === 'list'"></app-coaches-list-view>
-    <app-coaches-grid-view *ngIf="viewMode === 'grid'"></app-coaches-grid-view>
+    <app-coaches-grid-view
+    *ngIf="viewMode === 'grid'"
+    [sortOption]="sortBy"
+    [currentPage]="currentPage"
+    (pageChange)="setCurrentPage($event)">
+  </app-coaches-grid-view>
+  <app-coaches-list-view
+    *ngIf="viewMode === 'list'"
+    [sortOption]="sortBy"
+    [currentPage]="currentPage"
+    (pageChange)="setCurrentPage($event)">
+  </app-coaches-list-view>
   </div>
 </div>
 

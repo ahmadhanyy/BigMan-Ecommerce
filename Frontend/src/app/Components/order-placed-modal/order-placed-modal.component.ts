@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UserService } from '../../Services/user.service';
-import { ModalService } from '../../Services/modal.service';
 import { ViewportScroller } from '@angular/common';
 
 @Component({
@@ -12,12 +10,7 @@ export class OrderPlacedModalComponent {
   @Input() isOpen: boolean = false;
   @Output() close = new EventEmitter<void>();
 
-  constructor(private userService: UserService,
-              private modalService: ModalService,
-              private viewportScroller: ViewportScroller
-  ) {
-    console.log('OrderDialogComponent initialized');
-  }
+  constructor(private viewportScroller: ViewportScroller) {}
 
   closeModal() {
     this.viewportScroller.scrollToPosition([0, 0]); // scroll to top

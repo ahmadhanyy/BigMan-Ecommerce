@@ -3,7 +3,7 @@ export interface ICoach {
   documentId: string;
   name: string;
   salary: number;
-  experiance: string;
+  experiance: number;
   details: string;
   image: IImage;
   discountPrecent?: number;

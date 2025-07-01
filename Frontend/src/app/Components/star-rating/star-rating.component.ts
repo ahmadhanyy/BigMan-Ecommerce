@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IProduct } from '../../Interfaces/iproduct';
-import { ReviewService } from '../../Services/review.service';
 import { ICoach } from '../../Interfaces/icoach';
 
 @Component({
@@ -22,7 +21,7 @@ export class StarRatingComponent {
   starCount: number = 5;
   stars: boolean[] = [];
 
-  constructor(private reviewService: ReviewService){}
+  constructor(){}
 
   ngOnInit() {
 /*     if(this.coachCard){

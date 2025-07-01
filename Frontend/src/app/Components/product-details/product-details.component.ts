@@ -36,6 +36,7 @@ export class ProductDetailsComponent implements OnInit {
   cartItems: ICartItem[] = [];
   deliveryDate: Date = new Date();
   userAddress: IAddress | null = null;
+  showAddToCartAlert: boolean = false;
 
   constructor(private prodService: ProductService,
               private wishlistService: WishlistService,
@@ -83,7 +84,6 @@ export class ProductDetailsComponent implements OnInit {
         this.addressService.getAddressByEmail(this.userEmail).subscribe({
           next: (address) => {
             this.userAddress = address[0];
-            console.log('User address:', this.userAddress);
           },
           error: (err) => {
             console.error('Failed to fetch user address:', err);
@@ -160,7 +160,6 @@ export class ProductDetailsComponent implements OnInit {
     return 0;
   }
 
-
   chooseColor(color: string) {
     this.chosenColor = color;
     // Reset chosen size when color changes to first available size or empty string
@@ -221,13 +220,14 @@ addToCart(prod: IProduct) {
     chosenVariant = prod.prod_variants.find(variant => variant.color === this.chosenColor && variant.size === this.chosenSize);
   }
 
-    // Check if already in cart
-    const existingCartItem = this.cartItems.find(item =>
-      item.product.documentId === prod.documentId &&
-      item.color === this.chosenColor &&
-      item.size === this.chosenSize
-    );
+  // Check if already in cart
+  const existingCartItem = this.cartItems.find(item =>
+    item.product.documentId === prod.documentId &&
+    item.color === this.chosenColor &&
+    item.size === this.chosenSize
+  );
 
+  // If no variant found, log an error and exit
   if (!chosenVariant) {
     return;
   }
@@ -253,10 +253,10 @@ addToCart(prod: IProduct) {
       next: () => {
         this.userInfoService.cartSubject.next(this.cartItems);
         this.countNo = 1;
+        this.showSuccessAlert();
       },
       error: err => console.error('Failed to update cart item:', err)
     });
-
   } else {
     // Add new item to cart
     const cost = prod.price * this.countNo;
@@ -278,6 +278,7 @@ addToCart(prod: IProduct) {
         this.cartItems.push(newItem);
         this.userInfoService.cartSubject.next(this.cartItems);
         this.countNo = 1;
+        this.showSuccessAlert();
       },
       error: err => {
         this.countNo = 1;
@@ -364,6 +365,14 @@ addToCart(prod: IProduct) {
 
   showMoreSizes() {
     this.showAllSizes = true;
+  }
+
+  // Show success alert when item is added to cart
+  showSuccessAlert() {
+    this.showAddToCartAlert = true;
+    setTimeout(() => {
+      this.showAddToCartAlert = false;
+    }, 3000); // hides after 3 seconds
   }
 
 }

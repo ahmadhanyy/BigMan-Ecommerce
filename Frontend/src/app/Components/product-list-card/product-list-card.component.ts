@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { IProduct } from '../../Interfaces/iproduct';
-import { ProductService } from '../../Services/product.service';
 import { WishlistService } from '../../Services/wishlist.service';
 import { ModalService } from '../../Services/modal.service';
 import { ReviewService } from '../../Services/review.service';
@@ -29,6 +28,7 @@ export class ProductListCardComponent implements OnInit {
     private wishlistService: WishlistService,
     private userService: UserService,
     private userInfoService: UserInformationService) {}
+
   ngOnInit(): void {
     // Subscribe to the loggedUserId$ observable to get real-time updates
     this.userService.loggedUserEmail$.subscribe((email) => {

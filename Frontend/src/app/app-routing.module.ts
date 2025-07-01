@@ -16,13 +16,15 @@ import { OrdersComponent } from './Components/orders/orders.component';
 import { InboxComponent } from './Components/inbox/inbox.component';
 import { VouchersComponent } from './Components/vouchers/vouchers.component';
 import { PaymentComponent } from './Components/payment/payment.component';
+import { SearchResultsComponent } from './Components/search-results/search-results.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'}, //Default route
   {path: 'home', component: HomeComponent},
   {path: 'products', component: ProductsComponent},
-  {path: 'products/:category', component: ProductsComponent },
+  {path: 'products/:category', component: ProductsComponent},
   {path: 'product/:id', component: ProductDetailsComponent},
+  {path: 'search/:query', component: SearchResultsComponent},
   {path: 'cart', component: CartComponent},
   {path: 'branches', component: BranchesComponent},
   {path: 'memberships', component: MembershipsComponent},

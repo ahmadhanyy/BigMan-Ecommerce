@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../Services/user.service';
 import { ModalService } from '../../Services/modal.service';
 
@@ -16,7 +16,6 @@ export class LoginModalComponent {
   constructor(private userService: UserService,
               private modalService: ModalService
   ) {
-    console.log('LoginModalComponent initialized');
   }
 
 

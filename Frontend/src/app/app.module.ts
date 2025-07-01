@@ -49,6 +49,7 @@ import { AddressModalComponent } from './Components/address-modal/address-modal.
 import { OrderPlacedModalComponent } from './Components/order-placed-modal/order-placed-modal.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { VerifyModalComponent } from './Components/verify-modal/verify-modal.component';
+import { SearchResultsComponent } from './Components/search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { VerifyModalComponent } from './Components/verify-modal/verify-modal.com
     AddressModalComponent,
     OrderPlacedModalComponent,
     VerifyModalComponent,
+    SearchResultsComponent,
   ],
   imports: [
     BrowserModule,

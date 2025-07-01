@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ICoach } from '../../Interfaces/icoach';
 import { CoachService } from '../../Services/coach.service';
 import { ActivatedRoute } from '@angular/router';

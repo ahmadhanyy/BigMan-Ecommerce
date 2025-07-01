@@ -38,6 +38,7 @@ export class ProductModalComponent implements OnInit {
   cartItems: ICartItem[] = [];
   deliveryDate: Date = new Date();
   userAddress: IAddress | null = null;
+  showAddToCartAlert: boolean = false;
 
   constructor(public prodService: ProductService,
               public reviewService: ReviewService,
@@ -52,7 +53,6 @@ export class ProductModalComponent implements OnInit {
 
     this.deliveryEndDate = new Date(this.today);
     this.deliveryEndDate.setDate(this.today.getDate() + 5); // 5 days after today
-    console.log('product modal component initialized');
   }
 
   ngOnInit(): void {
@@ -69,7 +69,6 @@ export class ProductModalComponent implements OnInit {
         this.addressService.getAddressByEmail(this.userEmail).subscribe({
           next: (address) => {
             this.userAddress = address[0];
-            console.log('User address:', this.userAddress);
           },
           error: (err) => {
             console.error('Failed to fetch user address:', err);
@@ -118,13 +117,20 @@ export class ProductModalComponent implements OnInit {
   }
 
   get availableColors(): string[] {
-    const colors = this.card?.prod_variants?.map(v => v.color)?.filter((color): color is string => !!color); // remove undefined/null
-    return Array.from(new Set(colors));
+    // Filter colors based on the available variants
+    const colors = this.card?.prod_variants?.filter(v => v.quantity > 0)?.map(v => v.color)?.filter((color): color is string => !!color); // remove undefined/null
+    return Array.from(new Set(colors)); // add Set to remove duplicates
   }
 
   get availableSizes(): string[] {
-    const sizes = this.card?.prod_variants?.map(v => v.size)?.filter((size): size is string => !!size); // remove undefined/null
-    return sizes;
+    // Filter sizes based on the chosen color
+    if (!this.card.prod_variants[0]?.color) {
+      // If the product has no colors, return all sizes
+      const sizes = this.card?.prod_variants?.filter(v => v.quantity > 0)?.map(v => v.size)?.filter((size): size is string => !!size);
+      return Array.from(new Set(sizes)); // add Set to remove duplicates
+    }
+    const sizes = this.card?.prod_variants?.filter(v => (v.color === this.chosenColor) && (v.quantity > 0))?.map(v => v.size)?.filter((size): size is string => !!size);
+    return Array.from(new Set(sizes)); // add Set to remove duplicates
   }
 
   get currentVariantQuantity(): number {
@@ -162,10 +168,16 @@ export class ProductModalComponent implements OnInit {
 
   chooseColor(color: string) {
     this.chosenColor = color;
+    // Reset chosen size when color changes to first available size or empty string
+    this.chosenSize = this.availableSizes[0] || '';
+    // Reset countNo when color changes
+    this.countNo = 1;
   }
 
   chooseSize(size: string) {
     this.chosenSize = size;
+    // Reset countNo when size changes
+    this.countNo = 1;
   }
 
   chooseImg(img: string) {
@@ -192,84 +204,6 @@ export class ProductModalComponent implements OnInit {
       this.deliveryDate.setDate(this.today.getDate() + 5); // 5 days after today
     }
   }
-/*
-  addToCart(prod: IProduct) {
-    if (!this.userEmail) {
-      this.modalService.openLoginModal();
-    }
-    else {
-      // Check if the product is already in the cart
-      const existingCartItem = this.cartItems.find(item => item.product.documentId === prod.documentId && item.color === this.chosenColor && item.size === this.chosenSize);
-      if (existingCartItem) {
-        // If it exists, check if the chosen variant has enough quantity
-        let chosenVariant: IProdVariant | undefined;
-        if (this.chosenColor === '' && this.chosenSize === ''){
-          chosenVariant = prod.prod_variants[0];
-          console.log('Chosen variant:', chosenVariant);
-        }
-        else if (this.chosenColor === '') {
-          chosenVariant = prod.prod_variants.find(variant => variant.size === this.chosenSize);
-          console.log('Chosen variant:', chosenVariant);
-        }
-        else if (this.chosenSize === '') {
-          chosenVariant = prod.prod_variants.find(variant => variant.color === this.chosenColor);
-          console.log('Chosen variant:', chosenVariant);
-        }
-        else{
-          chosenVariant = prod.prod_variants.find(variant => variant.color === this.chosenColor && variant.size === this.chosenSize);
-          console.log('Chosen variant:', chosenVariant);
-        }
-        if (chosenVariant && chosenVariant.quantity < this.countNo) {
-          return;
-        }
-        // If it exists, update the count and cost
-        existingCartItem.prodCount += this.countNo;
-        existingCartItem.cost += prod.price * this.countNo;
-        console.log('Existing cart item:', existingCartItem);
-        this.cartService.updateItem(existingCartItem).subscribe({
-          next: (res) => {
-            // Update the cart items in the component
-            this.userInfoService.cartSubject.next(this.cartItems);
-            this.countNo = 1; // Reset count after adding to cart
-          },
-          error: (err) => {
-            console.error('Failed to update cart item:', err);
-          }
-        });
-        this.closeModal();
-      } else {
-        // If it doesn't exist, create a new cart item
-        const cost = prod.price * this.countNo;
-        this.cartService.addToCart(this.userEmail, prod, this.countNo, this.chosenColor, this.chosenSize, this.deliveryDate, cost).subscribe({
-          next: (res) => {
-            // Update the cart items in the component
-            let newItem: ICartItem = {
-              id: res.data.id,
-              documentId: res.data.documentId,
-              email: res.data.email,
-              product: res.data.product,
-              prodCount: res.data.prodCount,
-              color: res.data.color,
-              size: res.data.size,
-              deliveryDate: res.data.deliveryDate,
-              deliveryStatus: res.data.deliveryStatus,
-              cost: res.data.cost,
-              isOrdered: res.data.isOrdered
-            }
-            this.cartItems.push(newItem);
-            this.userInfoService.cartSubject.next(this.cartItems);
-            this.countNo = 1;
-          },
-          error: (err) => {
-            this.countNo = 1;
-            console.error('Failed to add to wishlist:', err);
-          }
-        });
-        this.closeModal();
-      }
-    }
-  }
-*/
 
 addToCart(prod: IProduct) {
   if (!this.userEmail) {
@@ -313,6 +247,7 @@ addToCart(prod: IProduct) {
     // Total requested = existing count + new count
     const totalRequested = existingCartItem.prodCount + this.countNo;
     if (totalRequested > chosenVariant.quantity) {
+      console.warn('Total quantity in cart exceeds stock.');
       return;
     }
 
@@ -324,11 +259,10 @@ addToCart(prod: IProduct) {
       next: () => {
         this.userInfoService.cartSubject.next(this.cartItems);
         this.countNo = 1;
+        this.showSuccessAlert();
       },
       error: err => console.error('Failed to update cart item:', err)
     });
-
-    this.closeModal();
   } else {
     // Add new item to cart
     const cost = prod.price * this.countNo;
@@ -350,14 +284,13 @@ addToCart(prod: IProduct) {
         this.cartItems.push(newItem);
         this.userInfoService.cartSubject.next(this.cartItems);
         this.countNo = 1;
+        this.showSuccessAlert();
       },
       error: err => {
         this.countNo = 1;
         console.error('Failed to add to cart:', err);
       }
     });
-
-    this.closeModal();
   }
 }
 
@@ -445,6 +378,14 @@ addToCart(prod: IProduct) {
       return true;
     }
     return false;
+  }
+
+  // Show success alert when item is added to cart
+  showSuccessAlert() {
+    this.showAddToCartAlert = true;
+    setTimeout(() => {
+      this.showAddToCartAlert = false;
+    }, 3000); // hides after 3 seconds
   }
 
 }

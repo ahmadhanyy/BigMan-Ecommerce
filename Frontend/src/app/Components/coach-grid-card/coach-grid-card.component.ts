@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, Input, Renderer2 } from '@angular/core';
 import { ICoach } from '../../Interfaces/icoach';
 import { CoachService } from '../../Services/coach.service';
 import { ModalService } from '../../Services/modal.service';

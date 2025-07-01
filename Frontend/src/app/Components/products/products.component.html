@@ -1,7 +1,15 @@
 <div class="products-container">
-  <app-products-sidebar [viewMode]="viewMode" (viewModeChange)="setViewMode($event)"></app-products-sidebar>
+  <app-products-sidebar [viewMode]="viewMode" (viewModeChange)="setViewMode($event)" (sortChange)="setSorting($event)" (filterChange)="setFilers($event)"></app-products-sidebar>
   <div class="products-content">
-    <app-products-grid-view *ngIf="viewMode === 'grid'"></app-products-grid-view>
-    <app-products-list-view *ngIf="viewMode === 'list'"></app-products-list-view>
+    <app-products-grid-view
+    *ngIf="viewMode === 'grid'"
+    [products]="prodRows">>
+  </app-products-grid-view>
+
+  <app-products-list-view
+    *ngIf="viewMode === 'list'"
+    [products]="prodList">>
+  </app-products-list-view>
   </div>
 </div>
+<app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>

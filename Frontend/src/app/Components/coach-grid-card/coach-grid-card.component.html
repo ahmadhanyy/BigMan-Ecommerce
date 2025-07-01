@@ -4,7 +4,7 @@
       <img alt="product image" [src]="apiUrl + card.image.url">
       <h5>{{ card.name }}</h5>
       <app-star-rating class="rate-stars" [coachCard]="card"></app-star-rating>
-      <h6>Experience: {{ card.experiance }}</h6>
+      <h6>Experience: {{ card.experiance }} Years</h6>
       <div class="coach-salary" *ngIf="card.discountPrecent">
         <p class="discounted-text">{{ card.discountPrecent }}% OFF</p>
         <p class="original-price">{{ card.salary | currency: 'EGP ' }}</p>

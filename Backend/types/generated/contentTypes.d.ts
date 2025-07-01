@@ -660,7 +660,6 @@ export interface ApiCoachCoach extends Struct.CollectionTypeSchema {
   attributes: {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     salary: Schema.Attribute.Decimal & Schema.Attribute.Required;
-    experiance: Schema.Attribute.String & Schema.Attribute.Required;
     details: Schema.Attribute.Text & Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     discountPrecent: Schema.Attribute.Decimal;
@@ -668,6 +667,7 @@ export interface ApiCoachCoach extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::coach-time.coach-time'
     >;
+    experiance: Schema.Attribute.Integer & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

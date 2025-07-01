@@ -2,9 +2,7 @@
   <div class="container-fluid">
     <a routerLink="/home"><img src="assets/Logo.png" alt="logo" class="logo" /></a>
     <div class="header-items">
-      <form action="/search" method="GET">
-        <input type="text" placeholder="What are you looking for?">
-      </form>
+      <input type="text" [(ngModel)]="searchQuery" (keydown.enter)="onSearch()" placeholder="What are you looking for?">
       <div class="icons">
         <div class="dropdown">
           <div class="login-section dropdown-button">

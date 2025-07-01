@@ -14,7 +14,6 @@ export class LoadButtonComponent {
   onPageClick(page: number) {
     if (page >= 1 && page <= this.totalPages && page !== this.currentPage) {
       // Emit the new page number only if it's different from the current page
-      console.log(`Changing to page: ${page}`);
       this.currentPage = page;
       this.newPage.emit(page);
     }

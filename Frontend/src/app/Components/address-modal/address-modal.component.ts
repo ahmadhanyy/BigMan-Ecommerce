@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { AddressService } from '../../Services/address.service';
 import { UserService } from '../../Services/user.service';
 import { IAddress, government } from '../../Interfaces/iaddress';
@@ -15,6 +14,7 @@ export class AddressModalComponent implements OnInit{
   @Output() updatedAddress = new EventEmitter<IAddress>();
   userAddress: IAddress;
   governments: string[] = Object.values(government);
+
 
   constructor(private addressService: AddressService,
               private userService: UserService

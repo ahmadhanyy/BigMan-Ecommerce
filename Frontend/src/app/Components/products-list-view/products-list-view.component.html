@@ -1,11 +1,10 @@
 <table>
   <tbody>
-    <tr *ngFor="let prod of prodsList">
+    <tr *ngFor="let prod of products">
       <td>
         <app-product-list-card [card]="prod"></app-product-list-card>
         <hr>
       </td>
     </tr>
   </tbody>
-  <app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>
 </table>

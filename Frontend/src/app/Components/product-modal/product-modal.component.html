@@ -1,4 +1,9 @@
 <div class="modal" *ngIf="isOpen" (click)="onBackdropClick($event)">
+  <div class="toast-container" *ngIf="showAddToCartAlert">
+    <div class="toast-success">
+      ✅ Product added to cart successfully!
+    </div>
+  </div>
   <div class="close-modal">
     <span class="close-btn" (click)="closeModal()">&times;</span>
   </div>

@@ -1,6 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit, Renderer2, } from '@angular/core';
 import { UserService } from '../../Services/user.service';
-import { ModalService } from '../../Services/modal.service';
 import { environment } from '../../../environments/environment';
 import { UserInformationService } from '../../Services/user-information.service';
 import { DeliveryStatus, ICartItem } from '../../Interfaces/icart-item';
@@ -10,7 +9,6 @@ import { OrderService } from '../../Services/order.service';
 import { CartItemService } from '../../Services/cart-item.service';
 import { IVoucher } from '../../Interfaces/ivoucher';
 import { VoucherService } from '../../Services/voucher.service';
-import { Router  } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
 import { IProdVariant } from '../../Interfaces/iproduct';
 
@@ -40,14 +38,12 @@ export class PaymentComponent implements OnInit {
 
   constructor(private userService: UserService,
               private userInfoService: UserInformationService,
-              private modalService: ModalService,
               private addressService: AddressService,
               private orderService: OrderService,
               private cartService: CartItemService,
               private prodService: ProductService,
               private voucherService: VoucherService,
-              private renderer: Renderer2,
-              private router: Router)
+              private renderer: Renderer2)
               {}
 
   ngOnInit(): void {
@@ -191,6 +187,7 @@ export class PaymentComponent implements OnInit {
       const deliveryDate = this.deliveryDate;
       const cost = this.getTotalPrice();
       // Create the order with the selected payment method
+      console.log('Order items:', this.cartItems);
       this.orderService.addOrder(this.loggedEmail, this.cartItems, this.userAddress, orderData, deliveryDate, orderStatus, cost, this.paymentMethod, this.cardNumber, this.cardHolder, this.cardExpiryDate, this.cvv).subscribe({
         next: (res) => {
           // Check if a voucher was used and update it

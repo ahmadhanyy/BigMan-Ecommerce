@@ -1,0 +1,20 @@
+<div class="no-result" *ngIf="!isSearchFound">
+  <i class="fa-solid fa-magnifying-glass" style="color: #B197FC;"></i>
+  <p class="no-result-text">No result found. Continue shopping to explore more.</p>
+  <a routerLink="/products"><button class="no-result-btn">Explore Items</button></a>
+</div>
+<div class="products-container" *ngIf="isSearchFound">
+  <app-products-sidebar [viewMode]="viewMode" (viewModeChange)="setViewMode($event)" (sortChange)="setSorting($event)" (filterChange)="setFilers($event)"></app-products-sidebar>
+  <div class="products-content">
+    <app-products-grid-view
+    *ngIf="viewMode === 'grid'"
+    [products]="prodRows">
+  </app-products-grid-view>
+
+  <app-products-list-view
+    *ngIf="viewMode === 'list'"
+    [products]="prodList">
+  </app-products-list-view>
+  </div>
+</div>
+<app-load-button *ngIf="isSearchFound" [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>

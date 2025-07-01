@@ -1,10 +1,9 @@
 <div class="grid-container">
-  <div class="row" *ngFor="let row of prodRows">
+  <div class="row" *ngFor="let row of products">
     <div class="cards-container">
       <ng-container  *ngFor="let card of row">
         <app-product-grid-card [card]="card"></app-product-grid-card>
       </ng-container>
     </div>
   </div>
-  <app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>
 </div>

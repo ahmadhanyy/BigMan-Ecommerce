@@ -1,8 +1,8 @@
-import { Component, OnChanges, OnInit, Renderer2 } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { ModalService } from '../../Services/modal.service';
 import { UserService } from '../../Services/user.service';
-import { CartItemService } from '../../Services/cart-item.service';
 import { UserInformationService } from '../../Services/user-information.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,10 +16,12 @@ export class HeaderComponent {
   isRegisterModalOpen = false;
   isLogoutModalOpen = false;
   isUserLoggedIn: boolean = false;
+  searchQuery: string = '';
 
   constructor(private renderer: Renderer2,
               private modalService: ModalService,
               private userService: UserService,
+              private router: Router,
               private userInfoService: UserInformationService) {}
 
   ngOnInit(): void {
@@ -94,5 +96,13 @@ export class HeaderComponent {
   closeLogoutModal() {
     this.modalService.closeLogoutModal();
     this.renderer.removeClass(document.body, 'modal-open'); // Remove the modal-open class to <body>
+  }
+
+  onSearch() {
+    const query = this.searchQuery.trim().toLowerCase();
+    if (query) {
+      this.router.navigate(['/search', query]);
+      this.searchQuery = ''; // Optional: clear input
+    }
   }
 }

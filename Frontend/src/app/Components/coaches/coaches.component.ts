@@ -6,10 +6,20 @@ import { Component } from '@angular/core';
   styleUrl: './coaches.component.scss'
 })
 export class CoachesComponent {
-  viewMode: 'grid' | 'list' = 'grid'; // Grid view is the default
+  viewMode: 'grid' | 'list' = 'grid';
+  sortBy: string = '';
+  currentPage: number = 1;
 
   setViewMode(mode: 'grid' | 'list') {
     this.viewMode = mode;
+  }
+
+  setSorting(sort: string){
+    this.sortBy = sort;
+  }
+
+  setCurrentPage(page: number) {
+    this.currentPage = page;
   }
 
 }
