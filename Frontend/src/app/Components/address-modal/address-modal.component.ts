@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { AddressService } from '../../Services/address.service';
 import { UserService } from '../../Services/user.service';
 import { IAddress, government } from '../../Interfaces/iaddress';
+import { UserInformationService } from '../../Services/user-information.service';
 
 @Component({
   selector: 'app-address-modal',
@@ -17,7 +18,8 @@ export class AddressModalComponent implements OnInit{
 
 
   constructor(private addressService: AddressService,
-              private userService: UserService
+              private userService: UserService,
+              private userInfoService: UserInformationService,
   ) {
     this.userAddress = {
       id: 0,
@@ -32,7 +34,7 @@ export class AddressModalComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.userService.loggedUserEmail$.subscribe(email => {
+    this.userInfoService.loggedUserEmail$.subscribe(email => {
       if (email) {
         this.userAddress.email = email;
         this.addressService.getAddressByEmail(email).subscribe({

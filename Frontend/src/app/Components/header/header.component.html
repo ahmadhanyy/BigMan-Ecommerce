@@ -4,14 +4,14 @@
     <div class="header-items">
       <input type="text" [(ngModel)]="searchQuery" (keydown.enter)="onSearch()" placeholder="What are you looking for?">
       <div class="icons">
-        <div class="dropdown">
-          <div class="login-section dropdown-button">
+        <div class="dropdown" [class.open]="isloginOpen">
+          <div class="login-section dropdown-button" (click)="toggleLogin()">
             <i class="fa-solid fa-user"></i>
             <span class="login-text">{{loginText}}</span>
             <span class="arrow down-arrow">&#8250;</span>
             <span class="arrow up-arrow">&#8249;</span>
           </div>
-          <div class="dropdown-content">
+          <div class="dropdown-content" *ngIf="isloginOpen">
             <div class="login-part" [hidden]="isUserLoggedIn">
               <button class="log-btn" (click)="onLogin()">Login</button>
               <button class="signup-btn" (click)="onRegister()">Register</button>
@@ -25,10 +25,10 @@
             </div>
             <hr>
             <div class="list">
-              <a routerLink = "/account">My Account</a>
-              <a routerLink = "/orders">My Orders</a>
-              <a routerLink = "/vouchers">My Vouchers</a>
-              <a routerLink = "/inbox">Inbox</a>
+              <a routerLink = "/account" (click)="isloginOpen=false">My Account</a>
+              <a routerLink = "/orders" (click)="isloginOpen=false">My Orders</a>
+              <a routerLink = "/vouchers" (click)="isloginOpen=false">My Vouchers</a>
+              <a routerLink = "/inbox" (click)="isloginOpen=false">Inbox</a>
             </div>
           </div>
         </div>

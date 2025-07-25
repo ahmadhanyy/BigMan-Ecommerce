@@ -63,3 +63,41 @@ h2{
   right: 0px;
   bottom: 50%;
 }
+
+@media (max-width: 824px) {
+  h2{
+    margin: 20px;
+    font-size: 1.3em;
+    font-weight: 800;
+  }
+
+  .list-container {
+    max-width: 100%;
+    height: auto;
+    flex-direction: column;
+  }
+
+  .cards-wrapper {
+    max-width: 95%;
+    height: auto;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    display: flex;
+    position: relative;
+    align-items: start;
+    overflow-x: auto; /* keep it scrollable */
+    scroll-behavior: smooth;
+    /* Hide scrollbars */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .cards-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+
+  .prod-arrow {
+    display: none; // Hide arrows for small screens, rely on scroll
+  }
+}

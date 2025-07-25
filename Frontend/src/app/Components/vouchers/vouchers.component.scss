@@ -117,3 +117,53 @@
 .continue-shopping-btn:hover{
   background-color: #d89400;
 }
+
+@media (max-width: 1024px) {
+  .cards-container {
+    padding: 20px;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+    margin-right: 0;
+    align-self: flex-start;
+    padding-left: 20px;
+  }
+
+  .voucher-btns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+  }
+
+
+  .voucher-btns button {
+    font-size: 0.9rem;
+  }
+  .active-vouchers,
+  .used-vouchers {
+    min-width: 0;
+    width: 90%;
+    padding: 15px;
+  }
+
+  .card {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .no-vouchers i {
+    font-size: 100px;
+  }
+
+  .no-vouchers p {
+    font-size: 0.9rem;
+  }
+
+  .continue-shopping-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+}

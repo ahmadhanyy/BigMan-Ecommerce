@@ -1,0 +1,118 @@
+.card {
+  width: 95%;
+  max-width: 1000px;
+  padding: 20px;
+  margin: 20px auto;
+  background: linear-gradient(to right, #ffffff, #f2f4f7);
+  border-left: 6px solid #007bff;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.card h4 {
+  font-size: 1.3rem;
+  color: #001044;
+  margin-bottom: 8px;
+}
+
+.price-section {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.original-price {
+  font-size: 1.4rem;
+  color: #c0392b;
+  text-decoration: line-through;
+}
+
+.discounted-price {
+  font-size: 1.5rem;
+  color: #008839;
+  font-weight: 600;
+}
+
+.card p {
+  font-size: 1.05rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.badge.discount-badge {
+  background-color: #c21d1d;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+.btns {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-btn,
+.remove-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 120px;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #0056d2;
+}
+
+.remove-btn {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.remove-btn:hover {
+  background-color: #c41c1c;
+}
+
+.remove-btn i {
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .card {
+    width: 90%;
+  }
+}

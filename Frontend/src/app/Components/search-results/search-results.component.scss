@@ -39,10 +39,94 @@
   background-color: #faa307;
 }
 
-.products-container {
+.products-content {
   display: flex;
 }
 
-.products-content {
-  padding-left: 50px;
+.view-icon{
+  width: 20px;
+  height: auto;
+  padding-bottom: 2px;
+}
+
+.grid-btn i{
+  font-size: 20px;
+}
+
+.list-btn i{
+  font-size: 20px;
+}
+
+.grid-btn{
+  border-radius: 20px 0 0 20px;
+  width: 50%;
+}
+
+.list-btn{
+  border-radius: 0 20px 20px 0;
+  width: 50%;
+}
+
+.view-buttons {
+  max-width: 300px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+button {
+  max-width: 100px;
+  padding: 7px 10px;
+  margin-top: 10px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sidebar-btn {
+  border-radius: 20px;
+  padding: 7px 20px;
+  margin-left: 5px;
+  display: none;
+}
+
+button.active,
+button.active:hover {
+  background-color: rgb(240, 156, 0);
+}
+
+@media (max-width: 1150px) {
+  .products-content {
+    max-width: 100%;
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .view-buttons {
+    flex-direction: row;
+    min-width: 100%;
+    padding: 10px 20px;
+  }
+
+  .sidebar-btn {
+    display: block;
+  }
+
+  button {
+    max-width: 200px;
+    font-size: 0.9rem;
+  }
+
+  .grid-btn i,
+  .list-btn i {
+    font-size: 18px;
+  }
 }

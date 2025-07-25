@@ -82,3 +82,35 @@ a{
 .go-order-btn:hover {
   background-color: #228d36;
 }
+
+@media (max-width: 724px) {
+  .order-content {
+    padding: 10px;
+    width: 80%;
+    border-radius: 12px;
+  }
+
+  .success-header i {
+    font-size: 2.2rem;
+  }
+
+  .success-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .success-header p {
+    font-size: 0.85rem;
+  }
+
+  .order-actions {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .go-home-btn,
+  .go-order-btn {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+}

@@ -71,7 +71,7 @@ export class ProductDetailsComponent implements OnInit {
     });
 
     // Subscribe to the loggedUserId$ observable to get real-time updates
-    this.userService.loggedUserEmail$.subscribe((email) => {
+    this.userInfoService.loggedUserEmail$.subscribe((email) => {
       this.userEmail = email;
       // Get wishlist and cart items for the logged-in user
       if (this.userEmail) {

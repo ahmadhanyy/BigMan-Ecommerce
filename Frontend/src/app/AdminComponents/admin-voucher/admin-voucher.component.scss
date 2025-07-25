@@ -1,0 +1,32 @@
+.vouchers-content {
+  display: flex;
+  justify-content: center;
+}
+
+.vouchers-container{
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1150px) {
+  .vouchers-content {
+    width: 100%;
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .vouchers-container{
+    width: 100%;
+    padding-left: 0px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+
+  .voucher{
+    width: 100%;
+  }
+}

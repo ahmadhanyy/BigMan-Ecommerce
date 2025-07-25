@@ -25,6 +25,11 @@ export class MessageService {
     });
   }
 
+  getAllMessages(currentPage: number): Observable<any> {
+    const headers = this.getHeaders();
+    return this.httpClient.get<any>(`${this.apiUrl}/messages?populate=*&pagination[page]=${currentPage}&pagination[pageSize]=20&sort=createdAt:desc`, { headers });
+  }
+
   getMessagesByEmail(email: string): Observable<IMessage[]> {
     const headers = this.getHeaders();
     return this.httpClient.get<{ data: IMessage[]}>(`${this.apiUrl}/messages?populate=*&filters[email][$eq]=${email}`, { headers }).pipe(

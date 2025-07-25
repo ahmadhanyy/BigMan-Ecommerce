@@ -4,6 +4,7 @@ import { OrderService } from '../../Services/order.service';
 import { UserService } from '../../Services/user.service';
 import { ViewportScroller } from '@angular/common';
 import { environment } from '../../../environments/environment';
+import { UserInformationService } from '../../Services/user-information.service';
 
 @Component({
   selector: 'app-orders',
@@ -18,11 +19,11 @@ export class OrdersComponent implements OnInit {
   email: string | null = null;
 
   constructor(private orderService: OrderService,
-              private userService: UserService,
+              private userInfoService: UserInformationService,
               private viewportScroller: ViewportScroller) {}
 
   ngOnInit(): void {
-    this.userService.loggedUserEmail$.subscribe(email => {
+    this.userInfoService.loggedUserEmail$.subscribe(email => {
       this.email = email;
       if (email) {
         this.fetchOrders(this.currentPage, email);

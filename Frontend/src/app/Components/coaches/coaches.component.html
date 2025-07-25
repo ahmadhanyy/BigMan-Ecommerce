@@ -1,18 +1,30 @@
-<div class="coaches-container">
-  <app-coaches-sidebar [viewMode]="viewMode" (viewModeChange)="setViewMode($event)" (sortChange)="setSorting($event)"></app-coaches-sidebar>
-  <div class="coaches-content">
-    <app-coaches-grid-view
+<div class="view-buttons">
+  <button class="grid-btn" [ngClass]="{'active': viewMode === 'grid'}" (click)="changeViewMode('grid')">
+    <i class="fa-solid fa-grip" style="color: #000000;"></i>
+    Grid
+  </button>
+  <button class="list-btn" [ngClass]="{'active': viewMode === 'list'}" (click)="changeViewMode('list')">
+    <i class="fa-solid fa-bars" style="color: #000000;"></i>
+    List
+  </button>
+  <button class="sidebar-btn" (click)="toggelSideBar()">
+    Sort
+  </button>
+</div>
+
+<div class="coaches-content">
+  <app-coaches-sidebar  *ngIf="showSideBar" (sortChange)="setSorting($event)"></app-coaches-sidebar>
+  <app-coaches-grid-view
     *ngIf="viewMode === 'grid'"
-    [sortOption]="sortBy"
-    [currentPage]="currentPage"
-    (pageChange)="setCurrentPage($event)">
+    [coachRows]="coachRows"
+    [isLoading]="isLoading">
   </app-coaches-grid-view>
   <app-coaches-list-view
     *ngIf="viewMode === 'list'"
-    [sortOption]="sortBy"
-    [currentPage]="currentPage"
-    (pageChange)="setCurrentPage($event)">
+    [coachList]="coachList"
+    [isLoading]="isLoading">
   </app-coaches-list-view>
-  </div>
 </div>
+<app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>
+
 

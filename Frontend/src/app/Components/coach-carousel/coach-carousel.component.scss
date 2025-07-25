@@ -63,3 +63,45 @@ h2{
   right: 0px;
   bottom: 50%;
 }
+
+@media screen and (max-width: 824px) {
+  h2{
+    margin: 20px;
+    margin-bottom: 0px;
+    font-size: 1.3em;
+    font-weight: 800;
+  }
+
+  .body {
+    padding: 20px 0;
+  }
+
+  .list-container {
+    max-width: 100%;
+    height: auto;
+    padding: 0 10px;
+  }
+
+  .cards-wrapper {
+    max-width: 95%;
+    height: auto;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    display: flex;
+    position: relative;
+    align-items: start;
+    overflow-x: auto; /* keep it scrollable */
+    scroll-behavior: smooth;
+    /* Hide scrollbars */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  .cards-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  .coach-arrow {
+    display: none; /* Hide arrows for touch devices */
+  }
+}

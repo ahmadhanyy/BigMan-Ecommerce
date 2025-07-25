@@ -1,0 +1,30 @@
+<nav>
+  <div class="container-fluid">
+    <a routerLink="/adminOrders"><img src="assets/Logo.png" alt="logo" class="logo" /></a>
+    <div class="header-items">
+      <input type="text" [(ngModel)]="searchQuery" (keydown.enter)="onSearch()" placeholder="Search for a product">
+
+      <div class="icons">
+        <div class="dropdown" [class.open]="isloginOpen">
+          <div class="login-section dropdown-button" (click)="toggleLogin()">
+            <i class="fa-solid fa-user"></i>
+            <span class="login-text">{{loginText}}</span>
+            <span class="arrow down-arrow">&#8250;</span>
+            <span class="arrow up-arrow">&#8249;</span>
+          </div>
+          <div class="dropdown-content" *ngIf="isloginOpen">
+            <div class="logout-part">
+              <div class="profile-data">
+                <i class="fa-solid fa-user"></i>
+                <p class="profile-name">{{loginText}}</p>
+              </div>
+              <button class="log-btn" (click)="onLogout()">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<app-admin-logout *ngIf="isLogoutModalOpen" [isOpen]="isLogoutModalOpen" (close)="closeLogoutModal()"></app-admin-logout>

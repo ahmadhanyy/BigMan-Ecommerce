@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-details">
+    <h3>{{membership.name}} Membership</h3>
+    <h4>Duration: {{membership.duration}}</h4>
+
+    <div class="price-section" *ngIf="membership.discountPrecent">
+      <span class="original-price">{{membership.price | currency: 'EGP'}}</span>
+      <span class="discounted-price">
+        {{(membership.price - (membership.price * membership.discountPrecent) / 100) | currency: 'EGP'}}
+      </span>
+    </div>
+
+    <div class="price-section" *ngIf="!membership.discountPrecent">
+      <span class="discounted-price">{{membership.price | currency: 'EGP'}}</span>
+    </div>
+
+    <p>{{membership.description}}</p>
+
+    <span *ngIf="membership.discountPrecent" class="badge discount-badge">
+      {{membership.discountPrecent}}% OFF
+    </span>
+  </div>
+
+  <div class="btns">
+    <button class="edit-btn" (click)="editMembership()">Edit</button>
+    <button class="remove-btn" (click)="removeMembership()">
+      <i class="fa-solid fa-trash-alt"></i>
+    </button>
+  </div>
+</div>
+

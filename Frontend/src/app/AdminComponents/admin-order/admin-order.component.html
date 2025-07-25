@@ -1,0 +1,21 @@
+<div class="order-content">
+  <div class="order-container" *ngIf="isLoading">
+    <div class="order">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="order">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="order">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+  </div>
+  <div class="order-container" *ngIf="!isLoading">
+    <ng-container *ngFor="let order of orders">
+      <div class="order">
+        <app-order-list-card [order]="order"></app-order-list-card>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>

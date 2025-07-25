@@ -40,8 +40,8 @@ export class RegisterModalComponent {
       },
       (error) => {
         this.passwordVisible = false; // Reset password visibility when closing the modal
-        this.errorMessage = 'This Email is already in use.'; // Display error message
-        console.error(error);
+        this.errorMessage = error.error.error.message; // Display error message
+        console.error(error.error.error.message);
       }
     );
   }

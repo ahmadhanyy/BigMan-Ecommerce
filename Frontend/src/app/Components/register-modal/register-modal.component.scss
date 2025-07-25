@@ -179,3 +179,50 @@ form.register-form button:hover:not(:disabled) {
   justify-content: center;
   cursor: pointer;
 }
+
+@media (max-width: 724px) {
+  .modal-content {
+    width: 80%;
+    top: 30px;
+    border-radius: 12px;
+  }
+
+  form.register-form {
+    padding: 10px;
+    gap: 7px;
+  }
+
+  .login-text {
+    font-size: 1rem;
+  }
+
+  .protected-section {
+    flex-direction: row;
+    text-align: center;
+  }
+
+  .form-group label {
+    font-size: 0.8rem;
+  }
+
+  .form-group input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .close-btn {
+    font-size: 28px;
+  }
+
+  form.register-form button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .error-message {
+    font-size: 0.75rem;
+    padding: 5px 6px;
+    margin: 0 10px 15px 10px;
+    width: calc(100% - 20px);
+  }
+}

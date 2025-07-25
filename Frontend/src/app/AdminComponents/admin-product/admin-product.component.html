@@ -1,0 +1,28 @@
+<div class="view-buttons">
+  <button class="sidebar-btn" (click)="toggelSideBar()">
+    Filter
+  </button>
+</div>
+<div class="products-content">
+  <app-products-sidebar *ngIf="showSideBar" (sortChange)="setSorting($event)" (filterChange)="setFilers($event)"></app-products-sidebar>
+  <div class="products-container" *ngIf="isLoading">
+    <div class="prod">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="prod">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="prod">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+  </div>
+  <div class="products-container" *ngIf="!isLoading">
+    <ng-container *ngFor="let prod of prodList">
+      <div class="prod">
+        <app-prod-list-card [card]="prod"></app-prod-list-card>
+      </div>
+      <hr/>
+    </ng-container>
+  </div>
+</div>
+<app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>

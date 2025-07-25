@@ -77,3 +77,45 @@
 .go-btn:hover {
   background-color: #333;
 }
+
+@media (max-width: 600px) {
+  .pagination-container {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .pagination-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
+  }
+
+  .ellipsis {
+    font-size: 1rem;
+  }
+
+  .go-to-container {
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    margin-left: 8px;
+  }
+
+  .go-label {
+    font-size: 0.75rem;
+  }
+
+  .go-input {
+    width: 40px;
+    height: 30px;
+    font-size: 0.75rem;
+  }
+
+  .go-btn {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+}

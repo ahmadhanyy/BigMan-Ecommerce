@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="prod-card">
+    <p class="prod-name">{{ card.name }}</p>
+    <div class="card-details">
+      <img alt="img" [src]="apiUrl + card.images[0].url">
+      <div class="prod-info">
+        <app-star-rating class="rate-stars" [prodCard]="card"></app-star-rating>
+        <p class="prod-description">{{ card.description }}</p>
+        <div class="prod-payment">
+          <div class="prod-price" *ngIf="card.discountPrecent">
+            <p class="original-price">{{card.price | currency: 'EGP '}}</p>
+            <p class="discounted-price">{{(card.price - (card.price * card.discountPrecent) / 100) | currency: 'EGP '}}</p>
+            <p class="discounted-text">{{card.discountPrecent}}% OFF for limited time</p>
+          </div>
+          <div class="prod-price" *ngIf="!card.discountPrecent">
+            <p class="discounted-price">{{card.price | currency: 'EGP '}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="btns">
+        <button class="cart-btn" (click)="editProd()">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>

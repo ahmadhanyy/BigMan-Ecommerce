@@ -153,3 +153,35 @@ form.login-form button:disabled {
   font-weight: bold;
   width: calc(100% - 40px);
 }
+
+@media (max-width: 600px) {
+  .modal-content {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .modal-text {
+    font-size: 1.1rem;
+  }
+
+  form.login-form button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .form-group input {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .close-btn {
+    font-size: 24px;
+  }
+
+  .error-message {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+    margin: 10px 10px 0 10px;
+    width: calc(100% - 20px);
+  }
+}

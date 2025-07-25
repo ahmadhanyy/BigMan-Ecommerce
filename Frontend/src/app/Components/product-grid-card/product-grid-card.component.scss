@@ -164,3 +164,30 @@ button:hover .fa-cart-plus{
 .card-body button:hover .cart-icon {
   filter: invert(100%);
 }
+
+@media (max-width: 1150px) {
+  .card {
+    width: 130px;
+    height: 200px;
+  }
+
+  .card:hover {
+    height: 200px;
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+  }
+
+  h5 {
+    font-size: 0.7rem;
+    font-weight: 800;
+    width: 100px;
+  }
+
+  .card-body:hover .button-group {
+    display: none;
+  }
+
+}

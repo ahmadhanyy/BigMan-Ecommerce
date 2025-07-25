@@ -14,25 +14,32 @@ export class HomeComponent implements OnInit {
   productsList: IProduct[] = [];
   textOnProdList: string = 'Big Saves New Collection';
   textOnCoachList: string = 'Top Rated Trainers';
+  isProdLoading: boolean = true;
+  isCoachLoading: boolean = true;
 
   constructor(private coachService: CoachService, private prodService: ProductService) {}
 
   ngOnInit(): void {
     this.coachService.getCoaches(1).subscribe(
       (response: any) => {
+        this.isCoachLoading = false;
         this.coachesList = response.data;
       },
       (error: any) => {
+        this.isCoachLoading = true;
         console.error('Error fetching coaches:', error);
       }
     );
     this.prodService.getDiscountByCategory('Clothes').subscribe(
       (response: any) => {
+        this.isProdLoading = false;
         this.productsList = response.data;
       },
       (error: any) => {
+        this.isProdLoading = true;
         console.error('Error fetching products:', error);
       }
     );
+
   }
 }

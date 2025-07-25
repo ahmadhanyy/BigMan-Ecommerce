@@ -8,6 +8,7 @@ import { ICoach } from '../../Interfaces/icoach';
 })
 export class CoachCarouselComponent {
   @Input() coachs: ICoach[] = [];
+  @Input() isLoading: boolean = true;
   @Input() textOnList: string = '';
   @ViewChild('coachsWrapper') coachsWrapper!: ElementRef<HTMLDivElement>;
 

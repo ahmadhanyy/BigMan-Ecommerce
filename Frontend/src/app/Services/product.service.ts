@@ -121,7 +121,7 @@ export class ProductService {
   convertListTo2DList(prodsList: IProduct[], size: number): IProduct[][] {
     const rows: IProduct[][] = [];
     for (let i = 0; i < prodsList.length; i += size) {
-      rows.push(prodsList.slice(i, i + 4));
+      rows.push(prodsList.slice(i, i + size));
     }
     return rows;
   }

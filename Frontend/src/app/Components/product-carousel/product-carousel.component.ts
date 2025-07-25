@@ -8,6 +8,7 @@ import { IProduct } from '../../Interfaces/iproduct';
 })
 export class ProductCarouselComponent {
   @Input() products: IProduct[] = [];
+  @Input() isLoading: boolean = true;
   @ViewChild('prodsWrapper') prodsWrapper!: ElementRef<HTMLDivElement>;
   @Input() textOnList: string = '';
 

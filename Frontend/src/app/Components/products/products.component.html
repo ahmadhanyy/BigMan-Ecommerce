@@ -1,15 +1,28 @@
-<div class="products-container">
-  <app-products-sidebar [viewMode]="viewMode" (viewModeChange)="setViewMode($event)" (sortChange)="setSorting($event)" (filterChange)="setFilers($event)"></app-products-sidebar>
-  <div class="products-content">
-    <app-products-grid-view
-    *ngIf="viewMode === 'grid'"
-    [products]="prodRows">>
-  </app-products-grid-view>
+<div class="view-buttons">
+  <button class="grid-btn" [ngClass]="{'active': viewMode === 'grid'}" (click)="changeViewMode('grid')">
+    <i class="fa-solid fa-grip" style="color: #000000;"></i>
+    Grid
+  </button>
+  <button class="list-btn" [ngClass]="{'active': viewMode === 'list'}" (click)="changeViewMode('list')">
+    <i class="fa-solid fa-bars" style="color: #000000;"></i>
+    List
+  </button>
+  <button class="sidebar-btn" (click)="toggelSideBar()">
+    Filter
+  </button>
+</div>
 
+<div class="products-content">
+  <app-products-sidebar *ngIf="showSideBar" (sortChange)="setSorting($event)" (filterChange)="setFilers($event)"></app-products-sidebar>
+  <app-products-grid-view
+    *ngIf="viewMode === 'grid'"
+    [products]="prodRows"
+    [isLoading]="isLoading">
+  </app-products-grid-view>
   <app-products-list-view
     *ngIf="viewMode === 'list'"
-    [products]="prodList">>
+    [products]="prodList"
+    [isLoading]="isLoading">
   </app-products-list-view>
-  </div>
 </div>
 <app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>

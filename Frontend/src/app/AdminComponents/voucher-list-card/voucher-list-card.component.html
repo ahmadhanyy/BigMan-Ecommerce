@@ -1,0 +1,25 @@
+
+<div class="card">
+  <div class="card-details">
+    <p class="user"><span>User:</span> {{ voucher.email }}</p>
+    <p class="code"><span>Code:</span> {{ voucher.voucherCode }}</p>
+    <p class="value"><span>Value:</span> {{ voucher.value | currency: 'EGP' }}</p>
+
+    <p *ngIf="voucher.isExpired" class="badge expired">Voucher Expired</p>
+    <p *ngIf="!voucher.isExpired" class="expiry-date">
+      <span>Expiry Date:</span> {{ voucher.expiryDate | date: 'MMM d yyyy' }}
+    </p>
+
+    <p *ngIf="voucher.isUsed" class="badge used">Voucher Used</p>
+    <p *ngIf="!voucher.isUsed" class="use-date">
+      <span>Usage Date:</span> {{ voucher.usageDate | date: 'MMM d yyyy' }}
+    </p>
+  </div>
+
+  <div class="btns">
+    <button class="edit-btn" (click)="editVoucher()">Edit</button>
+    <button class="remove-btn" (click)="removeVoucher()" title="Delete Voucher">
+      <i class="fa-solid fa-trash-alt"></i>
+    </button>
+  </div>
+</div>

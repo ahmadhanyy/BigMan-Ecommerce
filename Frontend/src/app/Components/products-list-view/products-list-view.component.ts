@@ -8,5 +8,6 @@ import { IProduct } from '../../Interfaces/iproduct';
 })
 export class ProductsListViewComponent {
   @Input() products: IProduct[] = [];
+  @Input() isLoading: boolean = true;
 
 }

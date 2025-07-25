@@ -339,3 +339,124 @@
   width: 20px;
   height: auto;
 }
+
+@media (max-width: 1240px) {
+  .product-page {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .product-details {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .details-section {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .prod-img img{
+    height: 200px;
+    width: 200px;
+  }
+
+  .img-section {
+    width: 90%;
+  }
+
+  .imgs-container {
+    width: 80%;
+  }
+
+  .imgs-wrapper {
+    max-width: 100%;
+  }
+
+  .payment-section {
+    width: 90%;
+    margin-top: 20px;
+    position: static;
+  }
+
+  .specifications-section p {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-page {
+    padding: 10px;
+  }
+
+  .prod-img img {
+    width: 150px;
+    height: auto;
+  }
+
+  .arrow {
+    font-size: 1.5rem;
+  }
+
+  .imgs-container {
+    height: auto;
+    padding: 5px 0;
+  }
+
+  .imgs-on-list {
+    width: 40px;
+    height: 40px;
+  }
+
+  .prod-name {
+    font-size: 0.95rem;
+  }
+
+  .discounted-price {
+    font-size: 1.2rem;
+  }
+
+  .original-price,
+  .discounted-text {
+    font-size: 0.8rem;
+  }
+
+  .payment-labels {
+    font-size: 1.1rem;
+  }
+
+  .shipping-fees,
+  .delivery-date,
+  .return-text-header {
+    font-size: 0.85rem;
+  }
+
+  .return-text-body {
+    font-size: 0.7rem;
+  }
+
+  .quantity-buttons button {
+    font-size: 1.2rem;
+    width: 26px;
+    height: 26px;
+  }
+
+  .add-to-cart-btn {
+    padding: 10px 40px;
+    font-size: 0.9rem;
+  }
+
+  .fav-btns i {
+    font-size: 30px;
+  }
+
+  .specifications-label {
+    font-size: 1.2rem;
+  }
+
+  .specifications-section p {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}

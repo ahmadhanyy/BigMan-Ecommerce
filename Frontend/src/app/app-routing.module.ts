@@ -17,6 +17,17 @@ import { InboxComponent } from './Components/inbox/inbox.component';
 import { VouchersComponent } from './Components/vouchers/vouchers.component';
 import { PaymentComponent } from './Components/payment/payment.component';
 import { SearchResultsComponent } from './Components/search-results/search-results.component';
+import { AdminOrderComponent } from './AdminComponents/admin-order/admin-order.component';
+import { AdminProductComponent } from './AdminComponents/admin-product/admin-product.component';
+import { AdminCoachComponent } from './AdminComponents/admin-coach/admin-coach.component';
+import { AdminUserComponent } from './AdminComponents/admin-user/admin-user.component';
+import { AdminMessageComponent } from './AdminComponents/admin-message/admin-message.component';
+import { AdminVoucherComponent } from './AdminComponents/admin-voucher/admin-voucher.component';
+import { AdminCategoryComponent } from './AdminComponents/admin-category/admin-category.component';
+import { AdminMembershipComponent } from './AdminComponents/admin-membership/admin-membership.component';
+import { AdminBranchComponent } from './AdminComponents/admin-branch/admin-branch.component';
+import { AdminHomeComponent } from './AdminComponents/admin-home/admin-home.component';
+import { AdminSearchComponent } from './AdminComponents/admin-search/admin-search.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'}, //Default route
@@ -36,6 +47,17 @@ const routes: Routes = [
   {path: 'orders', component: OrdersComponent},
   {path: 'vouchers', component: VouchersComponent},
   {path: 'account', component: AccountComponent, canActivate: [AuthGuard]},
+  {path: 'adminHome', component: AdminHomeComponent},
+  {path: 'adminOrders', component: AdminOrderComponent},
+  {path: 'adminProducts', component: AdminProductComponent},
+  {path: 'adminCoaches', component: AdminCoachComponent},
+  {path: 'adminUsers', component: AdminUserComponent},
+  {path: 'adminBranches', component: AdminBranchComponent},
+  {path: 'adminMessages', component: AdminMessageComponent},
+  {path: 'adminVouchers', component: AdminVoucherComponent},
+  {path: 'adminCategories', component: AdminCategoryComponent},
+  {path: 'adminMemberships', component: AdminMembershipComponent},
+  {path: 'adminSearch/:query', component: AdminSearchComponent},
   {path: '**', component: PageNotFoundComponent} //Wildcard route
 ];
 

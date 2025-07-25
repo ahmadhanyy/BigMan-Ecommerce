@@ -1,0 +1,28 @@
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 0px 5px 0px;
+  background: rgb(20, 20, 20);
+}
+
+.copy-right{
+  text-align: center;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  color: #dddddd;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 10px 0px;
+    margin: 0px;
+  }
+
+  .copy-right {
+    font-size: 0.65rem;
+    padding: 5px;
+  }
+}
+

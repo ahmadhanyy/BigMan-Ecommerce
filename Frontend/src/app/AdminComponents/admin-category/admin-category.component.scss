@@ -1,0 +1,32 @@
+.category-content {
+  display: flex;
+  justify-content: center;
+}
+
+.category-container{
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1150px) {
+  .category-content {
+    width: 100%;
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .category-container{
+    width: 100%;
+    padding-left: 0px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+
+  .category{
+    width: 100%;
+  }
+}

@@ -50,6 +50,32 @@ import { OrderPlacedModalComponent } from './Components/order-placed-modal/order
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { VerifyModalComponent } from './Components/verify-modal/verify-modal.component';
 import { SearchResultsComponent } from './Components/search-results/search-results.component';
+import { AdminBranchComponent } from './AdminComponents/admin-branch/admin-branch.component';
+import { AdminCategoryComponent } from './AdminComponents/admin-category/admin-category.component';
+import { AdminCoachComponent } from './AdminComponents/admin-coach/admin-coach.component';
+import { AdminFooterComponent } from './AdminComponents/admin-footer/admin-footer.component';
+import { AdminHeaderComponent } from './AdminComponents/admin-header/admin-header.component';
+import { AdminHomeComponent } from './AdminComponents/admin-home/admin-home.component';
+import { AdminLogoutComponent } from './AdminComponents/admin-logout/admin-logout.component';
+import { AdminMembershipComponent } from './AdminComponents/admin-membership/admin-membership.component';
+import { AdminMessageComponent } from './AdminComponents/admin-message/admin-message.component';
+import { AdminNavbarComponent } from './AdminComponents/admin-navbar/admin-navbar.component';
+import { AdminOrderComponent } from './AdminComponents/admin-order/admin-order.component';
+import { AdminProductComponent } from './AdminComponents/admin-product/admin-product.component';
+import { AdminUserComponent } from './AdminComponents/admin-user/admin-user.component';
+import { AdminVoucherComponent } from './AdminComponents/admin-voucher/admin-voucher.component';
+import { ProdListCardComponent } from './AdminComponents/prod-list-card/prod-list-card.component';
+import { CoachesListCardComponent } from './AdminComponents/coaches-list-card/coaches-list-card.component';
+import { CardSkeletonComponent } from './Components/card-skeleton/card-skeleton.component';
+import { ListSkeletonComponent } from './Components/list-skeleton/list-skeleton.component';
+import { AdminSearchComponent } from './AdminComponents/admin-search/admin-search.component';
+import { BranchListCardComponent } from './AdminComponents/branch-list-card/branch-list-card.component';
+import { CategoryListCardComponent } from './AdminComponents/category-list-card/category-list-card.component';
+import { MembershipListCardComponent } from './AdminComponents/membership-list-card/membership-list-card.component';
+import { MessageListCardComponent } from './AdminComponents/message-list-card/message-list-card.component';
+import { OrderListCardComponent } from './AdminComponents/order-list-card/order-list-card.component';
+import { UserListCardComponent } from './AdminComponents/user-list-card/user-list-card.component';
+import { VoucherListCardComponent } from './AdminComponents/voucher-list-card/voucher-list-card.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +124,32 @@ import { SearchResultsComponent } from './Components/search-results/search-resul
     OrderPlacedModalComponent,
     VerifyModalComponent,
     SearchResultsComponent,
+    AdminBranchComponent,
+    AdminCategoryComponent,
+    AdminCoachComponent,
+    AdminFooterComponent,
+    AdminHeaderComponent,
+    AdminHomeComponent,
+    AdminLogoutComponent,
+    AdminMembershipComponent,
+    AdminMessageComponent,
+    AdminNavbarComponent,
+    AdminOrderComponent,
+    AdminProductComponent,
+    AdminUserComponent,
+    AdminVoucherComponent,
+    ProdListCardComponent,
+    CardSkeletonComponent,
+    ListSkeletonComponent,
+    AdminSearchComponent,
+    CoachesListCardComponent,
+    BranchListCardComponent,
+    CategoryListCardComponent,
+    MembershipListCardComponent,
+    MessageListCardComponent,
+    OrderListCardComponent,
+    UserListCardComponent,
+    VoucherListCardComponent,
   ],
   imports: [
     BrowserModule,

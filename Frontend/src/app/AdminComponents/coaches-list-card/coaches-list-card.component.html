@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="coach-card">
+    <img alt="img" [src]="apiUrl + card.image.url"/>
+    <div class="coach-info">
+      <p class="coach-name">{{ card.name }}</p>
+      <app-star-rating class="rate-stars" [coachCard]="card"></app-star-rating>
+      <p class="coach-experience">Experience: {{ card.experiance }} Years</p>
+      <div class="coach-payment">
+        <div class="coach-salary" *ngIf="card.discountPrecent">
+          <p class="original-price">{{card.salary | currency: 'EGP '}}</p>
+          <p class="discounted-price">{{(card.salary - (card.salary * card.discountPrecent) / 100) | currency: 'EGP '}}</p>
+          <p class="discounted-text">{{card.discountPrecent}}% OFF for limited time</p>
+        </div>
+        <div class="coach-salary" *ngIf="!card.discountPrecent">
+          <p class="discounted-price">{{card.salary | currency: 'EGP '}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="btns">
+      <button (click)="editCoach()">Edit</button>
+    </div>
+  </div>
+</div>

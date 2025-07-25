@@ -1,0 +1,182 @@
+.card{
+  border: none;
+}
+
+.prod-card {
+  display: flex;
+  flex-direction: column;
+  width: 900px;
+  padding: 10px;
+  margin-left: 20px;
+}
+
+.card-details{
+  display: flex;
+  width: 900px;
+  padding: 10px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  border-radius: 3%;
+}
+
+.prod-info {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.prod-payment {
+  display: inline-block;
+}
+
+.prod-name {
+  display: inline-block;
+  width: 700px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.prod-description{
+  margin-top: 10px;
+  width: 400px;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.original-price {
+  font-size: 1rem;
+  color: #c0392b;
+  text-decoration: line-through;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+
+.discounted-price {
+  font-size: 1.5rem;
+  color: #000000;
+  font-weight: bold;
+  margin: 0px;
+}
+
+.discounted-text{
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #c0392b;
+  margin: 0px;
+}
+
+.rate-stars {
+  margin: 5px 0;
+}
+
+.btns {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-left: 40px;
+  gap: 10px;
+}
+
+button {
+  background-color: rgb(29, 29, 29);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 10px 40px;
+}
+
+button:hover {
+  background-color: rgb(185, 185, 185);
+  color: black;
+}
+
+@media (max-width: 1150px) {
+  .card{
+    width: 400px;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .card-details{
+    max-width: 450px;
+  }
+
+  .prod-card {
+    width: 400px;
+    padding: 0px;
+    margin: 10px;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  img {
+    margin-right: 5px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .prod-info {
+    margin-left: 3px;
+    text-align:left;
+  }
+
+  .prod-name {
+    width: 370px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+  }
+
+  .prod-description{
+    margin: 0px;
+    width: 200px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .prod-payment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .original-price,
+  .discounted-price{
+    font-size: 0.9rem;
+  }
+
+  .discounted-text {
+    font-size: 0.7rem;
+    text-align: center;
+  }
+
+  .btns {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+}

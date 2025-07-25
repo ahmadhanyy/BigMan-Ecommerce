@@ -179,3 +179,98 @@
   justify-content: center;
   align-items: center;
 }
+
+@media screen and (max-width: 1024px) {
+  .coach-details {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .img-section,
+  .details-section,
+  .payment-section {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .coach-img img {
+    width: 100%;
+    height: auto;
+  }
+
+  .sub-btn button {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .coach-salary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .session-btn {
+    margin-bottom: 8px;
+    font-size: 0.75rem;
+  }
+
+  .sub-btn{
+    text-align: center;
+    justify-content: center;
+  }
+
+  .sub-btn button{
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h2 {
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 10px 20px;
+  }
+
+  .coach-page {
+    padding: 10px;
+  }
+
+  .coach-name {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .discounted-salary {
+    font-size: 1.2rem;
+  }
+
+  .original-salary {
+    font-size: 0.9rem;
+  }
+
+  .session-label,
+  .session-duration {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .session-btn {
+    font-size: 0.7rem;
+    padding: 6px;
+  }
+
+  .show-more-btns {
+    text-align: center;
+    margin: 10px auto;
+  }
+
+  .sub-btn button{
+    width: 50%;
+  }
+
+  .sub-btn{
+    text-align: center;
+    justify-content: center;
+  }
+}

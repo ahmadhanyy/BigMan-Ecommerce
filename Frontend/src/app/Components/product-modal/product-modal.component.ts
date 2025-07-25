@@ -57,7 +57,7 @@ export class ProductModalComponent implements OnInit {
 
   ngOnInit(): void {
     // Subscribe to the loggedUserEmail$ observable to get real-time updates
-    this.userService.loggedUserEmail$.subscribe((email) => {
+    this.userInfoService.loggedUserEmail$.subscribe((email) => {
       this.userEmail = email;
       if (this.userEmail) {
         this.userInfoService.userWishlist$.subscribe((items) => {

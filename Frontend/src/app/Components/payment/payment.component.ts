@@ -48,7 +48,7 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
     // Subscribe to the loggedUserId$ observable to get real-time updates
-    this.userService.loggedUserEmail$.subscribe((email) => {
+    this.userInfoService.loggedUserEmail$.subscribe((email) => {
       this.loggedEmail = email;
       if (this.loggedEmail) {
         this.userInfoService.userCart$.subscribe((items) => {

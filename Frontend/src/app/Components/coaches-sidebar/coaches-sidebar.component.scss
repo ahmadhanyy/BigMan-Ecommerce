@@ -16,10 +16,6 @@
   font-weight: 600;
 }
 
-.view-buttons {
-  display: flex;
-}
-
 button {
   display: block;
   padding: 7px 10px;
@@ -29,24 +25,6 @@ button {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-}
-
-.grid-btn i{
-  font-size: 20px;
-}
-
-.list-btn i{
-  font-size: 20px;
-}
-
-.grid-btn{
-  border-radius: 20px 0 0 20px;
-  width: 50%;
-}
-
-.list-btn{
-  border-radius: 0 20px 20px 0;
-  width: 50%;
 }
 
 button.active,

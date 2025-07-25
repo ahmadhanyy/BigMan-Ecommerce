@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-details">
+    <p class="email"><span>Email:</span> {{ user.email }}</p>
+    <p class="name"><span>Username:</span> {{ user.username }}</p>
+  </div>
+  <div class="btns">
+    <button class="edit-btn" (click)="editUser()">Edit</button>
+    <button class="remove-btn" (click)="removeUser()" title="Remove User">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+  </div>
+</div>

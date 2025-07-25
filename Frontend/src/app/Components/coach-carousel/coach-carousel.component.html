@@ -3,9 +3,17 @@
   <div class="list-container">
     <button class="coach-arrow left-arrow" (click)="scroll('left')">&#8249;</button>
     <div class="cards-wrapper" #coachsWrapper>
-      <div *ngFor="let card of coachs">
-        <app-coach-grid-card [card]="card"></app-coach-grid-card>
-      </div>
+      <ng-container *ngIf="isLoading">
+        <app-card-skeleton></app-card-skeleton>
+        <app-card-skeleton></app-card-skeleton>
+        <app-card-skeleton></app-card-skeleton>
+        <app-card-skeleton></app-card-skeleton>
+      </ng-container>
+      <ng-container *ngIf="!isLoading">
+        <div *ngFor="let card of coachs">
+          <app-coach-grid-card [card]="card"></app-coach-grid-card>
+        </div>
+      </ng-container>
     </div>
     <button class="coach-arrow right-arrow" (click)="scroll('right')">&#8250;</button>
   </div>

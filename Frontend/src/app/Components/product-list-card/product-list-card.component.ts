@@ -31,7 +31,7 @@ export class ProductListCardComponent implements OnInit {
 
   ngOnInit(): void {
     // Subscribe to the loggedUserId$ observable to get real-time updates
-    this.userService.loggedUserEmail$.subscribe((email) => {
+    this.userInfoService.loggedUserEmail$.subscribe((email) => {
       this.userEmail = email;
       if (this.userEmail) {
         this.userInfoService.userWishlist$.subscribe((items) => {
@@ -41,86 +41,86 @@ export class ProductListCardComponent implements OnInit {
     });
   }
 
-    openModal() {
-      if(this.userService.isLoggedIn()) {
-        this.isModalProdOpen = true;
-        this.renderer.addClass(document.body, 'modal-open');
-      }
-      else {
-        this.modalService.openLoginModal();
-        this.renderer.addClass(document.body, 'modal-open');
-      }
+  openModal() {
+    if(this.userService.isLoggedIn()) {
+      this.isModalProdOpen = true;
+      this.renderer.addClass(document.body, 'modal-open');
     }
-
-    closeProdModal() {
-      this.isModalProdOpen = false;
-      this.renderer.removeClass(document.body, 'modal-open');
+    else {
+      this.modalService.openLoginModal();
+      this.renderer.addClass(document.body, 'modal-open');
     }
+  }
 
-    closeLoginModal() {
-      this.modalService.closeLoginModal();
-      this.renderer.removeClass(document.body, 'modal-open'); // Remove the modal-open class to <body>
-    }
+  closeProdModal() {
+    this.isModalProdOpen = false;
+    this.renderer.removeClass(document.body, 'modal-open');
+  }
 
-    addToWishlist(card: IProduct) {
-      if (!this.userEmail) {
-        this.modalService.openLoginModal();
-      } else {
-        this.wishlistService.addToWishlist(this.userEmail, card).subscribe({
-          next: (res) => {
-            // Update the wishlist items in the component
-            let newItem: IWishlistItem = {
-              id: res.data.id,
-            documentId: res.data.documentId,
-            email: res.data.email,
-              product: res.data.product,
-            }
-            this.wishlistItems.push(newItem);
-            this.userInfoService.wishlistSubject.next(this.wishlistItems);
-          },
-          error: (err) => {
-            console.error('Failed to add to wishlist:', err);
+  closeLoginModal() {
+    this.modalService.closeLoginModal();
+    this.renderer.removeClass(document.body, 'modal-open'); // Remove the modal-open class to <body>
+  }
+
+  addToWishlist(card: IProduct) {
+    if (!this.userEmail) {
+      this.modalService.openLoginModal();
+    } else {
+      this.wishlistService.addToWishlist(this.userEmail, card).subscribe({
+        next: (res) => {
+          // Update the wishlist items in the component
+          let newItem: IWishlistItem = {
+            id: res.data.id,
+          documentId: res.data.documentId,
+          email: res.data.email,
+            product: res.data.product,
           }
-        });
-      }
-    }
-
-    removeFromWishlist(card: IProduct) {
-      if (!this.userEmail) {
-        this.modalService.openLoginModal();
-      } else {
-        // Find the wishlist item to remove
-        const wishlistItem = this.wishlistItems.find(item => item.product.documentId === card.documentId);
-        if (!wishlistItem) {
-          console.warn('Product not found in wishlist');
-          return;
+          this.wishlistItems.push(newItem);
+          this.userInfoService.wishlistSubject.next(this.wishlistItems);
+        },
+        error: (err) => {
+          console.error('Failed to add to wishlist:', err);
         }
-        this.wishlistService.removeFromWishlist(wishlistItem.documentId).subscribe({
-          next: (res) => {
-            // Update the wishlist items in the component
-            this.wishlistItems = this.wishlistItems.filter(item => {
-              return item.documentId !== wishlistItem.documentId;
-            });;
-            this.userInfoService.wishlistSubject.next(this.wishlistItems);
-          },
-          error: (err) => {
-            console.error('Failed to add to wishlist:', err);
-          }
-        });
-      }
+      });
     }
+  }
 
-    isInWishlist(prod: IProduct) : boolean {
-      if (!this.userEmail) {
-        return false;
+  removeFromWishlist(card: IProduct) {
+    if (!this.userEmail) {
+      this.modalService.openLoginModal();
+    } else {
+      // Find the wishlist item to remove
+      const wishlistItem = this.wishlistItems.find(item => item.product.documentId === card.documentId);
+      if (!wishlistItem) {
+        console.warn('Product not found in wishlist');
+        return;
       }
-      let targetItem = this.wishlistItems.find(
-        (item) => item.product.documentId === prod.documentId
-      );
-      if (targetItem) {
-        return true;
-      }
+      this.wishlistService.removeFromWishlist(wishlistItem.documentId).subscribe({
+        next: (res) => {
+          // Update the wishlist items in the component
+          this.wishlistItems = this.wishlistItems.filter(item => {
+            return item.documentId !== wishlistItem.documentId;
+          });;
+          this.userInfoService.wishlistSubject.next(this.wishlistItems);
+        },
+        error: (err) => {
+          console.error('Failed to add to wishlist:', err);
+        }
+      });
+    }
+  }
+
+  isInWishlist(prod: IProduct) : boolean {
+    if (!this.userEmail) {
       return false;
     }
+    let targetItem = this.wishlistItems.find(
+      (item) => item.product.documentId === prod.documentId
+    );
+    if (targetItem) {
+      return true;
+    }
+    return false;
+  }
 
 }

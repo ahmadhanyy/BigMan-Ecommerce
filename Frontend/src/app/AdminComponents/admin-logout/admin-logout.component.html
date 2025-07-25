@@ -1,0 +1,9 @@
+<div class="logout-modal" *ngIf="isOpen">
+  <div class="logout-content">
+    <p>⚠️ Are you sure you want to log out?</p>
+    <div class="logout-actions">
+      <button class="confirm-btn" (click)="confirmLogout()">Yes</button>
+      <button class="cancel-btn" (click)="cancelLogout()">Cancel</button>
+    </div>
+  </div>
+</div>

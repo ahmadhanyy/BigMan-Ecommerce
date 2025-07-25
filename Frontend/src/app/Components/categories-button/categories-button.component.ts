@@ -9,6 +9,13 @@ import { CategoryService } from '../../Services/category.service';
 })
 export class CategoriesButtonComponent {
   categories: ICategory[] = [];
+  isDropdownOpen = false;
+
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
 
   constructor(private catService: CategoryService) {
     this.catService.getCategories().subscribe((response: any) => {

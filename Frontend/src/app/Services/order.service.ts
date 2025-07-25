@@ -27,6 +27,11 @@ export class OrderService {
     });
   }
 
+  getAllOrders(currentPage: number): Observable<any> {
+    const headers = this.getHeaders();
+    return this.httpClient.get<any>(`${this.apiUrl}/orders?populate=*&pagination[page]=${currentPage}&pagination[pageSize]=20&sort=createdAt:desc`, { headers });
+  }
+
   getPendingOrders(email: string): Observable<IOrder> {
     const headers = this.getHeaders();
     return this.httpClient.get<{ data: IOrder }>(`${this.apiUrl}/orders?populate=*&filters[email][$eq]=${email}&filters[orderStatus][$eq]=pending`, { headers }).pipe(

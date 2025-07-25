@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, HostListener } from '@angular/core';
 import { IProduct } from '../../Interfaces/iproduct';
 import { ProductService } from '../../Services/product.service';
 import { ActivatedRoute } from '@angular/router';
@@ -20,6 +20,8 @@ export class ProductsComponent implements OnInit, OnChanges {
   prodRows: IProduct[][] = []; // For grid view
   prodCatId: number | null = null;
   totalPages: number = 1;
+  showSideBar: boolean = true;
+  isLoading: boolean = true;
 
   constructor(public prodService: ProductService, private route: ActivatedRoute, private viewportScroller: ViewportScroller) {}
 
@@ -30,11 +32,34 @@ export class ProductsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    if (window.innerWidth <= 1150) {
+      this.showSideBar = false;
+    }
+    else {
+      this.showSideBar = true;
+    }
+    this.checkWindowSize();
     this.route.paramMap.subscribe(params => {
       this.query = params.get('query') || '';
       this.prodCatId = Number(params.get('category')) || null;
       this.fetchSpecialProducts(this.prodCatId!, this.sortOption, this.query, this.filters, this.currentPage);
     });
+  }
+
+  // Listen to window resize events
+  @HostListener('window:resize', [])
+  onResize() {
+    this.checkWindowSize();
+  }
+
+  checkWindowSize(): void {
+    if (window.innerWidth <= 1150) {
+      this.showSideBar = false;
+    }
+    else {
+      this.showSideBar = true;
+    }
+    this.fetchSpecialProducts(this.prodCatId!, this.sortOption, this.query, this.filters, this.currentPage);
   }
 
   fetchSpecialProducts(categoryId: number, sort: string, query:string, filters: any, page: number) {
@@ -45,8 +70,14 @@ export class ProductsComponent implements OnInit, OnChanges {
     }
     this.prodService.getSpecialProducts(params, categoryId, page).subscribe(
       (res: any) => {
+        this.isLoading = false;
         if(this.viewMode === 'grid'){
-          this.prodRows = this.prodService.convertListTo2DList(res.data, 4);
+          if (window.innerWidth <= 1150){
+            this.prodRows = this.prodService.convertListTo2DList(res.data, 3);
+          }
+          else {
+            this.prodRows = this.prodService.convertListTo2DList(res.data, 4);
+          }
         }
         else{
           this.prodList = res.data;
@@ -56,11 +87,12 @@ export class ProductsComponent implements OnInit, OnChanges {
       },
       (error) => {
         console.error('Error fetching products :', error);
+        this.isLoading = true;
       }
     );
   }
 
-  setViewMode(mode: 'grid' | 'list') {
+  changeViewMode(mode: 'grid' | 'list') {
     this.viewMode = mode;
     this.fetchSpecialProducts(this.prodCatId!, this.sortOption, this.query, this.filters, this.currentPage);
   }
@@ -75,6 +107,10 @@ export class ProductsComponent implements OnInit, OnChanges {
     this.filters = filters;
     this.currentPage = 1;
     this.fetchSpecialProducts(this.prodCatId!, this.sortOption, this.query, this.filters, this.currentPage);
+  }
+
+  toggelSideBar() {
+    this.showSideBar = !this.showSideBar;
   }
 
   setCurrentPage(page: number) {

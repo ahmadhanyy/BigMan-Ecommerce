@@ -1,0 +1,32 @@
+.branches-content {
+  display: flex;
+  justify-content: center;
+}
+
+.branches-container{
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1150px) {
+  .branches-content {
+    width: 100%;
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .branches-container{
+    width: 100%;
+    padding-left: 0px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+
+  .branch{
+    width: 100%;
+  }
+}

@@ -15,7 +15,6 @@
           <tr *ngFor="let item of wishlistItems">
             <td>
               <app-product-list-card [card]="item.product"></app-product-list-card>
-              <hr />
             </td>
           </tr>
         </tbody>
@@ -24,6 +23,6 @@
   </div>
 
   <div class="products-list">
-    <app-product-carousel [textOnList]="textOnList" [products]="prodsList"></app-product-carousel>
+    <app-product-carousel [isLoading]="isLoading" [textOnList]="textOnList" [products]="prodsList"></app-product-carousel>
   </div>
 </div>

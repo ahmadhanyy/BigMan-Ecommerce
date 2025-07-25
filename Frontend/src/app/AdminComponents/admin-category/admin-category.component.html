@@ -1,0 +1,20 @@
+<div class="category-content">
+  <div class="category-container" *ngIf="isLoading">
+    <div class="category">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="category">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="category">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+  </div>
+  <div class="category-container" *ngIf="!isLoading">
+    <ng-container *ngFor="let cat of category">
+      <div class="category">
+        <app-category-list-card [category]="cat"></app-category-list-card>
+      </div>
+    </ng-container>
+  </div>
+</div>

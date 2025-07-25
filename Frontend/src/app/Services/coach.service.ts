@@ -47,7 +47,7 @@ export class CoachService {
   convertListTo2DList(prodsList: ICoach[], size: number): ICoach[][] {
     const rows: ICoach[][] = [];
     for (let i = 0; i < prodsList.length; i += size) {
-      rows.push(prodsList.slice(i, i + 4));
+      rows.push(prodsList.slice(i, i + size));
     }
     return rows;
   }

@@ -1,16 +1,31 @@
 <div class="cards-container">
-  <div class="card" *ngFor="let membership of membershipsList">
-    <h3>{{membership.name}} Membership</h3>
-    <h4>Duration: {{membership.duration}}</h4>
-    <div class="price-section" *ngIf="membership.discountPrecent">
-      <span class="original-price">{{membership.price | currency: 'EGP'}}</span>
-      <span class="discounted-price">{{(membership.price - (membership.price * membership.discountPrecent) / 100) | currency: 'EGP'}}</span>
+  <ng-container *ngIf="isLoading">
+    <div class="card">
+      <app-list-skeleton></app-list-skeleton>
     </div>
-    <div class="price-section" *ngIf="!membership.discountPrecent">
-      <span class="discounted-price">{{membership.price | currency: 'EGP'}}</span>
+    <div class="card">
+      <app-list-skeleton></app-list-skeleton>
     </div>
-    <p>{{membership.description}}</p>
-    <span *ngIf="membership.discountPrecent" class="discount">{{membership.discountPrecent}}% OFF</span>
-    <button class="join-btn">Join</button>
-  </div>
+    <div class="card">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="card">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!isLoading">
+    <div class="card" *ngFor="let membership of membershipsList">
+      <h3>{{membership.name}} Membership</h3>
+      <h4>Duration: {{membership.duration}}</h4>
+      <div class="price-section" *ngIf="membership.discountPrecent">
+        <span class="original-price">{{membership.price | currency: 'EGP'}}</span>
+        <span class="discounted-price">{{(membership.price - (membership.price * membership.discountPrecent) / 100) | currency: 'EGP'}}</span>
+      </div>
+      <div class="price-section" *ngIf="!membership.discountPrecent">
+        <span class="discounted-price">{{membership.price | currency: 'EGP'}}</span>
+      </div>
+      <p>{{membership.description}}</p>
+      <span *ngIf="membership.discountPrecent" class="discount">{{membership.discountPrecent}}% OFF</span>
+    </div>
+  </ng-container>
 </div>

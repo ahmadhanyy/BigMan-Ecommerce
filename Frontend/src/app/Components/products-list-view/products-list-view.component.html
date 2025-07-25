@@ -1,10 +1,38 @@
 <table>
   <tbody>
-    <tr *ngFor="let prod of products">
-      <td>
-        <app-product-list-card [card]="prod"></app-product-list-card>
-        <hr>
-      </td>
-    </tr>
+    <ng-container *ngIf="isLoading">
+      <tr>
+        <td>
+          <app-list-skeleton></app-list-skeleton>
+          <hr>
+        </td>
+      </tr>
+      <tr >
+        <td>
+          <app-list-skeleton></app-list-skeleton>
+          <hr>
+        </td>
+      </tr>
+      <tr >
+        <td>
+          <app-list-skeleton></app-list-skeleton>
+          <hr>
+        </td>
+      </tr>
+      <tr >
+        <td>
+          <app-list-skeleton></app-list-skeleton>
+          <hr>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf="!isLoading">
+      <tr *ngFor="let prod of products">
+        <td>
+          <app-product-list-card [card]="prod"></app-product-list-card>
+          <hr>
+        </td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>

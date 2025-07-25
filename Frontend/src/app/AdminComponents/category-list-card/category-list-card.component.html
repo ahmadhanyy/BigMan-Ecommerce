@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-details">
+    <p class="category"><span>Category Name:</span> {{ category.name }}</p>
+  </div>
+  <div class="btns">
+    <button class="edit-btn" (click)="editCategory()">Edit</button>
+    <button class="remove-btn" (click)="removeCategory()" title="Delete Category">
+      <i class="fa-solid fa-trash-alt"></i>
+    </button>
+  </div>
+</div>
+

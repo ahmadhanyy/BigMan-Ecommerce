@@ -30,12 +30,6 @@
   background: #f9f9f9;
   border-radius: 16px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-
-  @media screen and (max-width: 768px) {
-    .user-form, .address-form {
-      flex: 1 1 100%;
-    }
-  }
 }
 
 .body {
@@ -155,7 +149,7 @@ button:disabled:hover {
   padding: 5px 8px;
   margin: 5px 20px 0;
   border-radius: 6px;
-  font-weight: 300;
+  font-weight: 700;
   font-size: 0.8rem;
   width: calc(100% - 40px);
 }
@@ -165,4 +159,79 @@ button:disabled:hover {
   font-size: 0.8rem;
   margin-top: 5px;
   font-weight: 600;
+}
+
+/* Mobile Layout Support */
+@media screen and (max-width: 768px) {
+  .body {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .user-form,
+  .address-form {
+    flex: 1 1 100%;
+  }
+
+  .row-form-group {
+    flex-direction: column;
+  }
+
+  .account-page {
+    padding: 15px;
+    margin: 20px;
+  }
+
+  .not-logged i {
+    font-size: 60px;
+  }
+
+  .not-logged-text {
+    font-size: 1rem;
+  }
+}
+
+/* Tablet Layout Support */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .account-page {
+    padding: 20px;
+    margin: 30px auto;
+  }
+
+  .body {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .user-form,
+  .address-form {
+    flex: 1 1 100%;
+  }
+
+  .row-form-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  input, select {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 10px 16px;
+  }
+
+  .error-message {
+    font-size: 0.75rem;
+    padding: 5px 6px;
+    margin: 0 10px 15px 10px;
+    width: calc(100% - 20px);
+  }
 }

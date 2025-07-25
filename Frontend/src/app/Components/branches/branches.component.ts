@@ -9,11 +9,13 @@ import { BranchService } from '../../Services/branch.service';
 })
 export class BranchesComponent implements OnInit {
   branchesList: IBranch[] = [];
+  isLoading: boolean = true;
 
   constructor(private branchService: BranchService) {}
 
   ngOnInit(): void {
     this.branchService.getBranches().subscribe((response: any) => {
+      this.isLoading = false;
       this.branchesList = response.data;
     });
   }

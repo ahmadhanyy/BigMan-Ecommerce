@@ -11,12 +11,18 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   cartCount: number = 0;
-  loginText: string = '';
+  loginText: string = 'Welcome';
   isLoginModalOpen = false;
   isRegisterModalOpen = false;
   isLogoutModalOpen = false;
   isUserLoggedIn: boolean = false;
   searchQuery: string = '';
+  isloginOpen = false;
+
+
+  toggleLogin() {
+    this.isloginOpen = !this.isloginOpen;
+  }
 
   constructor(private renderer: Renderer2,
               private modalService: ModalService,
@@ -45,27 +51,34 @@ export class HeaderComponent {
       this.isLogoutModalOpen = isOpen;
     });
 
-    this.userService.loggedUserEmail$.subscribe(email => {
+    this.userInfoService.loggedUserEmail$.subscribe(email => {
       if (email) {
-        this.loginText = `Welcome`;
+        this.userService.getUserByEmail(email).subscribe(user => {
+        this.loginText = `Welcome ${user[0].username}`;
+        });
         this.isUserLoggedIn = true;
+        this.isloginOpen = false;
       } else {
-        this.loginText = 'Log in';
+        this.loginText = 'Login';
         this.isUserLoggedIn = false;
+        this.isloginOpen = false;
       }
     });
   }
 
   onLogin() {
     this.isLoginModalOpen = true;
+    this.isloginOpen = false;
   }
 
   onRegister() {
     this.isRegisterModalOpen = true;
+    this.isloginOpen = false;
   }
 
   onLogout(){
     this.isLogoutModalOpen = true;
+    this.isloginOpen = false;
   }
 
   openLoginModal() {

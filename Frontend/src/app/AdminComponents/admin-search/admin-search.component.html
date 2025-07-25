@@ -1,0 +1,35 @@
+<div class="no-result" *ngIf="!isSearchFound">
+  <i class="fa-solid fa-magnifying-glass" style="color: #B197FC;"></i>
+  <p class="no-result-text">No result found. Continue shopping to explore more.</p>
+  <a routerLink="/products"><button class="no-result-btn">Explore Items</button></a>
+</div>
+<div class="view-buttons" *ngIf="isSearchFound">
+  <button class="sidebar-btn" (click)="toggelSideBar()">
+    Filter
+  </button>
+</div>
+<div class="products-content" *ngIf="isSearchFound">
+  <app-products-sidebar *ngIf="showSideBar" (sortChange)="setSorting($event)" (filterChange)="setFilers($event)"></app-products-sidebar>
+  <div class="products-container" *ngIf="isLoading">
+    <div class="prod">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="prod">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="prod">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+  </div>
+  <div class="products-container" *ngIf="!isLoading">
+    <ng-container *ngFor="let prod of prodList">
+      <div class="prod">
+        <app-prod-list-card
+          [card]="prod">>
+        </app-prod-list-card>
+      </div>
+      <hr/>
+    </ng-container>
+  </div>
+</div>
+<app-load-button *ngIf="isSearchFound" [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>

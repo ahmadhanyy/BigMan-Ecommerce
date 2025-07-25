@@ -3,12 +3,21 @@
   margin: 20px 0;
 }
 
-
-
 .cards-container {
-display: flex;
+  display: flex;
   position: relative;
   align-items:start;
   width: 100%;
   height: 350px;
+}
+
+@media (max-width: 1150px) {
+  .cards-container {
+    display: flex;
+    position: relative;
+    align-items:start;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
 }

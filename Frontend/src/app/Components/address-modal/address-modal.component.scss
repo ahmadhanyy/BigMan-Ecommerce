@@ -18,6 +18,8 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   position: relative;
   animation: fadeIn 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal-body h2 {
@@ -140,4 +142,28 @@ select:focus {
 
 .submit-btn:hover:not(:disabled) {
   background-color: #f0a800;
+}
+
+/* Tablet (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+  .modal-content {
+    width: 80%;
+    padding: 25px 20px 30px;
+  }
+
+  .form-group {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+  }
+
+  .form-sub-group input,
+  .form-sub-group select {
+    width: 100%;
+  }
+
+  .submit-btn {
+    width: 100%;
+    font-size: 1rem;
+  }
 }

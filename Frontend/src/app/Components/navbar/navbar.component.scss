@@ -8,11 +8,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  text-align: center;
+  justify-content: center;
   width: 100%;
   padding: 1px 10px 10px 10px;
   background-color: rgb(20, 20, 20);
   gap: 60px;
-  padding-left: 200px;
 }
 
 .nav-btns{
@@ -48,4 +49,32 @@ app-categories-button{
 
 .nav-btn.active .nav-link {
   color: rgb(255, 238, 0);
+}
+
+@media (max-width: 1024px) {
+  .container-fluid {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding-left: 5px;
+  }
+
+  .nav-btns.active {
+    display: flex;
+  }
+
+  ul {
+    flex-direction: row;
+    gap: 3px;
+  }
+
+  .nav-link{
+    font-size: 0.6rem;
+  }
+
+  .nav-link.home {
+    display: none;
+  }
+
 }

@@ -6,6 +6,7 @@ import { ProductService } from '../../Services/product.service';
 import { CoachService } from '../../Services/coach.service';
 import { IProduct } from '../../Interfaces/iproduct';
 import { ICoach } from '../../Interfaces/icoach';
+import { UserInformationService } from '../../Services/user-information.service';
 
 @Component({
   selector: 'app-inbox',
@@ -19,10 +20,11 @@ export class InboxComponent implements OnInit {
   constructor(private messageService: MessageService,
               private userService: UserService,
               private prodService: ProductService,
-              private coachService: CoachService) {}
+              private coachService: CoachService,
+              private userInfoService: UserInformationService) {}
 
   ngOnInit(): void {
-    this.userService.loggedUserEmail$.subscribe(email => {
+    this.userInfoService.loggedUserEmail$.subscribe(email => {
       if (email) {
         this.messageService.getMessagesByEmail(email).subscribe(messages => {
           this.messagesList = messages;

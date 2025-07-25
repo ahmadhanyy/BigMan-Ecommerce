@@ -1,0 +1,102 @@
+.card {
+  width: 800px;
+  max-width: 1000px;
+  padding: 20px;
+  margin: 20px auto;
+  background: linear-gradient(to right, #ffffff, #f3f4f6);
+  border-left: 6px solid #007bff;
+  border-radius: 15px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-details {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.card h4 {
+  font-size: 1.3rem;
+  color: #007bff;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.card p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.icon {
+  color: #007bff;
+  font-size: 1.1rem;
+}
+
+.btns {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-btn,
+.remove-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background-color: #3633ff;
+}
+
+.remove-btn {
+  background-color: #ff4d4f;
+  color: #fff;
+}
+
+.remove-btn:hover {
+  background-color: #d9162f;
+}
+
+.remove-btn i {
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .card {
+    width: 90%;
+  }
+}

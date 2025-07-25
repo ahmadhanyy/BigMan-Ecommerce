@@ -1,47 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ICoach } from '../../Interfaces/icoach';
-import { CoachService } from '../../Services/coach.service';
-import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-coaches-list-view',
   templateUrl: './coaches-list-view.component.html',
   styleUrl: './coaches-list-view.component.scss'
 })
-export class CoachesListViewComponent implements OnInit, OnChanges {
-  @Input() sortOption: string = '';
-  @Input() currentPage: number = 1;
-  @Output() pageChange = new EventEmitter<number>();
-  coachesList: ICoach[] = [];
-  totalPages: number = 1;
-
-  constructor(public coachService: CoachService, private viewportScroller: ViewportScroller) {}
-
-  ngOnChanges(): void {
-    if (this.sortOption) {
-      this.fetchCoaches(this.sortOption, this.currentPage);
-    }
-  }
-
-  ngOnInit(): void {
-    this.fetchCoaches(this.sortOption, this.currentPage);
-  }
-
-  fetchCoaches(sort: string, page: number) {
-    this.coachService.getSortedCoaches(sort, page).subscribe((res: any) => {
-      this.coachesList = res.data;
-      this.currentPage = res.meta.pagination.page;
-      this.totalPages = res.meta.pagination.pageCount;
-    },
-    (error) => {
-      console.error('Error fetching coaches:', error);
-    });
-  }
-
-  onPageChanged(newPage: number) {
-    this.viewportScroller.scrollToPosition([0, 0]); // scroll to top
-    this.pageChange.emit(newPage);
-    this.fetchCoaches(this.sortOption, this.currentPage);
-  }
+export class CoachesListViewComponent {
+  @Input() coachList: ICoach[] = [];
+  @Input() isLoading: boolean = true;
 
 }

@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-details">
+    <p class="email"><span>Email:</span> {{ message.email }}</p>
+    <p class="title"><span>Title:</span> {{ message.title }}</p>
+    <p class="date">
+      <i class="fa-regular fa-calendar"></i>
+      {{ message.date | date: 'MMM d, yyyy' }}
+    </p>
+    <p class="message" title="{{ message.message }}">{{ message.message }}</p>
+  </div>
+  <div class="btns">
+    <button class="edit-btn" (click)="editMessage()">Edit</button>
+    <button class="remove-btn" (click)="removeMessage()" title="Delete">
+      <i class="fa-solid fa-trash-alt"></i>
+    </button>
+  </div>
+</div>

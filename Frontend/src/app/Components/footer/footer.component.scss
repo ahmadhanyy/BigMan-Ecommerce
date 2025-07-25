@@ -15,7 +15,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 1rem;
   padding: 20px 30px;
 }
 
@@ -69,5 +68,49 @@
   transform: scale(1.1); /* Slightly enlarge the icon */
   filter: brightness(1.2); /* Slightly brighten the icon */
   transition: transform 0.3s ease, filter 0.3s ease; /* Smooth hover effect */
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 10px 0px;         /* Reduce padding for smaller screens */
+    margin: 0px;
+  }
+
+  .footer-row {
+    flex-direction: row;         /* Keep it horizontal */
+    flex-wrap: wrap;             /* Allow wrapping if needed */
+    justify-content: space-between;
+    gap: 30px;                   /* Reduce spacing */
+    padding: 0px;
+    margin: 0px 30px;
+  }
+
+  .footer-col {
+    margin-bottom: 5px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.95rem;
+  }
+
+  .footer-col .links li a {
+    font-size: 0.8rem;
+
+  }
+
+  .footer-col .icons {
+    justify-content: left;
+    padding-left: 0px;
+    margin-left: 0px;
+  }
+
+  .footer-col .icons img {
+    width: 24px;                /* Smaller icons */
+  }
+
+  .copy-right {
+    font-size: 0.65rem;
+    padding: 5px;
+  }
 }
 

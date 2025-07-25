@@ -8,4 +8,5 @@ import { IProduct } from '../../Interfaces/iproduct';
 })
 export class ProductsGridViewComponent {
   @Input() products: IProduct[][] = [];
+  @Input() isLoading: boolean = true;
 }

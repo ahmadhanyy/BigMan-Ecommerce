@@ -1,4 +1,7 @@
-<app-header></app-header>
-<app-navbar></app-navbar>
+<app-header *ngIf="!isAdmin"></app-header>
+<app-navbar *ngIf="!isAdmin"></app-navbar>
+<app-admin-header *ngIf="isAdmin"></app-admin-header>
+<app-admin-navbar *ngIf="isAdmin"></app-admin-navbar>
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+<app-footer *ngIf="!isAdmin"></app-footer>
+<app-admin-footer *ngIf="isAdmin"></app-admin-footer>

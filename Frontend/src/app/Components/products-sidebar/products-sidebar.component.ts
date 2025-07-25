@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-products-sidebar',
@@ -6,8 +6,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./products-sidebar.component.scss']
 })
 export class ProductsSidebarComponent {
-  @Input() viewMode: 'grid' | 'list' = 'grid';
-  @Output() viewModeChange = new EventEmitter<'grid' | 'list'>();
   @Output() sortChange = new EventEmitter<string>();
   @Output() filterChange = new EventEmitter<any>();
   sortBy: string = '';
@@ -15,11 +13,6 @@ export class ProductsSidebarComponent {
   maxPrice: number = 1000000;
   freeShipping: boolean = false;
   hasDiscount: boolean = false;
-
-  changeViewMode(mode: 'grid' | 'list') {
-    // Emit the new view mode
-    this.viewModeChange.emit(mode);
-  }
 
   onSortChange(event: Event) {
     // Emit the selected sort value
@@ -37,6 +30,4 @@ export class ProductsSidebarComponent {
       discount: this.hasDiscount
     });
   }
-
-
 }

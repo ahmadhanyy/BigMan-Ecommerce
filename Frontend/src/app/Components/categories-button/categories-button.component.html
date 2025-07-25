@@ -1,14 +1,14 @@
-<div class="dropdown">
-  <button class="dropdown-button">
+<div class="dropdown" [class.open]="isDropdownOpen">
+  <button class="dropdown-button" (click)="toggleDropdown()">
     <span><i class="fa-solid fa-bars"></i></span>
     <span class="button-text">All Categories</span>
     <span class="arrow down-arrow">&#8250;</span>
     <span class="arrow up-arrow">&#8249;</span>
   </button>
-  <div class="dropdown-content">
+  <div class="dropdown-content" *ngIf="isDropdownOpen">
     <div class="list">
       <ng-container *ngFor="let cat of categories; let i = index">
-        <a [routerLink] = "['/products', cat.id]">{{cat.name}}</a>
+        <a [routerLink] = "['/products', cat.id]" (click)="isDropdownOpen=false">{{cat.name}}</a>
       </ng-container>
     </div>
   </div>

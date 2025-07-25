@@ -1,0 +1,32 @@
+.user-content {
+  display: flex;
+  justify-content: center;
+}
+
+.user-container{
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1150px) {
+  .user-content {
+    width: 100%;
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .user-container{
+    width: 100%;
+    padding-left: 0px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+
+  .user{
+    width: 100%;
+  }
+}

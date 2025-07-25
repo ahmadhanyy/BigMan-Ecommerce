@@ -17,6 +17,7 @@ export class WishListComponent implements OnInit {
   prodsList: IProduct[] = [];
   textOnList: string = 'Big Sale New Collection';
   userEmail: string | null = null;
+  isLoading: boolean = true;
 
   constructor(private wishlistService: WishlistService,
               private prodService: ProductService,
@@ -26,7 +27,7 @@ export class WishListComponent implements OnInit {
 
   ngOnInit(): void {
     // Subscribe to the loggedUserId$ observable to get real-time updates
-    this.userService.loggedUserEmail$.subscribe((email) => {
+    this.userInfoService.loggedUserEmail$.subscribe((email) => {
       this.userEmail = email;
       if (this.userEmail) {
         this.userInfoService.userWishlist$.subscribe((items) => {
@@ -36,6 +37,7 @@ export class WishListComponent implements OnInit {
     });
 
     this.prodService.getDiscountByCategory('Clothes').subscribe((response: any) => {
+      this.isLoading = false;
       this.prodsList = response.data;
     });
   }

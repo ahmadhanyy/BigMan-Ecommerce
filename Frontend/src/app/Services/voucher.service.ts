@@ -32,6 +32,11 @@ export class VoucherService {
     );
   }
 
+  getAllVouchers(currentPage: number): Observable<any> {
+    const headers = this.getHeaders();
+    return this.httpClient.get<any>(`${this.apiUrl}/vouchers?populate=*&pagination[page]=${currentPage}&pagination[pageSize]=20`, { headers });
+  }
+
   getVouchersByEmail(email: string): Observable<IVoucher[]> {
     const headers = this.getHeaders();
     return this.httpClient.get<{ data: IVoucher[] }>(`${this.apiUrl}/vouchers?populate=*&filters[email][$eq]=${email}`, { headers }).pipe(

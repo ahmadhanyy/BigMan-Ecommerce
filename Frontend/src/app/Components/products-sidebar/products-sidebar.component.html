@@ -1,19 +1,5 @@
 <div class="sidebar">
   <div class="filter-section">
-    <h6>View</h6>
-    <div class="view-buttons">
-      <button class="grid-btn" [ngClass]="{'active': viewMode === 'grid'}" (click)="changeViewMode('grid')">
-        <i class="fa-solid fa-grip" style="color: #000000;"></i>
-        Grid
-      </button>
-      <button class="list-btn" [ngClass]="{'active': viewMode === 'list'}" (click)="changeViewMode('list')">
-        <i class="fa-solid fa-bars" style="color: #000000;"></i>
-        List
-      </button>
-    </div>
-    <hr />
-  </div>
-  <div class="filter-section">
     <h6>Sort By</h6>
     <select id="sort" name="sort" (change)="onSortChange($event)">
       <option value="" disabled selected>Select sort option</option>

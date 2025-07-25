@@ -10,6 +10,10 @@ import { CartItemService } from './cart-item.service';
   providedIn: 'root'
 })
 export class UserInformationService {
+  // Subjects to hold the user's email
+  loggedUserEmailSubject = new BehaviorSubject<string | null>(null);  // Initial user id is null
+  loggedUserEmail$ = this.loggedUserEmailSubject.asObservable()  // Observable to expose the logged user email
+
   // Subjects to hold the user's wishlist and cart items when the user is logged in
   wishlistSubject = new BehaviorSubject<IWishlistItem[]>([]);
   userWishlist$ = this.wishlistSubject.asObservable();
@@ -23,18 +27,23 @@ export class UserInformationService {
   );
 
   constructor(private userService: UserService, private wishlistService: WishlistService, private cartService: CartItemService) {
-    // Subscribe to the loggedUserEmail observable to fetch wishlist and cart items when the user logs in
-    this.userService.loggedUserEmail$.subscribe((email) => {
-      if (email) {
-        this.wishlistService.getWishlistItems(email).subscribe(response => {
-          this.wishlistSubject.next(response);
-        });
+    const email = this.userService.getEmail();
+    if (email) {
+      this.loggedUserEmailSubject.next(email);
 
-        this.cartService.getCartItems(email).subscribe(response => {
-          this.cartSubject.next(response);
-        });
-      }
-    });
+      this.wishlistService.getWishlistItems(email).subscribe(response => {
+        this.wishlistSubject.next(response);
+      });
+
+      this.cartService.getCartItems(email).subscribe(response => {
+        this.cartSubject.next(response);
+      });
+    }
+    else{
+      this.loggedUserEmailSubject.next(null);
+      this.wishlistSubject.next([]);
+      this.cartSubject.next([]);
+    }
   }
 
 }

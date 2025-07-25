@@ -1,0 +1,21 @@
+<div class="branches-content">
+  <div class="branches-container" *ngIf="isLoading">
+    <div class="branch">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="branch">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="branch">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+  </div>
+  <div class="branches-container" *ngIf="!isLoading">
+    <ng-container *ngFor="let branch of branches">
+      <div class="branch">
+        <app-branch-list-card [branch]="branch"></app-branch-list-card>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)"></app-load-button>

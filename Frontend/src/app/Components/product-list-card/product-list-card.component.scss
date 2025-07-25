@@ -4,6 +4,14 @@
 
 .prod-card {
   display: flex;
+  flex-direction: column;
+  width: 900px;
+  padding: 10px;
+  margin-left: 20px;
+}
+
+.card-details{
+  display: flex;
   width: 900px;
   padding: 10px;
 }
@@ -27,14 +35,13 @@ img {
 }
 
 .prod-payment {
-  margin-left: 50px;
   display: inline-block;
 }
 
 .prod-name {
   display: inline-block;
-  width: 400px;
-  font-size: 1rem;
+  width: 700px;
+  font-size: 1.1rem;
   font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
@@ -45,6 +52,7 @@ img {
 .prod-description{
   margin-top: 10px;
   width: 400px;
+  font-size: 1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -76,6 +84,16 @@ img {
   margin: 5px 0;
 }
 
+.btns {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-left: 40px;
+  gap: 10px;
+}
+
 button {
   background-color: rgb(29, 29, 29);
   color: rgb(255, 255, 255);
@@ -84,8 +102,6 @@ button {
   font-size: 0.9rem;
   font-weight: 700;
   padding: 10px 40px;
-  position: absolute;
-  bottom: 10px;
 }
 
 button:hover {
@@ -93,10 +109,92 @@ button:hover {
   color: black;
 }
 
-.prod-payment i{
+.fa-solid.fa-heart,
+.fa-regular.fa-heart{
   font-size: 40px;
-  bottom: 11px;
-  right: 280px;
-  position: absolute;
   cursor: pointer;
+}
+
+@media (max-width: 1150px) {
+  .card{
+    width: 450px;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .prod-card {
+    width: 450px;
+    padding: 0px;
+    margin: 10px;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .card-details{
+    display: flex;
+    width: 450px;
+    padding: 10px;
+  }
+
+  img {
+    margin-right: 5px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .prod-info {
+    margin-left: 3px;
+    text-align:left;
+  }
+
+  .prod-name {
+    width: 400px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+  }
+
+  .prod-description{
+    margin: 0px;
+    width: 200px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .prod-payment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .original-price,
+  .discounted-price{
+    font-size: 0.9rem;
+  }
+
+  .discounted-text {
+    font-size: 0.7rem;
+    text-align: center;
+  }
+
+  .btns {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+  }
+
+  .cart-btn{
+    padding: 10px 20px;
+    font-size: 0.7rem;
+  }
+
+  .fa-solid.fa-heart,
+  .fa-regular.fa-heart {
+    font-size: 30px;
+  }
 }

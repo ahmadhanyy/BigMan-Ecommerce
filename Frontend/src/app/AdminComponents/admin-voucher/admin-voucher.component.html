@@ -1,0 +1,21 @@
+<div class="vouchers-content">
+  <div class="vouchers-container" *ngIf="isLoading">
+    <div class="voucher">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="voucher">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="voucher">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+  </div>
+  <div class="vouchers-container" *ngIf="!isLoading">
+    <ng-container *ngFor="let voucher of vouchers">
+      <div class="voucher">
+        <app-voucher-list-card [voucher]="voucher"></app-voucher-list-card>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>

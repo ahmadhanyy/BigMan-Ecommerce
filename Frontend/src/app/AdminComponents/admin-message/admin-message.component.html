@@ -1,0 +1,21 @@
+<div class="message-content">
+  <div class="message-container" *ngIf="isLoading">
+    <div class="message">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="message">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="message">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+  </div>
+  <div class="message-container" *ngIf="!isLoading">
+    <ng-container *ngFor="let mes of message">
+      <div class="message">
+        <app-message-list-card [message]="mes"></app-message-list-card>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)"></app-load-button>

@@ -1,0 +1,20 @@
+<div class="membership-content">
+  <div class="membership-container" *ngIf="isLoading">
+    <div class="membership">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="membership">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="membership">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+  </div>
+  <div class="membership-container" *ngIf="!isLoading">
+    <ng-container *ngFor="let mem of membership">
+      <div class="membership">
+        <app-membership-list-card [membership]="mem"></app-membership-list-card>
+      </div>
+    </ng-container>
+  </div>
+</div>

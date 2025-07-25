@@ -1,10 +1,34 @@
 <div class="grid-container">
-  <div class="row" *ngFor="let row of coachRows">
-    <div class="cards-container">
-      <ng-container  *ngFor="let card of row">
-        <app-coach-grid-card [card]="card"></app-coach-grid-card>
-      </ng-container>
+  <ng-container *ngIf="isLoading">
+    <div class="row">
+      <div class="cards-container">
+        <app-card-skeleton></app-card-skeleton>
+        <app-card-skeleton></app-card-skeleton>
+        <app-card-skeleton></app-card-skeleton>
+      </div>
     </div>
-  </div>
-  <app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>
+    <div class="row">
+      <div class="cards-container">
+        <app-card-skeleton></app-card-skeleton>
+        <app-card-skeleton></app-card-skeleton>
+        <app-card-skeleton></app-card-skeleton>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cards-container">
+        <app-card-skeleton></app-card-skeleton>
+        <app-card-skeleton></app-card-skeleton>
+        <app-card-skeleton></app-card-skeleton>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!isLoading">
+    <div class="row" *ngFor="let row of coachRows">
+      <div class="cards-container">
+        <ng-container  *ngFor="let card of row">
+          <app-coach-grid-card [card]="card"></app-coach-grid-card>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
 </div>

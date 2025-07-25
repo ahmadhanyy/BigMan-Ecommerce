@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-header">
+    <h2>Order Summary</h2>
+    <p class="status">{{ order.orderStatus }}</p>
+  </div>
+  <div class="card-details">
+    <p><span>User Email:</span> {{ order.email }}</p>
+    <p><span>Government:</span> {{ order.address.government }}</p>
+    <p><span>City:</span> {{ order.address.city }}</p>
+    <p><span>Street:</span> {{ order.address.street }}</p>
+    <p><span>Building:</span> {{ order.address.buildingNo }}</p>
+    <p><span>Phone:</span> {{ order.address.phone }}</p>
+    <p><span>Total Fees:</span> {{ order.cost | currency: 'EGP' }}</p>
+    <p><span>Order Date:</span> {{ order.orderDate | date: 'MMM d yyyy' }}</p>
+    <p><span>Delivery Date:</span> {{ order.deliveryDate | date: 'MMM d yyyy' }}</p>
+    <p><span>Payment Method:</span> {{ order.paymentMethod }}</p>
+  </div>
+  <div class="card-actions">
+    <button (click)="editOrder()">Edit Order</button>
+    <button class="remove-btn" (click)="removeOrder()">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+  </div>
+</div>

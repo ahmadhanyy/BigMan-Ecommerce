@@ -20,6 +20,7 @@ export class CartComponent implements OnInit {
   cartItems: ICartItem[] = [];
   productsList: IProduct[] = [];
   textOnList: string = 'Big Sale Now! Up To 50% off on all clothes.';
+  isLoading: boolean = true;
 
   constructor(private prodService: ProductService,
               private cartItemService: CartItemService,
@@ -33,7 +34,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     // Subscribe to the loggedUserId$ observable to get real-time updates
-    this.userService.loggedUserEmail$.subscribe((email) => {
+    this.userInfoService.loggedUserEmail$.subscribe((email) => {
       this.loggedUserEmail = email;
       if (this.loggedUserEmail) {
         this.userInfoService.userCart$.subscribe((items) => {
@@ -42,6 +43,7 @@ export class CartComponent implements OnInit {
       }
     });
     this.prodService.getDiscountByCategory('Clothes').subscribe((response: any) => {
+      this.isLoading = false;
       this.productsList = response.data;
     });
   }

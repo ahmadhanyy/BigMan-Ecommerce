@@ -32,7 +32,7 @@ export class ProductGridCardComponent implements OnInit {
 
   ngOnInit(): void {
     // Subscribe to the loggedUserId$ observable to get real-time updates
-    this.userService.loggedUserEmail$.subscribe((email) => {
+    this.userInfoService.loggedUserEmail$.subscribe((email) => {
       this.userEmail = email;
       // Get wishlist items for the logged-in user
       if (this.userEmail) {

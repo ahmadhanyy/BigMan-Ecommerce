@@ -8,7 +8,7 @@
 }
 
 .card:hover {
-  height: 340px;
+  height: 310px;
 }
 
 .card-body {
@@ -110,4 +110,39 @@ img {
 .card-body button:hover{
   background-color: rgb(185, 185, 185);
   color: black;
+}
+
+@media (max-width: 1150px) {
+  .card {
+    width: 130px;
+    height: 210px;
+  }
+
+  .card:hover {
+    height: 210px;
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+  }
+
+  h5 {
+    font-size: 0.8rem;
+    font-weight: 800;
+    width: 100px;
+  }
+
+  h6 {
+    font-size: 0.6rem;
+    width: 100px;
+  }
+
+  .discounted-price {
+    margin: 0px;
+  }
+
+  .card:hover .card-body button {
+    display: none;
+  }
 }

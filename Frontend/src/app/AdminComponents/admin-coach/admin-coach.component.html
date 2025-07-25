@@ -1,0 +1,31 @@
+<div class="view-buttons">
+  <button class="sidebar-btn" (click)="toggelSideBar()">
+    Sort
+  </button>
+</div>
+
+<div class="coaches-content">
+  <app-coaches-sidebar  *ngIf="showSideBar" (sortChange)="setSorting($event)"></app-coaches-sidebar>
+  <div class="coaches-container" *ngIf="isLoading">
+    <div class="coach">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="coach">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+    <div class="coach">
+      <app-list-skeleton></app-list-skeleton>
+    </div>
+  </div>
+  <div class="coaches-container" *ngIf="!isLoading">
+    <ng-container *ngFor="let coach of coachList">
+      <div class="coach">
+        <app-coaches-list-card [card]="coach"></app-coaches-list-card>
+      </div>
+      <hr/>
+    </ng-container>
+  </div>
+</div>
+<app-load-button [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="onPageChanged($event)">></app-load-button>
+
+
